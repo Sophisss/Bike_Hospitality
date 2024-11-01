@@ -1,0 +1,30 @@
+{
+  "cli": {
+    "version": ">= 5.4.0"
+  },
+  "build": {
+    "local": {
+      "android": {
+        "buildType": "apk"
+      },
+      "releaseChannel": "local"
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "giacariel@gmail.com",
+        "ascAppId": "1628511540",
+        "appleTeamId": "K47P6SSL7C"
+      }
+    }
+  }
+}

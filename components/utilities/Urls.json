@@ -1,0 +1,54 @@
+{
+    "collegamenti": {
+        "routeName": "Collegamenti",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=sponsor&language="
+    },
+    "comuni": {
+        "routeName": "Comuni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=comuni&language="
+    },
+    "disciplinario": {
+        "routeName": "Disciplinare",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=disciplinare&language="
+    },
+    "home": {
+        "routeName": "BIKE Hospitality",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=home&language="
+    },
+    "guide": {
+        "routeName": "Guide Cicloturistiche",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=guide&language="
+    },
+    "eventi": {
+        "routeName": "Eventi",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=eventi&language="
+    },
+    "enogastronomia": {
+        "routeName": "Enogastronomia",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=enogastronomici&language="
+    },
+    "collaborations": {
+        "routeName": "Collaborazioni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=tecnici&language="
+    },
+    "noleggio": {
+        "routeName": "Noleggio",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=noleggi&language="
+    },
+    "promozioni": {
+        "routeName": "Promozioni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=noleggi&language="
+    },
+    "stazioni_di_ricarica": {
+        "routeName": "Stazioni di Ricarica",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=stazioni&language="
+    },
+    "strutture": {
+        "routeName": "Strutture Ricettive",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=strutture&language="
+    },
+    "tour": {
+        "routeName": "Itinerari",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=itinerari&language="
+    }
+}
