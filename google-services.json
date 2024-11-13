@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "631973335823",
+      "project_id": "bikehospitality-mobile",
+      "storage_bucket": "bikehospitality-mobile.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:631973335823:android:46a9b386e7dc8447f5647a",
+          "android_client_info": {
+            "package_name": "it.unicam.bikehospitality"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "631973335823-68ca90jstjrk3dbado7nn1f37p9dlhms.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyBbaDdH4D54YtfNukOJ1dVIO1-jNH-trng"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "631973335823-68ca90jstjrk3dbado7nn1f37p9dlhms.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }

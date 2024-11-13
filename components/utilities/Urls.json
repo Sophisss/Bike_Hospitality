@@ -1,0 +1,94 @@
+{
+    "collegamenti": {
+        "routeName": "Collegamenti",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=sponsor&language="
+    },
+    "comuni": {
+        "routeName": "Comuni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=comuni&language="
+    },
+    "comunien": {
+        "routeName": "Cities",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=comuni&language=en"
+    },
+    "disciplinario": {
+        "routeName": "Disciplinare",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=disciplinare&language="
+    },
+    "home": {
+        "routeName": "BIKE Hospitality",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=home&language="
+    },
+    "guide": {
+        "routeName": "Guide Cicloturistiche",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=guide&language="
+    },
+    "guideen": {
+        "routeName": "Cycling Guides",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=guide&language=en"
+    },
+    "eventi": {
+        "routeName": "Eventi",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=eventi&language="
+    },
+    "eventien": {
+        "routeName": "Events",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=eventi&language=en"
+    },
+    "enogastronomia": {
+        "routeName": "Enogastronomia",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=enogastronomici&language="
+    },
+    "enogastronomiaen": {
+        "routeName": "Food and wine",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=enogastronomici&language=en"
+    },
+    "collaborations": {
+        "routeName": "Collaborazioni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=tecnici&language="
+    },
+    "collaborationsen": {
+        "routeName": "Collaborations",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=tecnici&language=en"
+    },
+    "noleggio": {
+        "routeName": "Noleggio",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=noleggi&language="
+    },
+    "noleggioen": {
+        "routeName": "Bike rental",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=noleggi&language=en"
+    },
+    "promozioni": {
+        "routeName": "Attrazioni",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=promozioni&language="
+    },
+    "promozionien": {
+        "routeName": "Attractions",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=promozioni&language=en"
+    },
+    "stazioni_di_ricarica": {
+        "routeName": "Stazioni di Ricarica",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=stazioni&language="
+    },
+    "stazioni_di_ricaricaen": {
+        "routeName": "Charging stations",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=stazioni&language=en"
+    },
+    "strutture": {
+        "routeName": "Strutture Ricettive",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=strutture&language="
+    },
+    "struttureen": {
+        "routeName": "Accomodations",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=strutture&language=en"
+    },
+    "tour": {
+        "routeName": "Itinerari",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=itinerari&language="
+    },
+    "touren": {
+        "routeName": "Bike Routes",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=itinerari&language=en"
+    }
+}

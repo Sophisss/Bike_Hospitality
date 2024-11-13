@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "Bike Hospitality",
+    "slug": "bikehospitality",
+    "version": "1.0.5",
+    "orientation": "portrait",
+    "icon": "./assets/images/iconBH.png",
+    "owner": "bike-hospitality-org",
+    "splash": {
+      "image": "./assets/images/splashBH.png",
+    },
+    "androidStatusBar": {
+      "barStyle": "dark-content"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "NSLocationAlwaysAndWhenInUseUsageDescription": "Permetti a Bike Hospitality di accedere alla tua posizione."
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "it.maitour.bikehospitality",
+      "buildNumber": "1.0.5",
+      "config": {
+        "googleMapsApiKey": "AIzaSyC_XAFv0noAMAdTA-A99sx3B6S3i6vTMq4"
+      }
+    },
+    "android": {
+      "package": "it.unicam.bikehospitality",
+      "versionCode": 22,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyAjG9rRRDvgvXW0r93TI2RtUokYdKv4qo8"
+        }
+      },
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/iconBH.png",
+        "backgroundColor": "#ffffff"
+      },
+      "googleServicesFile": "./google-services.json"
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "description": "",
+    "extra": {
+      "eas": {
+        "projectId": "1c62c2fe-e4d5-47a9-8bf4-ab31e25192de"
+      }
+    }
+  }
+}
