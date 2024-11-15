@@ -94,5 +94,9 @@
     "regioni": {
         "routeName": "Regioni",
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=regioni"
+    },
+    "province": {
+        "routeName": "Province",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=province"
     }
 }

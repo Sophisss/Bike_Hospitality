@@ -52,12 +52,6 @@ function BottomBar() {
             },
         }} >
 
-            <Tab.Screen name="Regioni" component={SelezioneRegioni} options={{
-                headerShown: false, tabBarLabel: 'Regioni', tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons name="home" color={color} size={size} />
-                )
-            }} />
-
             <Tab.Screen name="Home" component={StackNavigator} options={{
                 headerShown: false, tabBarLabel: t[language].home, tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={size} />

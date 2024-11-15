@@ -5,10 +5,22 @@ import homeStyle from '../assets/styles/HomeStyle';
 import urls from './utilities/Urls';
 import fetcher from './utilities/Fetcher';
 
+import { useNavigation } from '@react-navigation/native';
+
+/**
+ * Component for selecting regions.
+ * @returns {JSX.Element}
+ */
 function SelezioneRegioni() {
+    const navigation = useNavigation();
+
     const [data, setData] = useState([]);
     const [selectedValue, setSelectedValue] = useState("0");
 
+    /**
+     * Fetches the list of regions from the server.
+     * @async
+     */
     const getRegioni = async () => {
         try {
             let json = await fetcher(urls.regioni.url);
@@ -23,6 +35,15 @@ function SelezioneRegioni() {
         getRegioni();
     }, []);
 
+    /**
+     * Handles the selection of a region.
+     * @param {string} id_regione - The ID of the selected region.
+     */
+    const handleRegionChange = (id_regione) => {
+        setSelectedValue(id_regione);
+        navigation.navigate(urls.home.routeName, { regioneId: id_regione });
+    };
+
     return (
         <View style={homeStyle.mainContainer}>
             <View style={homeStyle.header}>
@@ -32,7 +53,7 @@ function SelezioneRegioni() {
                         {data && data.length > 0 ? (
                             <Picker
                                 selectedValue={selectedValue}
-                                onValueChange={(itemValue) => setSelectedValue(itemValue)}
+                                onValueChange={(itemValue) => handleRegionChange(itemValue)}
                                 style={{ color: 'black', height: 50, width: '100%' }}
                             >
                                 <Picker.Item label="Seleziona una regione" value="0" style={{ fontSize: 16, color: 'gray' }} />
