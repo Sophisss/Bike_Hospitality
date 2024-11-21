@@ -14,10 +14,10 @@ function StazioniRicarica({ navigation, route }) {
   const [data, setData] = useState([]);
 
   const { regioneId } = route.params;
-  const regionCoordinates = regions[regioneId] || {
+  const coords = regionsCoordinate[regioneId] || {
     latitude: 43.254052, // Default latitude
     longitude: 13.010569, // Default longitude
-};
+  };
 
   const getStazioniRicarica = async () => {
     try {
@@ -40,7 +40,7 @@ function StazioniRicarica({ navigation, route }) {
     <View style={styles.container}>
 
       <MapView provider={PROVIDER_GOOGLE} style={styles.map} region={{
-        latitude: regionCoordinates.latitude, longitude: regionCoordinates.latitude,
+        latitude: coords.latitude, longitude: coords.longitude,
         latitudeDelta: 2, longitudeDelta: 2,
       }}>
         {data.map(marker => {
