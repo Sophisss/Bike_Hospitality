@@ -6,7 +6,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 import fetcher from "../utilities/Fetcher";
 import urls from "../utilities/Urls";
 import IconDecisionMaker from '../utilities/IconDecisionMaker';
-
+import regionsCoordinate from "../utilities/RegionsCoordinates";
 
 function StazioniRicarica({ navigation, route }) {
 
@@ -14,6 +14,10 @@ function StazioniRicarica({ navigation, route }) {
   const [data, setData] = useState([]);
 
   const { regioneId } = route.params;
+  const regionCoordinates = regions[regioneId] || {
+    latitude: 43.254052, // Default latitude
+    longitude: 13.010569, // Default longitude
+};
 
   const getStazioniRicarica = async () => {
     try {
@@ -36,10 +40,9 @@ function StazioniRicarica({ navigation, route }) {
     <View style={styles.container}>
 
       <MapView provider={PROVIDER_GOOGLE} style={styles.map} region={{
-        latitude: 43.254052, longitude: 13.010569,
+        latitude: regionCoordinates.latitude, longitude: regionCoordinates.latitude,
         latitudeDelta: 2, longitudeDelta: 2,
       }}>
-
         {data.map(marker => {
           return (
             <Marker key={marker.id} title={"Punto di Ricarica"} description={marker.indirizzo + " - " + marker.localita} coordinate={{ latitude: parseFloat(marker.latitude), longitude: parseFloat(marker.longitude) }}>

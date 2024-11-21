@@ -108,7 +108,7 @@ var simplemaps_countrymap_mapdata={
     },
     IT52: {
       color: "#003599",
-      name: "Toscania"
+      name: "Toscana"
     },
     IT55: {
       color: "#003599",
