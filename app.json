@@ -7,7 +7,7 @@
     "icon": "./assets/images/iconBH.png",
     "owner": "bike-hospitality-org",
     "splash": {
-      "image": "./assets/images/splashBH.png",
+      "image": "./assets/images/splashBH.png"
     },
     "androidStatusBar": {
       "barStyle": "dark-content"

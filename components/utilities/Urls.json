@@ -91,8 +91,8 @@
         "routeName": "Bike Routes",
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=itinerari&language=en"
     },
-    "regioni": {
-        "routeName": "Regioni",
+    "regions": {
+        "routeName": "Regions",
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=regioni"
     },
     "province": {

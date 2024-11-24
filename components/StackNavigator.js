@@ -1,10 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import SelezioneRegioni from './SelezioneRegioni';
+import { TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useContext } from 'react';
 
 import Accomodation from './pages/Strutture';
-import Home from './Home';
 import HStyle from '../assets/styles/HeaderStyle';
 import Promozioni from './pages/Promozioni';
 import Comuni from './pages/Comuni';
@@ -22,14 +23,9 @@ import Collaborazioni from './pages/Collaborazioni';
 import Enogastronomia from './pages/Enogastronomia';
 import Noleggio from './pages/Noleggio';
 import DettaglioEventi from './pages/detail/DettaglioEventi';
+import Regions from '../components/regions/Regions';
 
-import { TouchableOpacity } from 'react-native';
-import { Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
-import { useContext } from 'react';
 import { LanguageContext } from './LanguageContext';
-//import { myGFunction } from './utilities/Utils';
 import translations from '../translations/translations';
 
 
@@ -41,30 +37,18 @@ const enIcon = require('../assets/images/enIcon.png');
 var icon = global.currentLanguage === 'it' ? itIcon : enIcon;
 
 const setLanguage = (navigation) => {
-
-  //console.log('set language...'+global.currentLanguage);
   global.currentLanguage === 'it' ? global.currentLanguage = 'en' : global.currentLanguage = 'it';
-  //navigation.navigate('Home');
-  //console.log(' > '+global.currentLanguage);
   icon = global.currentLanguage === 'it' ? enIcon : itIcon;
   navigation.reset({ index: 0, routes: [{ name: 'Home' }] });
-
 };
 
 
-
 const StackNavigator = () => {
-
   const navigation = useNavigation();
-
   const { setLabel1 } = useContext(LanguageContext);
-
   const changeLabel = () => {
     setLabel1(translations[global.currentLanguage].disciplinare);
   };
-
-  var ln = global.currentLanguage;
-  var t = translations;
 
   return (
     <Stack.Navigator initialRouteName="Home" screenOptions={{
@@ -75,25 +59,13 @@ const StackNavigator = () => {
       headerTitleAlign: HStyle.headerTitleAlign,
       headerShown: true,
       headerRight: () => (
-        /* { return(
-            <View style={{flex: 1, flexDirection: 'row', padding: 5}}>
-              <Card style={HStyle.headerIconStyle} onPress={() => {console.log('Cambia lingua')}}>
-                <Icon name={IconDecisionMaker('language')} size={HStyle.headerIconSize} color={HStyle.headerIconColor}/>
-              </Card>setLabel1(global.currentLanguage)
-            </View>      size={25} color="#000"  <Icon name="italy"  />
-          );}
-          //Title: urls.strutture.routeName
-          */
         <TouchableOpacity onPress={() => { setLanguage(navigation); changeLabel() }}>
           <Image source={icon} style={{ width: 34, height: 34, marginRight: 12 }} />
         </TouchableOpacity>
-      ),
-
+      )
     }}>
 
-      <Stack.Screen name={"Home"} component={SelezioneRegioni} options={{ Title: urls.home.routeName }} />
-
-      <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name={urls.home.routeName} component={Regions} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />
       <Stack.Screen name={urls.comunien.routeName} component={Comuni} options={{ Title: urls.comunien.routeName }} />
       <Stack.Screen name={"Scheda Comune"} component={DettaglioComuni} options={{ Title: "Dettaglio Comuni" }} />
