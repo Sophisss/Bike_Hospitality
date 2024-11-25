@@ -5,6 +5,7 @@ import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
 
+import Home from './Home';
 import Accomodation from './pages/Strutture';
 import HStyle from '../assets/styles/HeaderStyle';
 import Promozioni from './pages/Promozioni';
@@ -23,7 +24,7 @@ import Collaborazioni from './pages/Collaborazioni';
 import Enogastronomia from './pages/Enogastronomia';
 import Noleggio from './pages/Noleggio';
 import DettaglioEventi from './pages/detail/DettaglioEventi';
-import Regions from '../components/regions/Regions';
+import Regions from '../components/Regions';
 
 import { LanguageContext } from './LanguageContext';
 import translations from '../translations/translations';
@@ -65,7 +66,8 @@ const StackNavigator = () => {
       )
     }}>
 
-      <Stack.Screen name={urls.home.routeName} component={Regions} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name={"Home"} component={Regions} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />
       <Stack.Screen name={urls.comunien.routeName} component={Comuni} options={{ Title: urls.comunien.routeName }} />
       <Stack.Screen name={"Scheda Comune"} component={DettaglioComuni} options={{ Title: "Dettaglio Comuni" }} />
