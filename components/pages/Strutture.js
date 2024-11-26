@@ -17,6 +17,7 @@ function Accomodation({ navigation, route }) {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = Object.keys(data).length;
 
   const { regioneId } = route.params;
 
@@ -49,60 +50,62 @@ function Accomodation({ navigation, route }) {
 
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
 
-        keys.map((key) => (
-          <View style={listStyle.categoryContainer} key={key}>
-            <Text style={listStyle.categoryText}>{t[ln].lb_prov_di}{key}</Text>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              _listEmptyComponent={_listEmptyComponent("Nessun " + key + " disponibile.")}
-              horizontal={true}
-              data={data[key]}
-              renderItem={({ item }) => (
-                <Card style={listStyle.itemCard}
-                  onPress={() => navigation.navigate(routeName, {
-                    id: item.id,
-                    nome: item.nome,
-                    //categoria: key,
-                    provincia: key,
-                    codice_provincia: item.codice_provincia,
-                    email: item.email,
-                    localita: item.localita,
-                    indirizzo: item.indirizzo,
-                    immagine: item.immagine,
-                    telefono: item.telefono,
-                    url: item.url,
-                    wiki: item.wiki,
-                    coords: item.coords,
-                    descrizione: item.descrizione,
-                  })
-                  }
-                >
+        (dataLength === 0 || dataLength == undefined) ?
+          _listEmptyComponent("Nessun dato disponibile.")
+          : keys.map((key) => (
+            <View style={listStyle.categoryContainer} key={key}>
+              <Text style={listStyle.categoryText}>{t[ln].lb_prov_di}{key}</Text>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                _listEmptyComponent={_listEmptyComponent("Nessun " + key + " disponibile.")}
+                horizontal={true}
+                data={data[key]}
+                renderItem={({ item }) => (
+                  <Card style={listStyle.itemCard}
+                    onPress={() => navigation.navigate(routeName, {
+                      id: item.id,
+                      nome: item.nome,
+                      //categoria: key,
+                      provincia: key,
+                      codice_provincia: item.codice_provincia,
+                      email: item.email,
+                      localita: item.localita,
+                      indirizzo: item.indirizzo,
+                      immagine: item.immagine,
+                      telefono: item.telefono,
+                      url: item.url,
+                      wiki: item.wiki,
+                      coords: item.coords,
+                      descrizione: item.descrizione,
+                    })
+                    }
+                  >
 
 
-                  <Image style={listStyle.itemImage} source={{ uri: item.immagine }} />
+                    <Image style={listStyle.itemImage} source={{ uri: item.immagine }} />
 
-                  <View style={listStyle.infoContainer}>
-                    <Text style={listStyle.accName}>{item.nome}</Text>
-                    <View style={listStyle.textContainer}>
-                      <Icon name={IconDecisionMaker('map')} size={20} color="green" />
-                      <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.localita} </Text>
+                    <View style={listStyle.infoContainer}>
+                      <Text style={listStyle.accName}>{item.nome}</Text>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('map')} size={20} color="green" />
+                        <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.localita} </Text>
+                      </View>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('location')} size={30} color="red" />
+                        <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.indirizzo} </Text>
+                      </View>
                     </View>
-                    <View style={listStyle.textContainer}>
-                      <Icon name={IconDecisionMaker('location')} size={30} color="red" />
-                      <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.indirizzo} </Text>
-                    </View>
-                  </View>
-                </Card>
-              )
-              }
-            />
+                  </Card>
+                )
+                }
+              />
 
-            {!key.match(keys[keys.length - 1])
-              ? <View style={{ width: '100%', borderBottomColor: 'lightgrey', borderWidth: 1, marginVertical: 30 }} />
-              : null}
-          </View>
+              {!key.match(keys[keys.length - 1])
+                ? <View style={{ width: '100%', borderBottomColor: 'lightgrey', borderWidth: 1, marginVertical: 30 }} />
+                : null}
+            </View>
 
-        ))
+          ))
       )}
 
     </ScrollView>
