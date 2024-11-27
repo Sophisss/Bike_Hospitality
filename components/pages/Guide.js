@@ -17,6 +17,7 @@ function Guide({ navigation, route }) {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = data.length;
 
   const { regioneId } = route.params;
 
@@ -46,47 +47,49 @@ function Guide({ navigation, route }) {
 
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
 
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          _listEmptyComponent={_listEmptyComponent("Nessuna guida disponibile.")}
-          data={data}
-          renderItem={({ item }) => (
-            <Card style={[listStyle.itemCardLeftImage]}
-              onPress={() => navigation.navigate(routeName, {
-                id: item.id,
-                nome: item.nome,
-                cognome: item.cognome,
-                provincia: item.provincia,
-                comune: item.comune,
-                localita: item.localita,
-                foto: item.foto,
-                lingue: item.lingue,
-                settori: item.settori,
-                telefono: item.telefono,
-                email: item.email,
-                descrizione: item.descrizione,
-              })}
-            >
+        (dataLength === 0 || dataLength == undefined) ?
+          _listEmptyComponent(t[ln].no_data)
+          : <FlatList
+            showsHorizontalScrollIndicator={false}
+            _listEmptyComponent={_listEmptyComponent("Nessuna guida disponibile.")}
+            data={data}
+            renderItem={({ item }) => (
+              <Card style={[listStyle.itemCardLeftImage]}
+                onPress={() => navigation.navigate(routeName, {
+                  id: item.id,
+                  nome: item.nome,
+                  cognome: item.cognome,
+                  provincia: item.provincia,
+                  comune: item.comune,
+                  localita: item.localita,
+                  foto: item.foto,
+                  lingue: item.lingue,
+                  settori: item.settori,
+                  telefono: item.telefono,
+                  email: item.email,
+                  descrizione: item.descrizione,
+                })}
+              >
 
-              <View style={listStyle.infoContainerLeftImage}>
-                <Image style={listStyle.itemLeftImage} source={{ uri: item.foto }} />
+                <View style={listStyle.infoContainerLeftImage}>
+                  <Image style={listStyle.itemLeftImage} source={{ uri: item.foto }} />
 
-                <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10, }}>
-                  <Text style={listStyle.accName}>{item.nome} {item.cognome}</Text>
-                  <View style={listStyle.textContainerLeftImage}>
-                    <Icon name={IconDecisionMaker('location')} size={20} color="red" />
-                    <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.comune} {"(" + item.provincia + ")"} </Text>
-                  </View>
-                  <View style={[listStyle.textContainerLeftImage]}>
-                    <Icon name={IconDecisionMaker('call')} size={20} color="green" />
-                    <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.telefono} </Text>
+                  <View style={{ flex: 1, flexDirection: 'column', marginLeft: 10, }}>
+                    <Text style={listStyle.accName}>{item.nome} {item.cognome}</Text>
+                    <View style={listStyle.textContainerLeftImage}>
+                      <Icon name={IconDecisionMaker('location')} size={20} color="red" />
+                      <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.comune} {"(" + item.provincia + ")"} </Text>
+                    </View>
+                    <View style={[listStyle.textContainerLeftImage]}>
+                      <Icon name={IconDecisionMaker('call')} size={20} color="green" />
+                      <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.telefono} </Text>
+                    </View>
                   </View>
                 </View>
-              </View>
-            </Card>
-          )
-          }
-        />
+              </Card>
+            )
+            }
+          />
       )}
 
     </View>

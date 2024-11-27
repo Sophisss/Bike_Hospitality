@@ -19,6 +19,7 @@ function Tour({ navigation, route }) {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = Object.keys(data).length;
 
   const { regioneId } = route.params;
 
@@ -55,58 +56,60 @@ function Tour({ navigation, route }) {
 
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
 
-        keys.map((key) => (
-          <View style={listStyle.categoryContainer} key={key}>
-            <Text style={listStyle.categoryText}>{(key == "Itinerario") ? "Itinerari/Tour" : t[ln].lb_prov_di + key}</Text>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              _listEmptyComponent={_listEmptyComponent("Nessun " + key + " disponibile.")}
-              horizontal={true}
-              data={data[key]}
-              renderItem={({ item }) => (
-                <Card style={listStyle.itemCard}
-                  onPress={() => navigation.navigate(routeName, {
-                    id: item.id,
-                    nome: item.nome,
-                    ///categoria: key,
-                    nome_provincia: key,
-                    provincia: item.provincia,
-                    codice_provincia: item.codice_provincia,
-                    comune: item.comune,
-                    localita: item.localita,
-                    mail: item.mail,
-                    gpx: item.gpx,
-                    map: item.map,
-                    linkgpx: item.linkgpx,
-                    telefono: item.telefono,
-                    email: item.email,
-                    descrizione: item.descrizione,
-                    immagini: item.immagini,
-                  })
-                  }
-                >
+        (dataLength === 0 || dataLength == undefined) ?
+          _listEmptyComponent(t[ln].no_data)
+          : keys.map((key) => (
+            <View style={listStyle.categoryContainer} key={key}>
+              <Text style={listStyle.categoryText}>{(key == "Itinerario") ? "Itinerari/Tour" : t[ln].lb_prov_di + key}</Text>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                _listEmptyComponent={_listEmptyComponent("Nessun " + key + " disponibile.")}
+                horizontal={true}
+                data={data[key]}
+                renderItem={({ item }) => (
+                  <Card style={listStyle.itemCard}
+                    onPress={() => navigation.navigate(routeName, {
+                      id: item.id,
+                      nome: item.nome,
+                      ///categoria: key,
+                      nome_provincia: key,
+                      provincia: item.provincia,
+                      codice_provincia: item.codice_provincia,
+                      comune: item.comune,
+                      localita: item.localita,
+                      mail: item.mail,
+                      gpx: item.gpx,
+                      map: item.map,
+                      linkgpx: item.linkgpx,
+                      telefono: item.telefono,
+                      email: item.email,
+                      descrizione: item.descrizione,
+                      immagini: item.immagini,
+                    })
+                    }
+                  >
 
 
-                  <Image style={listStyle.itemImage} source={{ uri: item.immagini[0] }} />
+                    <Image style={listStyle.itemImage} source={{ uri: item.immagini[0] }} />
 
-                  <View style={listStyle.infoContainer}>
-                    <Text style={listStyle.accName}>{item.nome}</Text>
-                    <View style={listStyle.textContainer}>
-                      <Icon name={IconDecisionMaker('map')} size={20} color="green" />
-                      <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.comune + " (" + item.provincia + ")"} </Text>
+                    <View style={listStyle.infoContainer}>
+                      <Text style={listStyle.accName}>{item.nome}</Text>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('map')} size={20} color="green" />
+                        <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.comune + " (" + item.provincia + ")"} </Text>
+                      </View>
                     </View>
-                  </View>
-                </Card>
-              )
-              }
-            />
+                  </Card>
+                )
+                }
+              />
 
-            {!key.match(keys[keys.length - 1])
-              ? <View style={{ width: '100%', borderBottomColor: 'lightgrey', borderWidth: 1, marginVertical: 30 }} />
-              : null}
-          </View>
+              {!key.match(keys[keys.length - 1])
+                ? <View style={{ width: '100%', borderBottomColor: 'lightgrey', borderWidth: 1, marginVertical: 30 }} />
+                : null}
+            </View>
 
-        ))
+          ))
 
       )}
 

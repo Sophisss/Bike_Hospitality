@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -17,6 +17,7 @@ function Enogastronomia({ navigation, route }) {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = data.length;
 
   const { regioneId } = route.params;
 
@@ -42,46 +43,52 @@ function Enogastronomia({ navigation, route }) {
   return (
     <View style={listStyle.mainContainer}>
 
-      <FlatList
-        style={{ alignSelf: 'center' }}
-        _listEmptyComponent={_listEmptyComponent("Nessun partner enogastronomico disponibile.")}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        data={data}
-        renderItem={({ item }) => (
-          <Card style={[listStyle.itemCardVertical, { alignSelf: 'center' }]}
-            onPress={() => navigation.navigate('Dettaglio Collaborazioni', {
-              id: item.id,
-              nome: item.nome,
-              categoria: item.categoria,
-              localita: item.localita,
-              indirizzo: item.indirizzo,
-              immagine: item.immagine,
-              url: item.url,
-              wiki: item.wiki,
-              coords: item.coords,
-              descrizione: item.descrizione,
-            }
+      {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
+        (dataLength === 0 || dataLength == undefined) ?
+          _listEmptyComponent(t[ln].no_data)
+          : <FlatList
+            style={{ alignSelf: 'center' }}
+            _listEmptyComponent={_listEmptyComponent("Nessun partner enogastronomico disponibile.")}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={data}
+            renderItem={({ item }) => (
+              <Card style={[listStyle.itemCardVertical, { alignSelf: 'center' }]}
+                onPress={() => navigation.navigate('Dettaglio Collaborazioni', {
+                  id: item.id,
+                  nome: item.nome,
+                  categoria: item.categoria,
+                  localita: item.localita,
+                  indirizzo: item.indirizzo,
+                  immagine: item.immagine,
+                  url: item.url,
+                  wiki: item.wiki,
+                  coords: item.coords,
+                  descrizione: item.descrizione,
+                }
+                )
+                }
+              >
+
+                <Image style={listStyle.itemImageVertical} source={{ uri: item.immagine }} />
+                <View style={listStyle.infoContainer}>
+                  <Text style={listStyle.accName}>{item.nome}</Text>
+                  <View style={listStyle.textContainer}>
+                    <Icon name={IconDecisionMaker('map')} size={20} color="green" />
+                    <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.localita} </Text>
+                  </View>
+                  <View style={listStyle.textContainer}>
+                    <Icon name={IconDecisionMaker('location')} size={30} color="red" />
+                    <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.indirizzo} </Text>
+                  </View>
+                </View>
+              </Card>
             )
             }
-          >
+          />
+      )}
 
-            <Image style={listStyle.itemImageVertical} source={{ uri: item.immagine }} />
-            <View style={listStyle.infoContainer}>
-              <Text style={listStyle.accName}>{item.nome}</Text>
-              <View style={listStyle.textContainer}>
-                <Icon name={IconDecisionMaker('map')} size={20} color="green" />
-                <Text style={[listStyle.text, { color: '#4d4d4d', fontWeight: 'bold' }]}> {item.localita} </Text>
-              </View>
-              <View style={listStyle.textContainer}>
-                <Icon name={IconDecisionMaker('location')} size={30} color="red" />
-                <Text style={[listStyle.text, listStyle.textItalic, { color: 'white' }]}> {item.indirizzo} </Text>
-              </View>
-            </View>
-          </Card>
-        )
-        }
-      />
+
 
     </View>
 
