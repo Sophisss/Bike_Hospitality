@@ -35,6 +35,8 @@ const Stack = createStackNavigator();
 const itIcon = require('../assets/images/itIcon.png');
 const enIcon = require('../assets/images/enIcon.png');
 
+
+
 var icon = global.currentLanguage === 'it' ? itIcon : enIcon;
 
 const setLanguage = (navigation) => {
@@ -66,7 +68,7 @@ const StackNavigator = () => {
       )
     }}>
 
-      <Stack.Screen name={"Home"} component={Regions} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name={translations[global.currentLanguage].select_region} component={Regions} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />
       <Stack.Screen name={urls.comunien.routeName} component={Comuni} options={{ Title: urls.comunien.routeName }} />

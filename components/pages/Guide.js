@@ -48,7 +48,7 @@ function Guide({ navigation, route }) {
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
 
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent("Nessun dato disponibile.")
+          _listEmptyComponent(t[ln].no_data)
           : <FlatList
             showsHorizontalScrollIndicator={false}
             _listEmptyComponent={_listEmptyComponent("Nessuna guida disponibile.")}

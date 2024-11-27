@@ -10,6 +10,8 @@ import IconDecisionMaker from '../utilities/IconDecisionMaker';
 import listStyle from '../../assets/styles/ListStyle';
 import { _listEmptyComponent } from '../utilities/Utils';
 
+import translations from '../../translations/translations';
+
 
 function Noleggio({ navigation, route }) {
 
@@ -34,12 +36,15 @@ function Noleggio({ navigation, route }) {
     getNol();
   }, []);
 
+  var ln = global.currentLanguage;
+  var t = translations;
+
   return (
     <View style={listStyle.mainContainer}>
 
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent("Nessun dato disponibile.")
+          _listEmptyComponent(t[ln].no_data)
           : <FlatList
             style={{ alignSelf: 'center' }}
             _listEmptyComponent={_listEmptyComponent("Nessun negozio per il noleggio disponibile.")}

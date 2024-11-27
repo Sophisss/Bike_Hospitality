@@ -45,7 +45,7 @@ function Enogastronomia({ navigation, route }) {
 
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent("Nessun dato disponibile.")
+          _listEmptyComponent(t[ln].no_data)
           : <FlatList
             style={{ alignSelf: 'center' }}
             _listEmptyComponent={_listEmptyComponent("Nessun partner enogastronomico disponibile.")}

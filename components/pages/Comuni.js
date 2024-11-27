@@ -54,7 +54,7 @@ function Comuni({ navigation, route }) {
       {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
 
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent("Nessun dato disponibile.")
+          _listEmptyComponent(t[ln].no_data)
           : keys.map((key) => (
             <View style={listStyle.categoryContainer} key={key}>
               <Text style={listStyle.categoryText}>{t[ln].lb_prov_di}{key}</Text>
