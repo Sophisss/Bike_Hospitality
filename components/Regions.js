@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Image, ImageBackground, View } from 'react-native';
+import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 import Svg, { Path } from "react-native-svg";
 
 import homeStyle from '../assets/styles/HomeStyle';
@@ -8,11 +9,6 @@ import homeStyle from '../assets/styles/HomeStyle';
 import urls from './utilities/Urls.json';
 import fetcher from './utilities/Fetcher';
 import { regionPaths } from './utilities/Paths';
-
-import {
-    responsiveHeight,
-    responsiveWidth
-} from "react-native-responsive-dimensions";
 
 
 /**
@@ -71,7 +67,7 @@ function Regions() {
                         source={require('../assets/images/logoBH.png')} />
                 </View>
 
-                <View style={homeStyle.body}>
+                <View>
                     <Svg
                         fill="#ffffff"
                         stroke="#000000"
@@ -79,8 +75,6 @@ function Regions() {
                         alignSelf="center"
                         width={responsiveWidth(200)}
                         height={responsiveHeight(100)}
-                    // zIndex={1}
-                    // style={homeStyle.svg}
                     >
                         {data.map((region, index) => {
                             const isSelected = selectedRegion == region.id_regione;

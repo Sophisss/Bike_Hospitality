@@ -21,8 +21,8 @@ const homeStyle = StyleSheet.create({
     zIndex: 2,
     width: '100%',
     height: '100%',
-    gap: 20,
-    padding: 10
+    gap: 10,
+    padding: 8
   },
 
   header: {
@@ -40,11 +40,6 @@ const homeStyle = StyleSheet.create({
     aspectRatio: 1,
     marginTop: 10,
     marginBottom: 10,
-  },
-
-  svg: {
-    width: '100%',
-    height: 'auto'
   },
 
   logoSingleButton: {
