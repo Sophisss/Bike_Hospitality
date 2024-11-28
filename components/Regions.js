@@ -9,6 +9,11 @@ import urls from './utilities/Urls.json';
 import fetcher from './utilities/Fetcher';
 import { regionPaths } from './utilities/Paths';
 
+import {
+    responsiveHeight,
+    responsiveWidth
+} from "react-native-responsive-dimensions";
+
 
 /**
  * Component for selecting regions.
@@ -72,10 +77,10 @@ function Regions() {
                         stroke="#000000"
                         viewBox="0 0 1000 1650"
                         alignSelf="center"
-                        width={1000}
-                        height={1000}
-                        zIndex={1}
-                        style={homeStyle.svg}
+                        width={responsiveWidth(200)}
+                        height={responsiveHeight(100)}
+                    // zIndex={1}
+                    // style={homeStyle.svg}
                     >
                         {data.map((region, index) => {
                             const isSelected = selectedRegion == region.id_regione;
