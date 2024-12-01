@@ -41,7 +41,9 @@ const translations = {
         msg_Mappa: "Map not available.",
         msg_Aggiorn: "Update available",
         no_data: "No data available.",
-        select_region: "Select a region"
+        select_region: "Select a region",
+        disabled_region: "Region in the process of being inserted...",
+        disabled_region_link: "Press here to join us!"
 
     },
     it: {
@@ -86,7 +88,9 @@ const translations = {
         msg_Mappa: "Nessuna mappa disponibile.",
         msg_Aggiorn: "Aggiornamento disponibile",
         no_data: "Nessun dato disponibile.",
-        select_region: "Seleziona una regione"
+        select_region: "Seleziona una regione",
+        disabled_region: "Regione in fase di inserimento...",
+        disabled_region_link: "Premi qui per unirti a noi!"
     },
 
     // Aggiungi altre lingue qui

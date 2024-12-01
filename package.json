@@ -26,6 +26,7 @@
     "expo-web-browser": "~12.1.1",
     "he": "^1.2.0",
     "i18next": "^23.7.11",
+    "lottie-react-native": "^7.1.0",
     "ramda": "^0.29.1",
     "react": "18.2.0",
     "react-i18next": "^14.0.0",

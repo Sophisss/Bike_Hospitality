@@ -86,6 +86,29 @@ const homeStyle = StyleSheet.create({
 
   scrollview: {
     padding: 2
+  },
+
+  disabled_region: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 30
+  },
+
+  linkText: {
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 10,
+    fontSize: 16,
+    color: 'royalblue'
+  },
+
+  animation: {
+    // marginLeft: 80,
+    marginTop: 10,
+    width: 100,
+    height: 100,
+    // backgroundColor: 'transparent',
   }
 })
 

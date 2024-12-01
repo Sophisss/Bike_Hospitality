@@ -53,7 +53,8 @@ function Regions() {
      * @param {*} regionId the id of the selected region
      */
     const handleRegionSelection = (regionId) => {
-        navigation.navigate(urls.home.routeName, { regioneId: regionId });
+        const abilitata = data.find(region => region.id_regione === regionId).abilitata;
+        navigation.navigate(urls.home.routeName, { regioneId: regionId, abilitata: abilitata });
     };
 
     return (
