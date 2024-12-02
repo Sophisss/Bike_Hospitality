@@ -43,7 +43,7 @@ const translations = {
         no_data: "No data available.",
         select_region: "Select a region",
         disabled_region: "Region in the process of being inserted...",
-        disabled_region_link: "Press here to join us!"
+        disabled_region_link: "If you are not yet part of our community, click the link below to join us!"
 
     },
     it: {
@@ -90,7 +90,7 @@ const translations = {
         no_data: "Nessun dato disponibile.",
         select_region: "Seleziona una regione",
         disabled_region: "Regione in fase di inserimento...",
-        disabled_region_link: "Premi qui per unirti a noi!"
+        disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!"
     },
 
     // Aggiungi altre lingue qui

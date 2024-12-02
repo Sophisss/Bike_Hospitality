@@ -134,11 +134,11 @@ const detailStyle = StyleSheet.create({
       padding: sectionPadding - 5,
     },
     sectionTitle: {
-      color: "darkblue",
+      color: "#294196",
       flex: 5,
       fontSize: 20, 
       fontWeight: 'bold',
-      paddingBottom: 8,
+      // paddingBottom: 8,
       textAlign: 'left',
     },
     sectionIcon: {
@@ -161,6 +161,7 @@ const detailStyle = StyleSheet.create({
 
     flexDirectionRow: {
       flexDirection: 'row',
+      alignItems: 'center'
     }
 });
 

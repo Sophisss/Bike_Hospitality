@@ -1,14 +1,19 @@
 import Icon from '@expo/vector-icons/Ionicons';
 import { useState, useEffect } from 'react';
 import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking } from 'react-native';
+import { Card } from 'react-native-paper';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
 
 import homeStyle from '../assets/styles/HomeStyle';
+import listStyle from "../assets/styles/ListStyle";
+import detailStyle from "../assets/styles/DetailStyle";
 import translations from '../translations/translations';
 
 import urls from './utilities/Urls';
 import IconDecisionMaker from './utilities/IconDecisionMaker';
 import fetcher from './utilities/Fetcher';
+import config from '../config.json';
 
 const appVersion = 3.0;
 global.msgShown = '0';
@@ -34,7 +39,6 @@ function Home({ navigation, route }) {
     const [data, setData] = useState([]);
 
     const { regioneId, abilitata } = route.params;
-    console.log("Home regioneId: " + regioneId + " abilitata: " + abilitata);
 
 
     /**
@@ -83,22 +87,46 @@ function Home({ navigation, route }) {
 
             <View style={homeStyle.box}>
 
-                <View style={homeStyle.header}>
-                    <Image style={homeStyle.logoBH}
-                        source={require('../assets/images/logoBH.png')} />
-                </View>
+                {
+                    abilitata == 1 ? (
+                        <View style={homeStyle.header}>
+                            <Image style={homeStyle.logoBH}
+                                source={require('../assets/images/logoBH.png')} />
+                        </View>
+                    ) : null
+                }
 
-                <View style={homeStyle.body} keyboardShouldPersistTaps={'handled'}>
+                <View style={[homeStyle.body, {
+                    justifyContent: abilitata == 1 ? 'flex-start' : 'center'
+                }]} keyboardShouldPersistTaps={'handled'}>
                     {
                         abilitata == 0 ? (
-                            <View>
-                                {/* <LottieView source={require('../assets/animations/cycling.json')} autoPlay loop style={homeStyle.animation} /> */}
+                            <View style={{ padding: 10, gap: 10, flex: 1 }}>
+                                <LottieView source={require('../assets/animations/cycling.json')} autoPlay loop style={homeStyle.animation} />
                                 <Text style={homeStyle.disabled_region}>{t[language].disabled_region}</Text>
-                                <TouchableOpacity onPress={() => Linking.openURL('https://www.bikehospitality.it/')}>
+
+                                <TouchableOpacity>
                                     <Text style={homeStyle.linkText}>
                                         {t[language].disabled_region_link}
                                     </Text>
                                 </TouchableOpacity>
+
+                                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                                    <View style={detailStyle.sectionView}>
+                                        <View style={detailStyle.flexDirectionRow}>
+                                            <Text style={[detailStyle.sectionTitle, { flex: 1 }]}>BIKEHOSPITALITY</Text>
+                                            <View>
+                                                <TouchableOpacity width={'auto'} onPress={() => {
+                                                    Linking.openURL(config.bikeHospitalityLink)
+                                                }}
+                                                >
+                                                    <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
+                                                </TouchableOpacity>
+                                            </View>
+                                        </View>
+                                        <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: config.bikeHospitalityImage }} />
+                                    </View>
+                                </Card>
                             </View>
                         ) : (
                             <View>

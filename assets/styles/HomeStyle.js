@@ -18,7 +18,6 @@ const homeStyle = StyleSheet.create({
 
   box: {
     position: 'absolute',
-    zIndex: 2,
     width: '100%',
     height: '100%',
     gap: 10,
@@ -50,7 +49,7 @@ const homeStyle = StyleSheet.create({
   },
 
   body: {
-    justifyContent: 'center',
+    flex: 1,
     maxHeight: screenHeight > 680 ? Dimensions.get('window').height : Dimensions.get('window').height * 0.48
   },
 
@@ -89,6 +88,7 @@ const homeStyle = StyleSheet.create({
   },
 
   disabled_region: {
+    color: '#294196',
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -104,11 +104,8 @@ const homeStyle = StyleSheet.create({
   },
 
   animation: {
-    // marginLeft: 80,
-    marginTop: 10,
-    width: 100,
-    height: 100,
-    // backgroundColor: 'transparent',
+    width: '100%',
+    height: screenHeight / 10
   }
 })
 
