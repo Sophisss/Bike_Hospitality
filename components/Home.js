@@ -1,6 +1,6 @@
 import Icon from '@expo/vector-icons/Ionicons';
-import { useState, useEffect } from 'react';
-import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
+import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking, AppState } from 'react-native';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
@@ -19,6 +19,7 @@ const appVersion = 3.0;
 global.msgShown = '0';
 
 function Home({ navigation, route }) {
+    const animationRef = useRef(null);
 
     var language = global.currentLanguage;
     var t = translations;
@@ -80,6 +81,23 @@ function Home({ navigation, route }) {
         getHome();
     }, []);
 
+    /**
+     * This method plays the animation when the app is in the foreground.
+     */
+    useEffect(() => {
+        const subscription = AppState.addEventListener("change", (nextAppState) => {
+            if (nextAppState === "active") {
+                if (animationRef.current) {
+                    animationRef.current.play();
+                }
+            }
+        });
+
+        return () => {
+            subscription.remove();
+        };
+    }, []);
+
     return (
 
         <View style={homeStyle.mainContainer}>
@@ -102,7 +120,7 @@ function Home({ navigation, route }) {
                     {
                         abilitata == 0 ? (
                             <View style={{ padding: 10, gap: 10, flex: 1 }}>
-                                <LottieView source={require('../assets/animations/cycling.json')} autoPlay loop style={homeStyle.animation} />
+                                <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={homeStyle.animation} />
                                 <Text style={homeStyle.disabled_region}>{t[language].disabled_region}</Text>
 
                                 <TouchableOpacity>
