@@ -10,10 +10,9 @@ import listStyle from "../assets/styles/ListStyle";
 import detailStyle from "../assets/styles/DetailStyle";
 import translations from '../translations/translations';
 
-import urls from './utilities/Urls';
+import urls from './utilities/Urls.json';
 import IconDecisionMaker from './utilities/IconDecisionMaker';
 import fetcher from './utilities/Fetcher';
-import config from '../config.json';
 
 const appVersion = 3.0;
 global.msgShown = '0';
@@ -135,14 +134,14 @@ function Home({ navigation, route }) {
                                             <Text style={[detailStyle.sectionTitle, { flex: 1 }]}>BIKEHOSPITALITY</Text>
                                             <View>
                                                 <TouchableOpacity width={'auto'} onPress={() => {
-                                                    Linking.openURL(config.bikeHospitalityLink)
+                                                    Linking.openURL('https://www.bikehospitality.it/aderisci/')
                                                 }}
                                                 >
                                                     <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
-                                        <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: config.bikeHospitalityImage }} />
+                                        <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
                                     </View>
                                 </Card>
                             </View>
