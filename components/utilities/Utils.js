@@ -6,6 +6,7 @@ import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
 import mainStyle from '../../assets/styles/MainStyle';
 import { Link } from '@react-navigation/native';
+import * as Location from "expo-location";
 
 /**
  * A View for components which don't have elments inside.
@@ -86,5 +87,18 @@ async function sendStats(page, id) {
 
 }
 
+async function getUserLocation() {
+  let { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== "granted") {
+    alert("Permessi di localizzazione non concessi");
+    return null;
+  }
 
-export { _listEmptyComponent, geo, sendStats };
+  const location = await Location.getCurrentPositionAsync({});
+  return {
+    latitude: location.coords.latitude,
+    longitude: location.coords.longitude,
+  };
+}
+
+export { _listEmptyComponent, geo, sendStats, getUserLocation };

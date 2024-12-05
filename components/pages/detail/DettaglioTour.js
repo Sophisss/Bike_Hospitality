@@ -16,6 +16,7 @@ import mainStyle from '../../../assets/styles/MainStyle';
 import notification from '../../utilities/Alert';
 
 import translations from '../../../translations/translations';
+import MapComponent from '../../utilities/MapComponent';
 
 function DettaglioTour({ navigation, route }) {
   const { id, nome, categoria, provincia, codice_provincia, comune, localita, gpx, map, linkgpx, telefono, email, descrizione, immagini } = route.params;
@@ -98,14 +99,16 @@ function DettaglioTour({ navigation, route }) {
             <Ionicons name={IconDecisionMaker('glasses')} style={detailStyle.sectionIcon} size={30} color='#294075' />
           </View>
 
-          {(map !== "") ?
+          <MapComponent gpxFileUri={gpx} />
+
+          {/* {(map !== "") ?
             <WebView
               nestedScrollEnabled
               source={{ uri: map }}
               style={{ marginTop: 10, height: Dimensions.get('window').height / 2, opacity: 0.99 }}
             />
             : _listEmptyComponent(t[ln].msg_Mappa)
-          }
+          } */}
 
           <Text style={{ padding: 2, alignSelf: 'center', marginTop: marginTopValue }}>
             {(gpx !== "") ?
