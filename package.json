@@ -15,6 +15,7 @@
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/native-stack": "^6.9.6",
     "@react-navigation/stack": "^6.3.17",
+    "@tmcw/togeojson": "^6.0.0",
     "@turf/turf": "^7.1.0",
     "expo": "^48.0.0",
     "expo-constants": "~14.2.1",
@@ -25,7 +26,6 @@
     "expo-status-bar": "~1.4.4",
     "expo-updates": "~0.16.4",
     "expo-web-browser": "~12.1.1",
-    "gpx-parse": "^0.10.4",
     "he": "^1.2.0",
     "i18next": "^23.7.11",
     "lottie-react-native": "^7.1.0",
@@ -52,7 +52,8 @@
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "^0.18.10",
     "react-native-webview": "11.26.0",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
