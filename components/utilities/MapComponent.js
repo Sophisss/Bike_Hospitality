@@ -2,37 +2,31 @@ import React, { useEffect, useState } from "react";
 import MapView, { Polyline, Marker } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
 
-import GpxParser from "gpx-parse";
 import * as Location from "expo-location";
 import * as turf from "@turf/turf";
 import { getUserLocation } from "./Utils";
+
+import { DOMParser } from "xmldom";
+import { gpx } from "@tmcw/togeojson";
 
 const MapComponent = ({ gpxFileUri }) => {
     const [itinerary, setItinerary] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [nearestPoint, setNearestPoint] = useState(null);
 
-    // Funzione per caricare e parse il file GPX
     async function parseGpx(fileUri) {
-        return new Promise((resolve, reject) => {
-            fetch(fileUri)
-                .then((response) => response.text())
-                .then((gpxData) => {
-                    GpxParser.parseGpx(gpxData, (error, data) => {
-                        if (error) {
-                            reject(error);
-                        } else {
-                            // Estrai i punti del percorso
-                            const coordinates = data.tracks[0].segments[0].map((point) => ({
-                                latitude: point.lat,
-                                longitude: point.lon,
-                            }));
-                            resolve(coordinates);
-                        }
-                    });
-                })
-                .catch((err) => reject(err));
-        });
+        const response = await fetch(fileUri);
+        const gpxText = await response.text();
+        const gpxXml = new DOMParser().parseFromString(gpxText, "text/xml");
+        const geojson = gpx(gpxXml);
+
+        // Estrai le coordinate
+        const coordinates = geojson.features[0].geometry.coordinates.map(([lon, lat]) => ({
+            latitude: lat,
+            longitude: lon,
+        }));
+
+        return coordinates;
     }
 
     function findNearestPoint(userLocation, itineraryPoints) {

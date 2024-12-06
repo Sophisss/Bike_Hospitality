@@ -88,7 +88,7 @@ function DettaglioTour({ navigation, route }) {
           <Ionicons name={IconDecisionMaker('glasses')} style={detailStyle.sectionIcon} size={30} color='dodgerblue' />
         </View>
 
-        <MapComponent gpxFileUri={gpx} />
+        <MapComponent gpxFileUri={linkgpx} />
 
         {/*(map !== "") ?
           <WebView
