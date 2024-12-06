@@ -5,7 +5,7 @@ import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
 
-import homeStyle from '../assets/styles/HomeStyle';
+import mainStyle from '../assets/styles/MainStyle';
 import listStyle from "../assets/styles/ListStyle";
 import detailStyle from "../assets/styles/DetailStyle";
 import translations from '../translations/translations';
@@ -99,31 +99,31 @@ function Home({ navigation, route }) {
 
     return (
 
-        <View style={homeStyle.mainContainer}>
-            <ImageBackground source={require('../assets/images/background.png')} style={homeStyle.imageBackground} />
+        <View style={mainStyle.mainContainer}>
+            <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-            <View style={homeStyle.box}>
+            <View style={mainStyle.box}>
 
                 {
                     abilitata == 1 ? (
-                        <View style={homeStyle.header}>
-                            <Image style={homeStyle.logoBH}
+                        <View style={mainStyle.header}>
+                            <Image style={mainStyle.logoBH}
                                 source={require('../assets/images/logoBH.png')} />
                         </View>
                     ) : null
                 }
 
-                <View style={[homeStyle.body, {
+                <View style={[mainStyle.body, {
                     justifyContent: abilitata == 1 ? 'flex-start' : 'center'
                 }]} keyboardShouldPersistTaps={'handled'}>
                     {
                         abilitata == 0 ? (
                             <View style={{ padding: 10, gap: 10, flex: 1 }}>
-                                <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={homeStyle.animation} />
-                                <Text style={homeStyle.disabled_region}>{t[language].disabled_region}</Text>
+                                <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
+                                <Text style={mainStyle.disabled_region}>{t[language].disabled_region}</Text>
 
                                 <TouchableOpacity>
-                                    <Text style={homeStyle.linkText}>
+                                    <Text style={mainStyle.linkText}>
                                         {t[language].disabled_region_link}
                                     </Text>
                                 </TouchableOpacity>
@@ -147,58 +147,58 @@ function Home({ navigation, route }) {
                             </View>
                         ) : (
                             <View>
-                                <View style={homeStyle.touchableRow}>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlHome, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("bed")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].strutture.toUpperCase()}</Text>
+                                <View style={mainStyle.touchableRow}>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlHome, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("bed")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].strutture.toUpperCase()}</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlComuni, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("business")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].comuni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={homeStyle.touchableRow}>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlGuide, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("person")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].guide.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlTour, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("bicycle-sharp")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].itinerari.toUpperCase()}</Text>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlComuni, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("business")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].comuni.toUpperCase()}</Text>
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={homeStyle.touchableRow}>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlStations, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("battery-charging")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].stazioni.toUpperCase()}</Text>
+                                <View style={mainStyle.touchableRow}>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlGuide, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("person")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].guide.toUpperCase()}</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlEventi, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("calendar")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].eventi.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
-
-                                <View style={homeStyle.touchableRow}>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPartners, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("people-sharp")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].collaborazioni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlFoodW, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("fast-food")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].enogastronomia.toUpperCase()}</Text>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlTour, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("bicycle-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].itinerari.toUpperCase()}</Text>
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={homeStyle.touchableRow}>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
+                                <View style={mainStyle.touchableRow}>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlStations, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("battery-charging")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].stazioni.toUpperCase()}</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={homeStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPromo, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("star")} size={iconSize} color="white" style={homeStyle.touchableItemIcon} />
-                                        <Text style={homeStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlEventi, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("calendar")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].eventi.toUpperCase()}</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                                <View style={mainStyle.touchableRow}>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPartners, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("people-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].collaborazioni.toUpperCase()}</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlFoodW, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("fast-food")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].enogastronomia.toUpperCase()}</Text>
+                                    </TouchableOpacity>
+                                </View>
+
+                                <View style={mainStyle.touchableRow}>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPromo, { regioneId: regioneId }) }}>
+                                        <Icon name={IconDecisionMaker("star")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                        <Text style={mainStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>

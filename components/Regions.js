@@ -4,7 +4,7 @@ import { Image, ImageBackground, View } from 'react-native';
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 import Svg, { Path } from "react-native-svg";
 
-import homeStyle from '../assets/styles/HomeStyle';
+import mainStyle from '../assets/styles/MainStyle';
 
 import urls from './utilities/Urls.json';
 import fetcher from './utilities/Fetcher';
@@ -58,13 +58,13 @@ function Regions() {
     };
 
     return (
-        <View style={homeStyle.mainContainer}>
-            <ImageBackground source={require('../assets/images/background.png')} style={homeStyle.imageBackground} />
+        <View style={mainStyle.mainContainer}>
+            <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-            <View style={homeStyle.box}>
+            <View style={mainStyle.box}>
 
-                <View style={homeStyle.header}>
-                    <Image style={homeStyle.logoBH}
+                <View style={mainStyle.header}>
+                    <Image style={mainStyle.logoBH}
                         source={require('../assets/images/logoBH.png')} />
                 </View>
 

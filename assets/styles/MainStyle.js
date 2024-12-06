@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const screenHeight = Dimensions.get('window').height;
 
 
-const homeStyle = StyleSheet.create({
+const mainStyle = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'royalblue',
     flexGrow: 1,
@@ -111,4 +111,4 @@ const homeStyle = StyleSheet.create({
 
 
 
-export default homeStyle;
+export default mainStyle;
