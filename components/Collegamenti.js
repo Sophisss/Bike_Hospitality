@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View, } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View, ImageBackground, Linking } from 'react-native';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import * as WebBrowser from 'expo-web-browser';
 
 import IconDecisionMaker from "./utilities/IconDecisionMaker";
 import fetcher from "./utilities/Fetcher";
 import urls from './utilities/Urls'
 import notification from "./utilities/Alert";
+import mainStyle from '../assets/styles/MainStyle';
 import listStyle from "../assets/styles/ListStyle";
 import detailStyle from "../assets/styles/DetailStyle";
 import { _listEmptyComponent } from "./utilities/Utils";
 import translations from "../translations/translations";
 
-
+/**
+ * Collegamenti component displays the Collegamenti data fetched from the server.
+ * @returns {View} View containing the Collegamenti data.
+ */
 function Collegamenti() {
-
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
 
+  /**
+   * Fetches the Collegamenti data from
+   * the server and sets the data state with the response.
+   */
   const getCollegamenti = async () => {
     try {
       let json = await fetcher(urls.collegamenti.url);
@@ -36,40 +42,45 @@ function Collegamenti() {
 
 
   return (
-    <View showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} style={[listStyle.mainContainer, { height: '100%' }]}>
-      <Text style={[listStyle.categoryText, { marginLeft: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloColl}</Text>
+    <View style={mainStyle.mainContainer}>
+      <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-      {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
+      <View style={mainStyle.box}>
+        <Text style={[listStyle.categoryText, { marginLeft: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloColl}</Text>
 
-        <FlatList
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          _listEmptyComponent={_listEmptyComponent("Nessun collegamento disponibile.")}
-          data={data}
-          renderItem={({ item }) => (
-            <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-              <View style={detailStyle.sectionView}>
-                <View style={detailStyle.flexDirectionRow}>
-                  <Text style={[detailStyle.sectionTitle, { flex: 1, }]}>{item.nome}</Text>
-                  <View>
-                    <TouchableOpacity width={'auto'} onPress={() => {
-                      item.web !== null && item.web !== undefined && item.web !== "" ?
-                        WebBrowser.openBrowserAsync(item.web) :
-                        notification("Attenzione", "Sito web non disponibile.", "Ok")()
-                    }}
-                    >
-                      <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
-                    </TouchableOpacity>
+        <View style={mainStyle.body} keyboardShouldPersistTaps={'handled'}>
+          {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
+
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              _listEmptyComponent={_listEmptyComponent("Nessun collegamento disponibile.")}
+              data={data}
+              renderItem={({ item }) => (
+                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                  <View style={detailStyle.sectionView}>
+                    <View style={detailStyle.flexDirectionRow}>
+                      <Text style={[detailStyle.sectionTitle, { flex: 1, }]}>{item.nome}</Text>
+                      <View>
+                        <TouchableOpacity width={'auto'} onPress={() => {
+                          item.web !== null && item.web !== undefined && item.web !== "" ?
+                            Linking.openURL(item.web) :
+                            notification("Attenzione", "Sito web non disponibile.", "Ok")()
+                        }}
+                        >
+                          <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    <Image style={detailStyle.collPhoto} source={{ uri: item.immagine }} />
                   </View>
-                </View>
-                <Image style={detailStyle.collPhoto} source={{ uri: item.immagine }} />
-              </View>
-            </Card>
-          )
-          }
-        />
-      )}
-
+                </Card>
+              )
+              }
+            />
+          )}
+        </View>
+      </View>
     </View>
   );
 }
