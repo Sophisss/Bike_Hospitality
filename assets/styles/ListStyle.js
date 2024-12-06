@@ -37,12 +37,14 @@ const listStyle = StyleSheet.create({
     marginRight: contentMargins + 4,
     marginTop: contentMargins,
     maxWidth: width,
+    overflow: 'hidden'
   },
   itemCardVertical: {
     alignContent: 'center',
     backgroundColor: "#3399ff",
     flexDirection: 'row',
     margin: 10,
+    overflow: 'hidden'
   },
   itemCardComuni: {
     maxWidth: windowWidth * 0.5,
