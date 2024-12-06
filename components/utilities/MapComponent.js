@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MapView, { Polyline, Marker } from "react-native-maps";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 
 import * as Location from "expo-location";
 import * as turf from "@turf/turf";
@@ -16,6 +16,7 @@ const MapComponent = ({ gpxFileUri }) => {
 
     async function parseGpx(fileUri) {
         const response = await fetch(fileUri);
+        //const response = "..\\..\\xml_test\\Escursione cicloturistica dei 4 passi Alta Valle del Potenza.gpx.xml";
         const gpxText = await response.text();
         const gpxXml = new DOMParser().parseFromString(gpxText, "text/xml");
         const geojson = gpx(gpxXml);
@@ -79,7 +80,7 @@ const MapComponent = ({ gpxFileUri }) => {
     });
 
     return (
-        <View style={styles.container}>
+        <View style={{ height: Dimensions.get("window").height / 2 }}>
             {userLocation && (
                 <MapView
                     style={styles.map}
