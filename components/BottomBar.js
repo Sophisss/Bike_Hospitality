@@ -41,13 +41,13 @@ function BottomBar() {
                 )
             }} />
 
-            <Tab.Screen name={urls.disciplinario.routeName} component={Disciplinario} options={{
-                tabBarLabel: label1, tabBarIcon: ({ color, size }) => (
+            <Tab.Screen name={t[language].disciplinare} component={Disciplinario} options={{
+                tabBarLabel: t[language].disciplinare, tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="file" color={color} size={size} />
                 )
             }} />
 
-            <Tab.Screen name="Collegamenti" component={Collegamenti} options={{
+            <Tab.Screen name={t[language].collegamenti} component={Collegamenti} options={{
                 tabBarLabel: t[language].collegamenti, tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="link" color={color} size={size} />
                 )

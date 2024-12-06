@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, View, Text, ScrollView, TouchableOpacity  } from 'react-native';
+import { Image, View, Text, ScrollView, TouchableOpacity, Linking  } from 'react-native';
 import { Marker } from 'react-native-maps';
 import MapView from 'react-native-maps/lib/MapView';
 import { PROVIDER_GOOGLE } from 'react-native-maps/lib/ProviderConstants';
