@@ -41,10 +41,10 @@ const listStyle = StyleSheet.create({
   },
   itemCardVertical: {
     alignContent: 'center',
-    backgroundColor: "#3399ff",
+    backgroundColor: "#2F84C4",
     flexDirection: 'row',
     margin: 10,
-    overflow: 'hidden'
+    borderRadius: 15,
   },
   itemCardComuni: {
     maxWidth: windowWidth * 0.5,
@@ -58,13 +58,14 @@ const listStyle = StyleSheet.create({
   itemImage: {
     width: width,
     aspectRatio: 1.5,
-    resizeMode: 'stretch'
+    resizeMode: 'contain',
   },
   itemImageVertical: {
     width: '100%',
     //height: 'auto',
     aspectRatio: 1.5,
-    resizeMode: 'stretch',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15
   },
   collabItemImage: {
     alignSelf: 'center',
@@ -112,7 +113,7 @@ const listStyle = StyleSheet.create({
   },
 
   accName: {
-    color: 'yellow',
+    color: '#F0F0F0',
     fontSize: contentTextSize + 2,
     fontWeight: 'bold',
     textAlign: 'left',

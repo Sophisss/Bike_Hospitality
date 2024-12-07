@@ -60,7 +60,7 @@ function Disciplinario() {
               data={data}
               renderItem={({ item }) => (
                 <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]} >
-                  <View style={detailStyle.sectionView}>
+                  <View style={[detailStyle.sectionView, { gap: 15 }]}>
                     <View style={detailStyle.flexDirectionRow}>
                       <Text style={detailStyle.sectionTitle}>{item.titolo}</Text>
                       <Ionicons name={Platform.OS === "ios" ? "ios-information-circle" : "md-information-circle"} size={30} color={((item.titolo.includes("obbl") || item.titolo.includes("Mand")) ? 'red' : 'green')} />

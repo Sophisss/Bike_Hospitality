@@ -126,20 +126,18 @@ const detailStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
 
-
   sectionView: {
     alignSelf: 'stretch',
     backgroundColor: '#b3d9ff',
     marginVertical: 5,
-    padding: sectionPadding - 5,
-    gap: 20
+    padding: sectionPadding - 5
   },
+
   sectionTitle: {
     color: "#294196",
     flex: 5,
     fontSize: 20,
     fontWeight: 'bold',
-    // paddingBottom: 8,
     textAlign: 'left',
   },
 
@@ -163,7 +161,7 @@ const detailStyle = StyleSheet.create({
 
   flexDirectionRow: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   }
 });
 

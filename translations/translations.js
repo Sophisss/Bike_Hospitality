@@ -51,7 +51,7 @@ const translations = {
         disciplinare: "Disciplinare",
         collegamenti: "Collegamenti",
         attrazioni: "Attrazioni",
-        noleggio: "Noleggio bike",
+        noleggio: "Noleggio bici",
         enogastronomia: "Enogastronomia",
         collaborazioni: "Collaborazioni",
         eventi: "Eventi",
