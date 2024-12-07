@@ -62,7 +62,6 @@ const listStyle = StyleSheet.create({
   },
   itemImageVertical: {
     width: '100%',
-    //height: 'auto',
     aspectRatio: 1.5,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15

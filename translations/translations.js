@@ -41,9 +41,16 @@ const translations = {
         msg_Mappa: "Map not available.",
         msg_Aggiorn: "Update available",
         no_data: "No data available.",
+        empty_events: "No events available.",
+        empty_collaborations: "No collaborations available.",
+        empty_bike_rental: "No rental shop available.",
+        empty_food_and_wine: "No food and wine partners available.",
+        empty_attractions: "No attractions available.",
         select_region: "Select a region",
         disabled_region: "Region in the process of being inserted...",
-        disabled_region_link: "If you are not yet part of our community, click the link below to join us!"
+        disabled_region_link: "If you are not yet part of our community, click the link below to join us!",
+        empty_address: "No address available",
+        loading_data: "We are retrieving the data, almost there..."
 
     },
     it: {
@@ -88,9 +95,16 @@ const translations = {
         msg_Mappa: "Nessuna mappa disponibile.",
         msg_Aggiorn: "Aggiornamento disponibile",
         no_data: "Nessun dato disponibile.",
+        empty_events: "Nessun evento disponibile.",
+        empty_collaborations: "Nessuna collaborazione disponibile.",
+        empty_bike_rental: "Nessun negozio per il noleggio disponibile.",
+        empty_food_and_wine: "Nessun partner enogastronomico disponibile.",
+        empty_attractions: "Nessuna attrazione disponibile.",
         select_region: "Seleziona una regione",
         disabled_region: "Regione in fase di inserimento...",
-        disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!"
+        disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!",
+        empty_address: "Nessun indirizzo disponibile",
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
     },
 
     // Aggiungi altre lingue qui

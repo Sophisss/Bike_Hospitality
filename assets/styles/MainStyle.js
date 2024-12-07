@@ -48,9 +48,32 @@ const mainStyle = StyleSheet.create({
     width: undefined, // Clear fixed width
   },
 
+  loadIndicator: {
+    alignSelf: 'center',
+    position: 'absolute',
+    top: '45%'
+  },
+
+  loadText: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '53%',
+    fontSize: 16,
+    color: '#333'
+  },
+
   body: {
     flex: 1,
     maxHeight: screenHeight > 680 ? Dimensions.get('window').height : Dimensions.get('window').height * 0.48
+  },
+
+  empty_data: {
+    position: 'absolute',
+    fontSize: 20, 
+    color: "#294196",
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    top: '45%'
   },
 
   touchableRow: {

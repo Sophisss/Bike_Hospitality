@@ -43,14 +43,16 @@ function Noleggio({ navigation, route }) {
     <View style={mainStyle.mainContainer}>
       <ImageBackground source={require('../../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-      {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
+      {loaded ? (
+        <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
+          <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
+      ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].no_data)
+          _listEmptyComponent(t[ln].empty_bike_rental)
           :
-          <View style={[mainStyle.box]}>
+          <View style={mainStyle.box}>
             <FlatList
               style={{ alignSelf: 'center' }}
-              _listEmptyComponent={_listEmptyComponent("Nessun negozio per il noleggio disponibile.")}
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               data={data}
@@ -82,7 +84,9 @@ function Noleggio({ navigation, route }) {
                     </View>
                     <View style={listStyle.textContainer}>
                       <Icon name={IconDecisionMaker('location')} size={25} color="red" />
-                      <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}> {item.indirizzo} </Text>
+                      <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}>
+                        {item.indirizzo ? item.indirizzo : t[ln].empty_address}
+                      </Text>
                     </View>
                   </View>
                 </Card>

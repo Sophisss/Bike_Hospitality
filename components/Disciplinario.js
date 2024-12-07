@@ -23,6 +23,9 @@ function Disciplinario() {
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
 
+  const ln = global.currentLanguage;
+  const t = translations;
+
   /**
    * Fetches the Disciplinario data from
    * the server and sets the data state with the response.
@@ -51,8 +54,10 @@ function Disciplinario() {
         <Text style={[listStyle.categoryText, { marginHorizontal: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloDisc}</Text>
 
         <View style={mainStyle.body} keyboardShouldPersistTaps={'handled'}>
-          {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
-
+          {loaded ? (
+            <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
+              <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
+          ) : (
             <FlatList
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
