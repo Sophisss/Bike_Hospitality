@@ -50,9 +50,10 @@ const listStyle = StyleSheet.create({
     maxWidth: windowWidth * 0.5,
   },
   itemCardLeftImage: {
-    backgroundColor: "#3399ff",
+    backgroundColor: "#2F84C4",
     marginBottom: contentMargins + 8,
     padding: 10,
+    borderRadius: 15,
   },
 
   itemImage: {
@@ -85,7 +86,9 @@ const listStyle = StyleSheet.create({
     width: windowWidth * 0.9,
     height: undefined,
     aspectRatio: 0.85,
-    resizeMode: 'stretch'
+    resizeMode: 'stretch',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15
   },
   itemLeftImage: {
     borderRadius: 15,

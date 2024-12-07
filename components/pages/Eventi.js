@@ -58,7 +58,7 @@ function Eventi({ navigation, route }) {
               showsVerticalScrollIndicator={false}
               data={data}
               renderItem={({ item }) => (
-                <Card style={listStyle.itemCardVertical}
+                <Card style={[listStyle.itemCardVertical, { alignSelf: 'center' }]}
                   onPress={() => navigation.navigate(routeName, {
                     id: item.id,
                     nome: item.nome,
