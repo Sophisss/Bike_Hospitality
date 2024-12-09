@@ -82,6 +82,7 @@ const mainStyle = StyleSheet.create({
 
   touchableRowItem: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#294075',
     borderRadius: 10,
     flex: 1,
