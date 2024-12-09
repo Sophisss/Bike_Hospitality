@@ -1,4 +1,4 @@
-import { Dimensions, Platform, StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 const contentTextSize = 20;
 const contentMargins = 12;
@@ -13,6 +13,7 @@ const listStyle = StyleSheet.create({
     marginBottom: 10,
     paddingBottom: 15
   },
+
   mainContainerLeftImage: {
     backgroundColor: '#BDFFFF',
     display: 'flex',
@@ -25,30 +26,33 @@ const listStyle = StyleSheet.create({
   },
 
   categoryText: {
-    color: '#1E74B7',
+    color: '#294075',
     fontSize: contentTextSize + 6,
     fontWeight: 'bold',
   },
 
   itemCard: {
-    backgroundColor: "#3399ff",
+    backgroundColor: "#2F84C4",
     flexDirection: 'row',
     marginBottom: contentMargins + 8,
     marginRight: contentMargins + 4,
     marginTop: contentMargins,
     maxWidth: width,
-    overflow: 'hidden'
   },
+
   itemCardVertical: {
     alignContent: 'center',
     backgroundColor: "#2F84C4",
     flexDirection: 'row',
     margin: 10,
-    borderRadius: 15,
+    borderRadius: 15
   },
+
   itemCardComuni: {
+    alignItems: 'center',
     maxWidth: windowWidth * 0.5,
   },
+
   itemCardLeftImage: {
     backgroundColor: "#2F84C4",
     marginBottom: contentMargins + 8,
@@ -61,12 +65,14 @@ const listStyle = StyleSheet.create({
     aspectRatio: 1.5,
     resizeMode: 'contain',
   },
+
   itemImageVertical: {
     width: '100%',
     aspectRatio: 1.5,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15
   },
+
   collabItemImage: {
     alignSelf: 'center',
     width: windowWidth * 0.7,
@@ -74,6 +80,7 @@ const listStyle = StyleSheet.create({
     aspectRatio: 1,
     resizeMode: 'stretch'
   },
+
   comuniItemImage: {
     width: '100%',
     height: undefined,
@@ -81,6 +88,7 @@ const listStyle = StyleSheet.create({
     //  flex: 1,
     resizeMode: 'contain',
   },
+
   eventItemImage: {
     alignSelf: 'center',
     width: windowWidth * 0.9,
@@ -90,6 +98,7 @@ const listStyle = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15
   },
+
   itemLeftImage: {
     borderRadius: 15,
     height: 100,
@@ -103,12 +112,14 @@ const listStyle = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
+
   infoCollabContainer: {
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
     flex: 1,
     paddingBottom: 2
   },
+
   infoContainerLeftImage: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -120,23 +131,28 @@ const listStyle = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
   },
+
   textContainer: {
     alignItems: 'center',
     borderRadius: 10,
     flexDirection: 'row',
     marginBottom: 20,
+    gap: 8,
   },
+
   textContainerLeftImage: {
     borderRadius: 10,
     flexDirection: 'row',
     marginBottom: contentMargins,
   },
+
   text: {
     flex: 1,
     textAlign: 'left',
     flexWrap: 'wrap',
     fontSize: contentTextSize - 3,
   },
+
   textItalic: {
     fontStyle: 'italic',
     fontWeight: 'bold',

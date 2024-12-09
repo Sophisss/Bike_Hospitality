@@ -70,7 +70,7 @@ const mainStyle = StyleSheet.create({
   empty_data: {
     position: 'absolute',
     fontSize: 20, 
-    color: "#294196",
+    color: "#294075",
     alignSelf: 'center',
     fontWeight: 'bold',
     top: '45%'
