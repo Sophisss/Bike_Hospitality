@@ -1,5 +1,6 @@
 const translations = {
     en: {
+        region: "Region",
         home: "Home",
         disciplinare: "Regulations",
         collegamenti: "Partners",
@@ -52,12 +53,13 @@ const translations = {
         empty_cities: "No cities available.",
         empty_bike_routes: "No bike routes available.",
         select_region: "Select a region",
-        disabled_region: "Region in the process of being inserted...",
+        disabled_region: "in the process of being inserted...",
         disabled_region_link: "If you are not yet part of our community, click the link below to join us!",
         loading_data: "We are retrieving the data, almost there..."
 
     },
     it: {
+        region: "Regione",
         home: "Home",
         disciplinare: "Disciplinare",
         collegamenti: "Collegamenti",
@@ -109,7 +111,7 @@ const translations = {
         empty_cities: "Nessun comune disponibile.",
         empty_bike_routes: "Nessun itinerario disponibile.",
         select_region: "Seleziona una regione",
-        disabled_region: "Regione in fase di inserimento...",
+        disabled_region: "in fase di inserimento...",
         disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!",
         empty_address: "Nessun indirizzo disponibile",
         loading_data: "Stiamo recuperando i dati, ci siamo quasi..."

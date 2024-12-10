@@ -38,7 +38,9 @@ function Home({ navigation, route }) {
     const iconSize = 30;
     const [data, setData] = useState([]);
 
-    const { regioneId, abilitata } = route.params;
+    const { region } = route.params;
+    const regioneId = region.id;
+    const abilitata = region.abilitata;
 
 
     /**
@@ -120,7 +122,7 @@ function Home({ navigation, route }) {
                         abilitata == 0 ? (
                             <View style={{ padding: 10, gap: 10, flex: 1 }}>
                                 <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
-                                <Text style={mainStyle.disabled_region}>{t[language].disabled_region}</Text>
+                                <Text style={mainStyle.disabled_region}>{t[language].region + ' ' + region.nome_regione.toLowerCase() + ' ' + t[language].disabled_region}</Text>
 
                                 <TouchableOpacity>
                                     <Text style={mainStyle.linkText}>

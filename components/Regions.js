@@ -52,9 +52,9 @@ function Regions() {
      * This method handles the selection of a region.
      * @param {*} regionId the id of the selected region
      */
-    const handleRegionSelection = (regionId) => {
-        const abilitata = data.find(region => region.id_regione === regionId).abilitata;
-        navigation.navigate(urls.home.routeName, { regioneId: regionId, abilitata: abilitata });
+    const handleRegionSelection = (selected_region) => {
+        const abilitata = data.find(region => region.id_regione === selected_region.id_regione).abilitata;
+        navigation.navigate(urls.home.routeName, { region: selected_region });
     };
 
     return (
@@ -89,7 +89,7 @@ function Regions() {
                                     fill={isSelected ? '#4C90B1' : '#ffffff'}
                                     onPressIn={() => setSelectedRegion(region.id_regione)}
                                     onPressOut={() => setSelectedRegion(null)}
-                                    onPress={() => handleRegionSelection(region.id_regione)}
+                                    onPress={() => handleRegionSelection(region)}
                                 />
                             );
                         })}

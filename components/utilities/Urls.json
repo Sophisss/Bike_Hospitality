@@ -16,7 +16,7 @@
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=disciplinare&language="
     },
     "home": {
-        "routeName": "BIKE Hospitality",
+        "routeName": "Bike Hospitality",
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=home&language="
     },
     "guide": {

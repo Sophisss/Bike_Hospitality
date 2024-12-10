@@ -58,7 +58,7 @@ function Comuni({ navigation, route }) {
         (dataLength === 0 || dataLength == undefined) ?
           _listEmptyComponent(t[ln].empty_cities)
           :
-          <ScrollView style={mainStyle.box}>
+          <ScrollView showsVerticalScrollIndicator={false} style={mainStyle.box}>
             {keys.map((key) => (
               <View style={listStyle.categoryContainer} key={key}>
                 <Text style={listStyle.categoryText}>{t[ln].lb_prov_di}{key}</Text>

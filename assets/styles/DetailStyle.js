@@ -21,6 +21,7 @@ const detailStyle = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 15,
     padding: 10,
+    gap: 10,
   },
   mainContentDetailsView: {
     alignContent: 'flex-start',
@@ -33,15 +34,15 @@ const detailStyle = StyleSheet.create({
 
 
   detailTitle: {
-    color: "darkblue",
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    color: '#294075',
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
     fontSize: 22,
     fontWeight: 'bold',
-    textAlign: "left",
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10,
+    textAlign: "center",
+    // textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    // textShadowOffset: { width: -1, height: 1 },
+    // textShadowRadius: 10,
   },
 
 
