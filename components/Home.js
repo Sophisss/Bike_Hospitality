@@ -39,7 +39,7 @@ function Home({ navigation, route }) {
     const [data, setData] = useState([]);
 
     const { region } = route.params;
-    const regioneId = region.id;
+    const regioneId = region.id_regione;
     const abilitata = region.abilitata;
 
 
