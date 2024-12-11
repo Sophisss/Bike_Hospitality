@@ -60,7 +60,7 @@ function Collegamenti() {
                 <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
                   <View style={detailStyle.sectionView}>
                     <View style={detailStyle.flexDirectionRow}>
-                      <Text style={[detailStyle.sectionTitle, { flex: 1, }]}>{item.nome}</Text>
+                      <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>{item.nome}</Text>
                       <View>
                         <TouchableOpacity width={'auto'} onPress={() => {
                           item.web !== null && item.web !== undefined && item.web !== "" ?

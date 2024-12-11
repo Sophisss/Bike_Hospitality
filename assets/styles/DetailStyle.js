@@ -16,7 +16,7 @@ const detailStyle = StyleSheet.create({
   },
   mainContentView: {
     alignSelf: 'stretch',
-    backgroundColor: 'skyblue',
+    backgroundColor: '#b3d9ff',
     borderRadius: 10,
     marginHorizontal: 10,
     marginVertical: 15,
@@ -35,20 +35,15 @@ const detailStyle = StyleSheet.create({
 
   detailTitle: {
     color: '#294075',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: 'bold',
-    textAlign: "center",
-    // textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    // textShadowOffset: { width: -1, height: 1 },
-    // textShadowRadius: 10,
+    textAlign: "center"
   },
 
 
   button: {
     alignItems: 'center',
-    backgroundColor: 'mediumblue',
+    backgroundColor: '#2F84C4',
     borderRadius: 10,
     flexDirection: 'row',
     padding: 10,
@@ -139,7 +134,7 @@ const detailStyle = StyleSheet.create({
     flex: 5,
     fontSize: 20,
     fontWeight: 'bold',
-    textAlign: 'left',
+    textAlign: 'center',
   },
 
   sectionIcon: {
@@ -150,6 +145,7 @@ const detailStyle = StyleSheet.create({
 
   sectionBody: {
     fontSize: 17,
+    padding: 5
   },
 
   map: {
@@ -161,8 +157,11 @@ const detailStyle = StyleSheet.create({
 
 
   flexDirectionRow: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 5,
   }
 });
 
