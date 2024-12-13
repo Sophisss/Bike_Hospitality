@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MapView, { Polyline, Marker } from "react-native-maps";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View, ActivityIndicator } from "react-native";
 
 import * as Location from "expo-location";
 import * as turf from "@turf/turf";
@@ -18,7 +18,6 @@ const MapComponent = ({ gpxFileUri }) => {
 
     async function parseGpx(fileUri) {
         const response = await fetch(fileUri);
-        //const response = "..\\..\\xml_test\\Escursione cicloturistica dei 4 passi Alta Valle del Potenza.gpx.xml";
         const gpxText = await response.text();
         const gpxXml = new DOMParser().parseFromString(gpxText, "text/xml");
         const geojson = gpx(gpxXml);
@@ -54,21 +53,17 @@ const MapComponent = ({ gpxFileUri }) => {
         const lat = (coord1.latitude + coord2.latitude) / 2;
         const lon = (coord1.longitude + coord2.longitude) / 2;
         return { latitude: lat, longitude: lon };
-      }
-      
+    }
+
     function calculateRegion(userPosition, destinationPosition) {
-        // const latDelta = Math.abs(userPosition.latitude - destinationPosition.latitude) * 1.5;
-        // const lonDelta = Math.abs(userPosition.longitude - destinationPosition.longitude) * 1.5;
-        // const center = calculateMidpoint(userPosition, destinationPosition);
+        const latDelta = Math.abs(userPosition.latitude - destinationPosition.latitude) * 1.5;
+        const lonDelta = Math.abs(userPosition.longitude - destinationPosition.longitude) * 1.5;
+        const center = calculateMidpoint(userPosition, destinationPosition);
         return {
-        //   latitude: center.latitude,
-        //   longitude: center.longitude,
-        //   latitudeDelta: latDelta,
-        //   longitudeDelta: lonDelta
-        latitude: 13,
-        longitude: 34,
-        latitudeDelta: 0.05,
-        longitudeDelta: 0.05
+            latitude: center.latitude,
+            longitude: center.longitude,
+            latitudeDelta: latDelta,
+            longitudeDelta: lonDelta
         };
     }
 
@@ -88,7 +83,7 @@ const MapComponent = ({ gpxFileUri }) => {
                 setNearestPoint(nearest);
 
                 const pippo = calculateRegion(location, nearest);
-                console.log("oppjvh",pippo);
+                console.log("oppjvh", pippo);
                 setRegionLocation(pippo)
 
             } catch (error) {
@@ -107,6 +102,14 @@ const MapComponent = ({ gpxFileUri }) => {
             flex: 1,
         },
     });
+
+    if (!regionLocation) {
+        return (
+            <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
+                <ActivityIndicator size="large" color="#0000ff" />
+            </View>
+        );
+    }
 
     return (
         <View style={{ height: Dimensions.get("window").height / 2 }}>
