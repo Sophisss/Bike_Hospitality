@@ -13,6 +13,8 @@ const MapComponent = ({ gpxFileUri }) => {
     const [itinerary, setItinerary] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [nearestPoint, setNearestPoint] = useState(null);
+    const [regionLocation, setRegionLocation] = useState(null);
+
 
     async function parseGpx(fileUri) {
         const response = await fetch(fileUri);
@@ -48,6 +50,28 @@ const MapComponent = ({ gpxFileUri }) => {
         };
     }
 
+    function calculateMidpoint(coord1, coord2) {
+        const lat = (coord1.latitude + coord2.latitude) / 2;
+        const lon = (coord1.longitude + coord2.longitude) / 2;
+        return { latitude: lat, longitude: lon };
+      }
+      
+    function calculateRegion(userPosition, destinationPosition) {
+        // const latDelta = Math.abs(userPosition.latitude - destinationPosition.latitude) * 1.5;
+        // const lonDelta = Math.abs(userPosition.longitude - destinationPosition.longitude) * 1.5;
+        // const center = calculateMidpoint(userPosition, destinationPosition);
+        return {
+        //   latitude: center.latitude,
+        //   longitude: center.longitude,
+        //   latitudeDelta: latDelta,
+        //   longitudeDelta: lonDelta
+        latitude: 13,
+        longitude: 34,
+        latitudeDelta: 0.05,
+        longitudeDelta: 0.05
+        };
+    }
+
     useEffect(() => {
         async function initializeMap() {
             try {
@@ -62,6 +86,11 @@ const MapComponent = ({ gpxFileUri }) => {
                 // Punto più vicino
                 const nearest = findNearestPoint(location, parsedItinerary);
                 setNearestPoint(nearest);
+
+                const pippo = calculateRegion(location, nearest);
+                console.log("oppjvh",pippo);
+                setRegionLocation(pippo)
+
             } catch (error) {
                 console.error("Errore durante l'inizializzazione della mappa:", error);
             }
@@ -85,8 +114,8 @@ const MapComponent = ({ gpxFileUri }) => {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: userLocation.latitude,
-                        longitude: userLocation.longitude,
+                        latitude: regionLocation.latitude,
+                        longitude: regionLocation.longitude,
                         latitudeDelta: 0.05,
                         longitudeDelta: 0.05,
                     }}
