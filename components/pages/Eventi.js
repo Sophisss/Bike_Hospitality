@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import listStyle from "../../assets/styles/ListStyle";
-import { ActivityIndicator, Image, Text, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, Image, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -8,6 +8,7 @@ import Icon from '@expo/vector-icons/Ionicons';
 import fetcher from "../utilities/Fetcher";
 import urls from "../utilities/Urls";
 import IconDecisionMaker from "../utilities/IconDecisionMaker";
+import BackgroundWrapper from "../utilities/BackgroundWrapper";
 import { _listEmptyComponent } from "../utilities/Utils";
 import mainStyle from '../../assets/styles/MainStyle';
 import translations from '../../translations/translations';
@@ -41,9 +42,7 @@ function Eventi({ navigation, route }) {
 
 
   return (
-    <View style={mainStyle.mainContainer}>
-      <ImageBackground source={require('../../assets/images/background.png')} style={mainStyle.imageBackground} />
-
+    <BackgroundWrapper dataLength={dataLength} styles={mainStyle}>
       {loaded ? (
         <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
@@ -68,7 +67,7 @@ function Eventi({ navigation, route }) {
                     descrizione: item.descrizione,
                   })}>
 
-                  <Image style={listStyle.eventItemImage} source={{ uri: item.immagine }} />
+                  <Image style={listStyle.itemImageVertical} source={{ uri: item.immagine }} />
 
                   <View style={[listStyle.infoContainer, { gap: 10 }]}>
                     <Text style={listStyle.accName}>{item.nome}</Text>
@@ -77,7 +76,7 @@ function Eventi({ navigation, route }) {
                       <Text style={[listStyle.text, { color: '#F0F0F0', fontWeight: 'bold' }]}> {"Provincia: " + item.provincia} </Text>
                     </View>
                     <View style={listStyle.textContainer}>
-                      <Icon name={IconDecisionMaker('location')} size={30} color="red" />
+                      <Icon name={IconDecisionMaker('location')} size={25} color="red" />
                       <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}>
                         {item.localita ? item.localita : t[ln].empty_address}
                       </Text>
@@ -89,7 +88,7 @@ function Eventi({ navigation, route }) {
             />
           </View>
       )}
-    </View>
+    </BackgroundWrapper>
   );
 }
 

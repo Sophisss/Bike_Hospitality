@@ -162,6 +162,7 @@ const detailStyle = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 5,
+    gap: 8
   }
 });
 

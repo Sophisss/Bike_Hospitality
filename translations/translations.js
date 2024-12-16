@@ -1,5 +1,6 @@
 const translations = {
     en: {
+        attention: "Attention",
         region: "Region",
         home: "Home",
         disciplinare: "Regulations",
@@ -42,7 +43,6 @@ const translations = {
         msg_Mappa: "Map not available.",
         msg_Aggiorn: "Update available",
         no_data: "No data available.",
-        empty_address: "No address available",
         empty_events: "No events available.",
         empty_collaborations: "No collaborations available.",
         empty_bike_rental: "No rental shop available.",
@@ -55,10 +55,18 @@ const translations = {
         select_region: "Select a region",
         disabled_region: "in the process of being inserted...",
         disabled_region_link: "If you are not yet part of our community, click the link below to join us!",
+        empty_address: "No address available.",
+        empty_coordinates: "No navigation coordinates available.",
+        empty_description: "No description available.",
+        empty_site: "Web site not available.",
+        empty_email: "Email not available.",
+        empty_phone_number: "Phone number not available.",
+        empty_languages: "Languages not available.",
         loading_data: "We are retrieving the data, almost there..."
 
     },
     it: {
+        attention: "Attenzione",
         region: "Regione",
         home: "Home",
         disciplinare: "Disciplinare",
@@ -113,7 +121,13 @@ const translations = {
         select_region: "Seleziona una regione",
         disabled_region: "in fase di inserimento...",
         disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!",
-        empty_address: "Nessun indirizzo disponibile",
+        empty_address: "Nessun indirizzo disponibile.",
+        empty_coordinates: "Coordinate per la navigazione non disponibili.",
+        empty_description: "Nessuna descrizione disponibile.",
+        empty_site: "Sito web non disponibile.",
+        empty_email: "Email non disponibile.",
+        empty_phone_number: "Numero di telefono non disponibile.",
+        empty_languages: "Lingue non disponibili.",
         loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
     },
 

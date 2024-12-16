@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, Platform } from 'react-native';
+import { Text, Platform, Linking } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import * as Device from 'expo-device';
 import * as SecureStore from 'expo-secure-store';
 import { v4 as uuidv4 } from 'uuid';
 import mainStyle from '../../assets/styles/MainStyle';
+import { Link } from '@react-navigation/native';
 
 /**
  * A View for components which don't have elments inside.
@@ -28,14 +29,15 @@ function _listEmptyComponent(result_text) {
  * @param {*} name name of destination
  */
 function geo(lat, lng, name) {
-  const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-  const latLng = `${lat},${lng}`;
-  const label = name;
+  const iosUrl = `maps:0,0?q=${encodeURIComponent(name)}@${lat},${lng}`;
+  const androidUrl = `geo:${lat},${lng}?q=${encodeURIComponent(name)}`;
+
   const url = Platform.select({
-    ios: `${scheme}${label}@${latLng}`,
-    android: `${scheme}${latLng}(${label})`
+    ios: iosUrl,
+    android: androidUrl
   });
-  WebBrowser.openBrowserAsync(url);
+
+  Linking.openURL(url).catch(error => console.error('Error opening maps:', error));
 }
 
 async function getUniqueID() {

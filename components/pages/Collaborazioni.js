@@ -6,6 +6,7 @@ import { Card } from 'react-native-paper';
 import fetcher from '../utilities/Fetcher';
 import urls from '../utilities/Urls';
 import { _listEmptyComponent } from '../utilities/Utils';
+import BackgroundWrapper from "../utilities/BackgroundWrapper";
 import mainStyle from '../../assets/styles/MainStyle';
 import listStyle from '../../assets/styles/ListStyle';
 import translations from '../../translations/translations';
@@ -37,9 +38,7 @@ function Collaborazioni({ navigation, route }) {
   var t = translations;
 
   return (
-    <View style={mainStyle.mainContainer}>
-      <ImageBackground source={require('../../assets/images/background.png')} style={mainStyle.imageBackground} />
-
+    <BackgroundWrapper dataLength={dataLength} styles={mainStyle}>
       {loaded ? (
         <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
@@ -77,7 +76,7 @@ function Collaborazioni({ navigation, route }) {
             />
           </View>
       )}
-    </View>
+    </BackgroundWrapper>
   );
 }
 

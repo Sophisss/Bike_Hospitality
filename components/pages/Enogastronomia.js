@@ -8,6 +8,7 @@ import fetcher from '../utilities/Fetcher';
 import urls from '../utilities/Urls';
 import IconDecisionMaker from '../utilities/IconDecisionMaker';
 import { _listEmptyComponent } from '../utilities/Utils';
+import BackgroundWrapper from "../utilities/BackgroundWrapper";
 import listStyle from '../../assets/styles/ListStyle';
 import mainStyle from '../../assets/styles/MainStyle';
 import translations from '../../translations/translations';
@@ -41,9 +42,7 @@ function Enogastronomia({ navigation, route }) {
 
 
   return (
-    <View style={mainStyle.mainContainer}>
-      <ImageBackground source={require('../../assets/images/background.png')} style={mainStyle.imageBackground} />
-
+    <BackgroundWrapper dataLength={dataLength} styles={mainStyle}>
       {loaded ? (
         <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
@@ -96,11 +95,7 @@ function Enogastronomia({ navigation, route }) {
             />
           </View>
       )}
-
-
-
-    </View>
-
+    </BackgroundWrapper>
   );
 }
 

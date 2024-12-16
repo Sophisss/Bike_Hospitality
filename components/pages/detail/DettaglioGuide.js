@@ -13,7 +13,6 @@ import translations from '../../../translations/translations';
 function DettaglioGuide({ navigation, route }) {
   const { id, nome, cognome, provincia, comune, localita, foto, lingue, settori, telefono, email, descrizione } = route.params;
 
-
   useEffect(() => {
     //  navigation.setOptions({title: nome + " " + cognome});
   })
@@ -28,7 +27,7 @@ function DettaglioGuide({ navigation, route }) {
       <ImageBackground source={require('../../../assets/images/background.png')} style={mainStyle.imageBackground} />
 
       <ScrollView showsVerticalScrollIndicator={false} style={[mainStyle.box, { padding: 0 }]}>
-        <View style={detailStyle.mainContentView} >
+        <View style={[detailStyle.mainContentView, { marginVertical: 10 }]} >
           <Text style={[detailStyle.detailTitle, detailStyle.buttonTextFlex]}>{nome + " " + cognome}</Text>
           <Text style={[detailStyle.sectionTitle, { color: '#4d4d4d', marginTop: -5 }]}>{comune + " (" + provincia + ")"}</Text>
 
@@ -38,7 +37,7 @@ function DettaglioGuide({ navigation, route }) {
               {
                 telefono !== null && telefono !== undefined && telefono !== "" ?
                   Linking.openURL(`tel:${telefono}`) :
-                  notification("Attenzione", "Numero di telefono non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_phone_number, "Ok")()
               }
             }}
             >
@@ -49,7 +48,7 @@ function DettaglioGuide({ navigation, route }) {
               {
                 email !== null && email !== undefined && email !== "" ?
                   Linking.openURL(`mailto:${email}`) :
-                  notification("Attenzione", "Email non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_email, "Ok")()
               }
             }}
             >
@@ -60,20 +59,20 @@ function DettaglioGuide({ navigation, route }) {
         </View>
 
 
-        <View style={detailStyle.mainContentView}>
+        <View style={[detailStyle.mainContentView, { marginVertical: 10 }]} >
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_descriz}</Text>
-            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={25} color='#294075' />
           </View>
           {descrizione !== null && descrizione !== undefined && descrizione !== "" ?
             descrizione.split(' - ').map((elem => {
               return (<Text style={[detailStyle.sectionBody, { textAlign: 'left' }]}>{elem}</Text>)
             }))
-            : _listEmptyComponent("Descrizione non disponibile.")}
+            : _listEmptyComponent(t[ln].empty_description)}
         </View>
 
 
-        <View style={detailStyle.mainContentView}>
+        <View style={[detailStyle.mainContentView, { marginVertical: 10 }]} >
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_lingue}</Text>
             <Ionicons name={IconDecisionMaker('language')} style={detailStyle.sectionIcon} size={30} color='#294075' />
@@ -83,7 +82,7 @@ function DettaglioGuide({ navigation, route }) {
               lingue.split('|').map((elem => {
                 return (<Text style={[detailStyle.sectionBody, { alignSelf: 'flex-start', margin: 5, textAlign: 'left', color: '#4d4d4d', fontWeight: 'bold', fontSize: 20 }]}>{elem}</Text>)
               }))
-              : _listEmptyComponent("Lingue non disponibili.")}
+              : _listEmptyComponent(t[ln].empty_languages)}
           </ScrollView>
         </View>
 

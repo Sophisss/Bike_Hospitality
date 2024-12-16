@@ -24,6 +24,9 @@ function DettaglioTour({ navigation, route }) {
     //W navigation.setOptions({title: nome});
   }, []);
 
+  // utility variables
+  const marginTopValue = map !== "" ? 10 : gpx !== "" ? 100 : 50;
+
   var ln = global.currentLanguage;
   var t = translations;
 
@@ -39,12 +42,15 @@ function DettaglioTour({ navigation, route }) {
           <Text style={[detailStyle.sectionTitle, { color: '#4d4d4d', marginTop: -5 }]}>{comune + " (" + provincia + ")"}</Text>
 
           <Image style={detailStyle.photo} source={{ uri: immagini[0] }} />
+          <Text style={{ color: '#4d4d4d', marginTop: 2, fontSize: 18, fontWeight: 'bold', textAlign: 'center', alignSelf: 'center' }}>
+            {t[ln].msg_CntGuida}
+          </Text>
           <View style={{ flexGrow: 0, flexDirection: 'row', flex: 1, flexWrap: 'wrap', alignSelf: 'stretch', justifyContent: 'space-between' }}>
             <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
               {
                 telefono !== null && telefono !== undefined && telefono !== "" ?
                   Linking.openURL(`tel:${telefono}`) :
-                  notification("Attenzione", "Numero di telefono non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_phone_number, "Ok")()
               }
             }}
             >
@@ -55,7 +61,7 @@ function DettaglioTour({ navigation, route }) {
               {
                 email !== null && email !== undefined && email !== "" ?
                   Linking.openURL(`mailto:${email}`) :
-                  notification("Attenzione", "Email non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_email, "Ok")()
               }
             }}
             >
@@ -70,7 +76,9 @@ function DettaglioTour({ navigation, route }) {
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_descriz}</Text>
             <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={25} color='#294075' />
           </View>
-          <RenderHTML source={{ html: he.decode(descrizione) }} contentWidth={200} baseStyle={HTMLStyle.text} />
+          {(descrizione !== null && descrizione !== undefined && descrizione !== "") ?
+            <RenderHTML source={{ html: he.decode(descrizione), }} contentWidth={200} baseStyle={HTMLStyle.text} />
+            : _listEmptyComponent(t[ln].empty_description)}
         </View>
 
         <View style={detailStyle.mainContentView}>
@@ -99,18 +107,17 @@ function DettaglioTour({ navigation, route }) {
             : _listEmptyComponent(t[ln].msg_Mappa)
           }
 
-          <Text style={{ padding: 5, alignSelf: 'center', justifyContent: 'space-between', marginTop: 10 }}>
-
+          <Text style={{ padding: 2, alignSelf: 'center', marginTop: marginTopValue }}>
             {(gpx !== "") ?
-              <TouchableOpacity style={[detailStyle.button,]} onPress={() => WebBrowser.openBrowserAsync(gpx)}>
-                <Ionicons name={IconDecisionMaker('map')} size={30} color='green' />
+              <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(gpx)}>
+                <Ionicons name={IconDecisionMaker('map')} size={30} color='#6DBE45' />
                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].lb_Altimetria}</Text>
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_Altimetr)
-            },
+            }
           </Text>
 
-          <Text style={{ padding: 5, alignSelf: 'center', justifyContent: 'space-between' }}>
+          <Text style={{ padding: 2, alignSelf: 'center', justifyContent: 'space-between' }}>
             {(linkgpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(linkgpx)}>
                 <Ionicons name={IconDecisionMaker('download')} size={30} color='white' />
@@ -118,7 +125,6 @@ function DettaglioTour({ navigation, route }) {
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_DownlGpx)
             }
-
           </Text>
         </View>
 

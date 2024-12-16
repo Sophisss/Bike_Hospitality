@@ -70,7 +70,8 @@ const listStyle = StyleSheet.create({
     width: '100%',
     aspectRatio: 1.5,
     borderTopLeftRadius: 15,
-    borderTopRightRadius: 15
+    borderTopRightRadius: 15,
+    resizeMode: 'cover',
   },
 
   collabItemImage: {

@@ -78,6 +78,23 @@ function Home({ navigation, route }) {
         }
     }
 
+    /**
+     * This method formats the region name.
+     * @param {*} name the region name to format.
+     * @returns the formatted region name.
+     */
+    const formatRegionName = (name) => {
+        if (!name) return "";
+        return name
+            .split(/([-\/\s])/g)
+            .map((part) =>
+                part.match(/[-\/\s]/)
+                    ? part
+                    : part.charAt(0).toUpperCase() + part.slice(1).toLowerCase() // Altrimenti capitalizza
+            )
+            .join('');
+    };
+
     useEffect(() => {
         getHome();
     }, []);
@@ -122,7 +139,9 @@ function Home({ navigation, route }) {
                         abilitata == 0 ? (
                             <View style={{ padding: 10, gap: 10, flex: 1 }}>
                                 <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
-                                <Text style={mainStyle.disabled_region}>{t[language].region + ' ' + region.nome_regione.toLowerCase() + ' ' + t[language].disabled_region}</Text>
+                                <Text style={mainStyle.disabled_region}>
+                                    {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
+                                </Text>
 
                                 <TouchableOpacity>
                                     <Text style={mainStyle.linkText}>
@@ -133,7 +152,7 @@ function Home({ navigation, route }) {
                                 <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
                                     <View style={detailStyle.sectionView}>
                                         <View style={detailStyle.flexDirectionRow}>
-                                            <Text style={[detailStyle.sectionTitle, { flex: 1 }]}>BIKEHOSPITALITY</Text>
+                                            <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>BIKEHOSPITALITY</Text>
                                             <View>
                                                 <TouchableOpacity width={'auto'} onPress={() => {
                                                     Linking.openURL('https://www.bikehospitality.it/aderisci/')

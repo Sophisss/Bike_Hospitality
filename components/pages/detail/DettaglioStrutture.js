@@ -3,7 +3,6 @@ import { Image, View, Text, ScrollView, TouchableOpacity, Linking, ImageBackgrou
 import { Marker } from 'react-native-maps';
 import MapView from 'react-native-maps/lib/MapView';
 import { PROVIDER_GOOGLE } from 'react-native-maps/lib/ProviderConstants';
-import * as WebBrowser from 'expo-web-browser';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import { _listEmptyComponent, geo, sendStats } from '../../utilities/Utils';
@@ -33,6 +32,16 @@ function DettaglioStrutture({ navigation, route }) {
     // navigation.setOptions({title: nome});
   }, []);
 
+  const isValidCoordinate = (latitude, longitude) => {
+    console.log(email)
+    return (
+      typeof latitude === "number" &&
+      typeof longitude === "number" &&
+      !isNaN(latitude) &&
+      !isNaN(longitude)
+    );
+  };
+
   sendStats('struttura', id);
 
   return (
@@ -43,7 +52,7 @@ function DettaglioStrutture({ navigation, route }) {
         <View style={[detailStyle.mainContentView, { gap: 5 }]}>
           <Text style={[detailStyle.detailTitle, { flex: 1, marginBottom: 8 }]}>{nome}</Text>
           <Text style={[detailStyle.sectionTitle, { color: '#4d4d4d', marginBottom: 8 }]}>
-            {indirizzo && localita ? `${indirizzo} - ${localita}` : indirizzo || localita}
+            {indirizzo && localita ? `${indirizzo}- ${localita}` : indirizzo || localita}
           </Text>
 
 
@@ -53,7 +62,7 @@ function DettaglioStrutture({ navigation, route }) {
               {
                 telefono !== null && telefono !== undefined && telefono !== "" ?
                   Linking.openURL(`tel:${telefono}`) :
-                  notification("Attenzione", "Numero di telefono non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_phone_number, "Ok")()
               }
             }}
             >
@@ -64,7 +73,7 @@ function DettaglioStrutture({ navigation, route }) {
               {
                 email !== null && email !== undefined && email !== "" ?
                   Linking.openURL(`mailto:${email}`) :
-                  notification("Attenzione", "Email non disponibile.", "Ok")()
+                  notification(t[ln].attention, t[ln].empty_email, "Ok")()
               }
             }}
             >
@@ -74,7 +83,7 @@ function DettaglioStrutture({ navigation, route }) {
             <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
               coords !== null && coords !== undefined && coords !== "" ?
                 geo(lat, lgt, nome) :
-                notification("Attenzione", "Coordinate per la navigazione non disponibili.", "Ok")()
+                notification(t[ln].attention, t[ln].empty_coordinates, "Ok")()
             }}
             >
               <Ionicons name={IconDecisionMaker('navigate')} size={30} color='red' />
@@ -85,8 +94,8 @@ function DettaglioStrutture({ navigation, route }) {
           <View style={{ flexGrow: 0, flexDirection: 'row', flex: 1, flexWrap: 'wrap', alignSelf: 'stretch', justifyContent: 'space-between' }}>
             <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
               url !== null && url !== undefined && url !== "" ?
-                WebBrowser.openBrowserAsync(url) :
-                notification("Attenzione", "Sito web non disponibile.", "Ok")()
+                Linking.openURL(url) :
+                notification(t[ln].attention, t[ln].empty_site, "Ok")()
             }}
             >
               <Ionicons name={IconDecisionMaker('link')} size={30} color='#294075' />
@@ -99,25 +108,26 @@ function DettaglioStrutture({ navigation, route }) {
         <View style={detailStyle.mainContentView}>
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_descriz}</Text>
-            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={25} color='#294075' />
           </View>
-          <RenderHTML contentWidth={200} source={{ html: he.decode(descrizione), }} baseStyle={HTMLStyle.text} />
+          {(descrizione !== null && descrizione !== undefined && descrizione !== "") ?
+            <RenderHTML source={{ html: he.decode(descrizione), }} contentWidth={200} baseStyle={HTMLStyle.text} />
+            : _listEmptyComponent(t[ln].empty_description)}
         </View>
 
-
-        <View style={detailStyle.mainContentView}>
-          <View style={detailStyle.flexDirectionRow}>
-            <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_posizione}</Text>
-            <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='#294075' />
-          </View>
-          {coords !== null && coords !== undefined && coords !== "" ?
+        {coords !== null && coords !== undefined && coords !== "" && isValidCoordinate(lat, lgt) ?
+          <View style={detailStyle.mainContentView}>
+            <View style={detailStyle.flexDirectionRow}>
+              <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_posizione}</Text>
+              <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+            </View>
             <MapView provider={PROVIDER_GOOGLE} style={detailStyle.map}
               region={{ latitude: lat, longitude: lgt, latitudeDelta: 1, longitudeDelta: 1, }}>
               <Marker coordinate={{ latitude: lat, longitude: lgt }}
                 onPress={() => { geo(lat, lgt, nome) }} />
             </MapView>
-            : _listEmptyComponent("Mappa non disponibile.")}
-        </View>
+          </View>
+          : null}
       </ScrollView>
 
     </View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground, Linking } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
 import * as WebBrowser from 'expo-web-browser';
@@ -62,8 +62,8 @@ function DettaglioComuni({ navigation, route }) {
           <View style={{ flexGrow: 0, flexDirection: 'row', flex: 1, flexWrap: 'wrap', alignSelf: 'stretch', justifyContent: 'space-between' }}>
             <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
               url !== null && url !== undefined && url !== "" ?
-                WebBrowser.openBrowserAsync(url) :
-                notification("Attenzione", "Sito web non disponibile.", "Ok")()
+                Linking.openURL(url) :
+                notification(t[ln].attention, t[ln].empty_site, "Ok")()
             }}
             >
               <Ionicons name={IconDecisionMaker('link')} size={30} color='#294075' />
@@ -76,7 +76,7 @@ function DettaglioComuni({ navigation, route }) {
         <View style={[detailStyle.mainContentView, { gap: 0 }]}>
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_descriz}</Text>
-            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+            <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={25} color='#294075' />
           </View>
           <RenderHTML source={{ html: he.decode(descrizione) }} contentWidth={200} baseStyle={HTMLStyle.text} />
         </View>
@@ -90,12 +90,12 @@ function DettaglioComuni({ navigation, route }) {
           <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            _listEmptyComponent={_listEmptyComponent("Nessuna struttura ricettiva disponibile.")}
+            _listEmptyComponent={_listEmptyComponent(t[ln].empty_accommodations)}
             horizontal={true}
             data={data}
             renderItem={({ item }) => (
               <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
-                onPress={() => navigation.navigate('Dettaglio Strutture', {
+                onPress={() => navigation.navigate(t[ln].rt_struttura, {
                   nome: item.nome,
                   categoria: item.categoria,
                   codice_provincia: item.codice_provincia,
@@ -140,12 +140,12 @@ function DettaglioComuni({ navigation, route }) {
           <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
-            _listEmptyComponent={_listEmptyComponent("Nessun tour disponibile.")}
+            _listEmptyComponent={_listEmptyComponent(t[ln].empty_bike_routes)}
             horizontal={true}
             data={tour}
             renderItem={({ item }) => (
               <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
-                onPress={() => navigation.navigate("Dettaglio Itinerario", {
+                onPress={() => navigation.navigate(t[ln].rt_tour, {
                   nome: item.nome,
                   categoria: item.categoria,
                   provincia: item.provincia,

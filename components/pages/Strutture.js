@@ -8,6 +8,7 @@ import fetcher from '../utilities/Fetcher';
 import urls from '../utilities/Urls';
 import IconDecisionMaker from '../utilities/IconDecisionMaker';
 import { _listEmptyComponent } from '../utilities/Utils';
+import BackgroundWrapper from "../utilities/BackgroundWrapper";
 import mainStyle from '../../assets/styles/MainStyle';
 import listStyle from '../../assets/styles/ListStyle';
 import translations from '../../translations/translations';
@@ -46,9 +47,7 @@ function Accomodation({ navigation, route }) {
   routeName = t[ln].rt_struttura;
 
   return (
-    <View style={mainStyle.mainContainer}>
-      <ImageBackground source={require('../../assets/images/background.png')} style={mainStyle.imageBackground} />
-
+    <BackgroundWrapper dataLength={dataLength} styles={mainStyle}>
       {loaded ? (
         <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
@@ -112,7 +111,7 @@ function Accomodation({ navigation, route }) {
             ))}
           </ScrollView>
       )}
-    </View >
+    </BackgroundWrapper >
   );
 }
 
