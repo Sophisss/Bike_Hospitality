@@ -135,41 +135,41 @@ function Home({ navigation, route }) {
                 <View style={[mainStyle.body, {
                     justifyContent: abilitata == 1 ? 'flex-start' : 'center'
                 }]} keyboardShouldPersistTaps={'handled'}>
-                    <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-                        {
-                            abilitata == 0 ? (
-                                <View style={{ padding: 10, gap: 10, flex: 1 }}>
-                                    <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
-                                    <Text style={mainStyle.disabled_region}>
-                                        {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
+
+                    {
+                        abilitata == 0 ? (
+                            <View style={{ padding: 10, gap: 10, flex: 1 }}>
+                                <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
+                                <Text style={mainStyle.disabled_region}>
+                                    {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
+                                </Text>
+
+                                <TouchableOpacity>
+                                    <Text style={mainStyle.linkText}>
+                                        {t[language].disabled_region_link}
                                     </Text>
+                                </TouchableOpacity>
 
-                                    <TouchableOpacity>
-                                        <Text style={mainStyle.linkText}>
-                                            {t[language].disabled_region_link}
-                                        </Text>
-                                    </TouchableOpacity>
-
-                                    <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                                        <View style={detailStyle.sectionView}>
-                                            <View style={detailStyle.flexDirectionRow}>
-                                                <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>BIKEHOSPITALITY</Text>
-                                                <View>
-                                                    <TouchableOpacity width={'auto'} onPress={() => {
-                                                        Linking.openURL('https://www.bikehospitality.it/aderisci/')
-                                                    }}
-                                                    >
-                                                        <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
-                                                    </TouchableOpacity>
-                                                </View>
+                                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                                    <View style={detailStyle.sectionView}>
+                                        <View style={detailStyle.flexDirectionRow}>
+                                            <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>BIKEHOSPITALITY</Text>
+                                            <View>
+                                                <TouchableOpacity width={'auto'} onPress={() => {
+                                                    Linking.openURL('https://www.bikehospitality.it/aderisci/')
+                                                }}
+                                                >
+                                                    <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
+                                                </TouchableOpacity>
                                             </View>
-                                            <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
                                         </View>
-                                    </Card>
-                                </View>
-                            ) : (
-                                <View>
-
+                                        <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
+                                    </View>
+                                </Card>
+                            </View>
+                        ) : (
+                            <View>
+                                <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
                                     <View style={mainStyle.touchableRow}>
                                         <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlHome, { regioneId: regioneId }) }}>
                                             <Icon name={IconDecisionMaker("bed")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
@@ -224,11 +224,11 @@ function Home({ navigation, route }) {
                                             <Text style={mainStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
                                         </TouchableOpacity>
                                     </View>
+                                </ScrollView>
+                            </View>
+                        )
+                    }
 
-                                </View>
-                            )
-                        }
-                    </ScrollView>
                 </View>
             </View>
         </View>
