@@ -1,6 +1,6 @@
 import Icon from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useRef } from 'react';
-import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking, AppState } from 'react-native';
+import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking, AppState, ScrollView } from 'react-native';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
@@ -135,96 +135,100 @@ function Home({ navigation, route }) {
                 <View style={[mainStyle.body, {
                     justifyContent: abilitata == 1 ? 'flex-start' : 'center'
                 }]} keyboardShouldPersistTaps={'handled'}>
-                    {
-                        abilitata == 0 ? (
-                            <View style={{ padding: 10, gap: 10, flex: 1 }}>
-                                <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
-                                <Text style={mainStyle.disabled_region}>
-                                    {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
-                                </Text>
-
-                                <TouchableOpacity>
-                                    <Text style={mainStyle.linkText}>
-                                        {t[language].disabled_region_link}
+                    <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
+                        {
+                            abilitata == 0 ? (
+                                <View style={{ padding: 10, gap: 10, flex: 1 }}>
+                                    <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
+                                    <Text style={mainStyle.disabled_region}>
+                                        {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
                                     </Text>
-                                </TouchableOpacity>
 
-                                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                                    <View style={detailStyle.sectionView}>
-                                        <View style={detailStyle.flexDirectionRow}>
-                                            <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>BIKEHOSPITALITY</Text>
-                                            <View>
-                                                <TouchableOpacity width={'auto'} onPress={() => {
-                                                    Linking.openURL('https://www.bikehospitality.it/aderisci/')
-                                                }}
-                                                >
-                                                    <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
-                                                </TouchableOpacity>
+                                    <TouchableOpacity>
+                                        <Text style={mainStyle.linkText}>
+                                            {t[language].disabled_region_link}
+                                        </Text>
+                                    </TouchableOpacity>
+
+                                    <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                                        <View style={detailStyle.sectionView}>
+                                            <View style={detailStyle.flexDirectionRow}>
+                                                <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>BIKEHOSPITALITY</Text>
+                                                <View>
+                                                    <TouchableOpacity width={'auto'} onPress={() => {
+                                                        Linking.openURL('https://www.bikehospitality.it/aderisci/')
+                                                    }}
+                                                    >
+                                                        <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
+                                                    </TouchableOpacity>
+                                                </View>
                                             </View>
+                                            <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
                                         </View>
-                                        <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
+                                    </Card>
+                                </View>
+                            ) : (
+                                <View>
+
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlHome, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("bed")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].strutture.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlComuni, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("business")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].comuni.toUpperCase()}</Text>
+                                        </TouchableOpacity>
                                     </View>
-                                </Card>
-                            </View>
-                        ) : (
-                            <View>
-                                <View style={mainStyle.touchableRow}>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlHome, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("bed")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].strutture.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlComuni, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("business")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].comuni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
 
-                                <View style={mainStyle.touchableRow}>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlGuide, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("person")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].guide.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlTour, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("bicycle-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].itinerari.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlGuide, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("person")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].guide.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlTour, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("bicycle-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].itinerari.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                    </View>
 
-                                <View style={mainStyle.touchableRow}>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlStations, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("battery-charging")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].stazioni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlEventi, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("calendar")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].eventi.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlStations, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("battery-charging")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].stazioni.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlEventi, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("calendar")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].eventi.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                    </View>
 
-                                <View style={mainStyle.touchableRow}>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPartners, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("people-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].collaborazioni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlFoodW, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("fast-food")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].enogastronomia.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                </View>
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPartners, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("people-sharp")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].collaborazioni.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlFoodW, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("fast-food")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].enogastronomia.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                    </View>
 
-                                <View style={mainStyle.touchableRow}>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPromo, { regioneId: regioneId }) }}>
-                                        <Icon name={IconDecisionMaker("star")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
-                                        <Text style={mainStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
-                                    </TouchableOpacity>
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPromo, { regioneId: regioneId }) }}>
+                                            <Icon name={IconDecisionMaker("star")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
+                                            <Text style={mainStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
                                 </View>
-                            </View>
-                        )
-                    }
+                            )
+                        }
+                    </ScrollView>
                 </View>
             </View>
         </View>
