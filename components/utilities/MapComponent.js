@@ -82,15 +82,15 @@ const MapComponent = ({ gpxFileUri }) => {
                 const nearest = findNearestPoint(location, parsedItinerary);
                 setNearestPoint(nearest);
 
-                const pippo = calculateRegion(location, nearest);
-                console.log("oppjvh", pippo);
-                setRegionLocation(pippo)
+                const region = calculateRegion(location, nearest);
+                console.log("re", region);
+
+                setRegionLocation(region);
 
             } catch (error) {
                 console.error("Errore durante l'inizializzazione della mappa:", error);
             }
         }
-
         initializeMap();
     }, [gpxFileUri]);
 
@@ -103,24 +103,25 @@ const MapComponent = ({ gpxFileUri }) => {
         },
     });
 
-    if (!regionLocation) {
-        return (
+    return (
+        (!itinerary.length || !userLocation) ? 
             <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
                 <ActivityIndicator size="large" color="#0000ff" />
-            </View>
-        );
-    }
+            </View> :
 
-    return (
         <View style={{ height: Dimensions.get("window").height / 2 }}>
             {userLocation && (
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: regionLocation.latitude,
-                        longitude: regionLocation.longitude,
+                        // latitude: regionLocation.latitude,
+                        // longitude: regionLocation.longitude,
+                        // latitudeDelta: regionLocation.latitudeDelta,
+                        // longitudeDelta: regionLocation.longitudeDelta,
+                        latitude: userLocation.latitude,
+                        longitude: userLocation.longitude,
                         latitudeDelta: 0.05,
-                        longitudeDelta: 0.05,
+                        longitudeDelta: 0.05
                     }}
                 >
                     {/* Mostra l'itinerario */}
