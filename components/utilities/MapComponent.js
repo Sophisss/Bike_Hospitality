@@ -13,8 +13,7 @@ const MapComponent = ({ gpxFileUri }) => {
     const [itinerary, setItinerary] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [nearestPoint, setNearestPoint] = useState(null);
-    const [regionLocation, setRegionLocation] = useState(null);
-
+    const [region, setRegion] = useState(null);
 
     async function parseGpx(fileUri) {
         const response = await fetch(fileUri);
@@ -49,21 +48,23 @@ const MapComponent = ({ gpxFileUri }) => {
         };
     }
 
-    function calculateMidpoint(coord1, coord2) {
-        const lat = (coord1.latitude + coord2.latitude) / 2;
-        const lon = (coord1.longitude + coord2.longitude) / 2;
-        return { latitude: lat, longitude: lon };
-    }
+    function calculateRegion(userLocation, destinationPoint) {
+        const latitudes = [userLocation.latitude, destinationPoint.latitude];
+        const longitudes = [userLocation.longitude, destinationPoint.longitude];
 
-    function calculateRegion(userPosition, destinationPosition) {
-        const latDelta = Math.abs(userPosition.latitude - destinationPosition.latitude) * 1.5;
-        const lonDelta = Math.abs(userPosition.longitude - destinationPosition.longitude) * 1.5;
-        const center = calculateMidpoint(userPosition, destinationPosition);
+        const minLat = Math.min(...latitudes);
+        const maxLat = Math.max(...latitudes);
+        const minLon = Math.min(...longitudes);
+        const maxLon = Math.max(...longitudes);
+
+        const latitudeDelta = maxLat - minLat + 0.02; // Aggiungi margine
+        const longitudeDelta = maxLon - minLon + 0.02; // Aggiungi margine
+
         return {
-            latitude: center.latitude,
-            longitude: center.longitude,
-            latitudeDelta: latDelta,
-            longitudeDelta: lonDelta
+            latitude: (minLat + maxLat) / 2,
+            longitude: (minLon + maxLon) / 2,
+            latitudeDelta,
+            longitudeDelta,
         };
     }
 
@@ -82,11 +83,9 @@ const MapComponent = ({ gpxFileUri }) => {
                 const nearest = findNearestPoint(location, parsedItinerary);
                 setNearestPoint(nearest);
 
-                const region = calculateRegion(location, nearest);
-                console.log("re", region);
-
-                setRegionLocation(region);
-
+                // Calcola la regione
+                const calculatedRegion = calculateRegion(location, nearest);
+                setRegion(calculatedRegion);
             } catch (error) {
                 console.error("Errore durante l'inizializzazione della mappa:", error);
             }
@@ -104,55 +103,46 @@ const MapComponent = ({ gpxFileUri }) => {
     });
 
     return (
-        (!itinerary.length || !userLocation) ? 
+        (!itinerary.length || !userLocation) ?
             <View style={[styles.container, { justifyContent: "center", alignItems: "center" }]}>
                 <ActivityIndicator size="large" color="#0000ff" />
             </View> :
 
-        <View style={{ height: Dimensions.get("window").height / 2 }}>
-            {userLocation && (
-                <MapView
-                    style={styles.map}
-                    initialRegion={{
-                        // latitude: regionLocation.latitude,
-                        // longitude: regionLocation.longitude,
-                        // latitudeDelta: regionLocation.latitudeDelta,
-                        // longitudeDelta: regionLocation.longitudeDelta,
-                        latitude: userLocation.latitude,
-                        longitude: userLocation.longitude,
-                        latitudeDelta: 0.05,
-                        longitudeDelta: 0.05
-                    }}
-                >
-                    {/* Mostra l'itinerario */}
-                    {itinerary.length > 0 && (
-                        <Polyline
-                            coordinates={itinerary}
-                            strokeWidth={3}
-                            strokeColor="blue"
-                        />
-                    )}
+            <View style={{ height: Dimensions.get("window").height / 2 }}>
+                {region && (
+                    <MapView
+                        style={styles.map}
+                        region={region}
+                    >
+                        {/* Mostra l'itinerario */}
+                        {itinerary.length > 0 && (
+                            <Polyline
+                                coordinates={itinerary}
+                                strokeWidth={3}
+                                strokeColor="blue"
+                            />
+                        )}
 
-                    {/* Mostra la posizione dell'utente */}
-                    {userLocation && (
-                        <Marker
-                            coordinate={userLocation}
-                            title="La tua posizione"
-                            pinColor="green"
-                        />
-                    )}
+                        {/* Mostra la posizione dell'utente */}
+                        {userLocation && (
+                            <Marker
+                                coordinate={userLocation}
+                                title="La tua posizione"
+                                pinColor="green"
+                            />
+                        )}
 
-                    {/* Mostra il punto più vicino */}
-                    {nearestPoint && (
-                        <Marker
-                            coordinate={nearestPoint}
-                            title="Punto più vicino"
-                            pinColor="red"
-                        />
-                    )}
-                </MapView>
-            )}
-        </View>
+                        {/* Mostra il punto più vicino */}
+                        {nearestPoint && (
+                            <Marker
+                                coordinate={nearestPoint}
+                                title="Punto più vicino"
+                                pinColor="red"
+                            />
+                        )}
+                    </MapView>
+                )}
+            </View>
     );
 };
 
