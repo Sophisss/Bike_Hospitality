@@ -4,14 +4,20 @@ import listStyle from "../../assets/styles/ListStyle";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { Card } from "react-native-paper";
 import detailStyle from "../../assets/styles/DetailStyle";
+import mainStyle from '../../assets/styles/MainStyle';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import HTMLStyle from "../../assets/styles/HTMLStyle";
 import IconDecisionMaker from "../utilities/IconDecisionMaker";
+import BackgroundWrapper from "../utilities/BackgroundWrapper";
+import translations from '../../translations/translations';
 
 function Trenitalia({ navigation, route }) {
 
     const [loaded, setLoadStatus] = useState(true);
     const [data, setData] = useState([]);
+
+    var ln = global.currentLanguage;
+    var t = translations;
 
     const logoStyles = {
         alignSelf: 'center',
@@ -36,19 +42,18 @@ function Trenitalia({ navigation, route }) {
     }, []);
 
     const generalInfo = {
-        title: "La mobilità integrata sostenibile",
-        text: "Nelle Marche, entro i confini geografici della regione, il transporto della bici è gratuito sui treni Trenitalia."
+        title: t[ln].trenitalia_general_info_title,
+        text: t[ln].trenitalia_general_info_text
     }
 
     const bikeTrains = {
-        title: "Trasporto bici a bordo dei treni regionali",
-        text: "Nelle Marche, tutti i treni regionali sono attrezzati per il trasporto delle biciclette a bordo e il trasporto della bici è gratuito.\n\n" +
-            "Un’ottima occasione per muoversi e conoscere il territorio marchigiano in modo sostenibile, pratico ed economico."
+        title: t[ln].trenitalia_bike_trains_title,
+        text: t[ln].trenitalia_bike_trains_text
     }
 
     const usefulInfo = {
-        title: "Informazioni Utili",
-        linkText: "Informazioni Utili - Marche - Trenitalia",
+        title: t[ln].trenitalia_useful_info_title,
+        linkText: t[ln].trenitalia_useful_info_link_text,
         link: "https://www.trenitalia.com/it/treni_regionali/marche/trenobici-nelle-marche.html"
     }
 
@@ -64,45 +69,49 @@ function Trenitalia({ navigation, route }) {
 
 
     return (
-        <View style={[listStyle.mainContainer, { height: '100%' }]}>
-            <Image source={require('../../assets/images/trenitalia.png')} style={logoStyles} />
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                    <View style={detailStyle.sectionView}>
-                        <View style={detailStyle.flexDirectionRow}>
-                            <Text style={detailStyle.sectionTitle}>{generalInfo.title}</Text>
+        <BackgroundWrapper styles={mainStyle}>
+
+            <View style={mainStyle.box}>
+                <Image source={require('../../assets/images/trenitalia.png')} style={logoStyles} />
+
+                <ScrollView showsVerticalScrollIndicator={false} style={mainStyle.body}>
+                    <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                        <View style={[detailStyle.sectionView, { gap: 5 }]}>
+                            <View style={detailStyle.flexDirectionRow}>
+                                <Text style={[detailStyle.sectionTitle, { textAlign: 'left' }]}>{generalInfo.title}</Text>
+                            </View>
+                            <Text style={HTMLStyle.text}>{generalInfo.text}</Text>
                         </View>
-                        <Text style={HTMLStyle.text}>{generalInfo.text}</Text>
-                    </View>
-                </Card>
+                    </Card>
 
-                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                    <View style={detailStyle.sectionView}>
-                        <View style={detailStyle.flexDirectionRow}>
-                            <Text style={detailStyle.sectionTitle}>{bikeTrains.title}</Text>
+                    <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                        <View style={[detailStyle.sectionView, { gap: 5 }]}>
+                            <View style={detailStyle.flexDirectionRow}>
+                                <Text style={[detailStyle.sectionTitle, { textAlign: 'left' }]}>{bikeTrains.title}</Text>
+                            </View>
+                            <Text style={HTMLStyle.text}>{bikeTrains.text}</Text>
                         </View>
-                        <Text style={HTMLStyle.text}>{bikeTrains.text}</Text>
-                    </View>
-                </Card>
+                    </Card>
 
-                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                    <View style={detailStyle.sectionView}>
-                        <View style={detailStyle.flexDirectionRow}>
-                            <Text style={detailStyle.sectionTitle}>{usefulInfo.title}</Text>
+                    <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                        <View style={[detailStyle.sectionView, { gap: 5 }]}>
+                            <View style={detailStyle.flexDirectionRow}>
+                                <Text style={[detailStyle.sectionTitle, { textAlign: 'left' }]}>{usefulInfo.title}</Text>
+
+                            </View>
+                            <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex, { gap: 5 }]} onPress={() => handleOpenTrenitaliaWebpage(usefulInfo.link)}>
+                                <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { fontSize: 15 }]}>
+                                    {usefulInfo.linkText}
+                                </Text>
+                                <Ionicons name={IconDecisionMaker("link-outline")} size={20} color={'white'} />
+                            </TouchableOpacity>
 
                         </View>
-                        <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex, { gap: 5 }]} onPress={() => handleOpenTrenitaliaWebpage(usefulInfo.link)}>
-                            <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { fontSize: 15 }]}>
-                                {usefulInfo.linkText}
-                            </Text>
-                            <Ionicons name={IconDecisionMaker("link-outline")} size={20} color={'white'} />
-                        </TouchableOpacity>
+                    </Card>
+                </ScrollView>
+            </View>
 
-                    </View>
-                </Card>
-            </ScrollView>
-
-        </View>
+        </BackgroundWrapper>
 
     );
 }

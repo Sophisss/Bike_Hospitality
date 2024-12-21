@@ -62,7 +62,14 @@ const translations = {
         empty_email: "Email not available.",
         empty_phone_number: "Phone number not available.",
         empty_languages: "Languages not available.",
-        loading_data: "We are retrieving the data, almost there..."
+        loading_data: "We are retrieving the data, almost there...",
+        trenitalia_general_info_title: "Sustainable integrated mobility",
+        trenitalia_general_info_text: "In the Marche region, within the geographical boundaries of the region, the transport of bicycles is free on Trenitalia trains.",
+        trenitalia_bike_trains_title: "Transport of bicycles on regional trains",
+        trenitalia_bike_trains_text: "In the Marche region, all regional trains are equipped for the transport of bicycles on board and the transport of bicycles is free.\n\n" +
+            "An excellent opportunity to move around and get to know the Marche region in a sustainable, practical and economical way.",
+        trenitalia_useful_info_title: "Useful Information",
+        trenitalia_useful_info_link_text: "Useful Information - Marche - Trenitalia",
 
     },
     it: {
@@ -128,7 +135,14 @@ const translations = {
         empty_email: "Email non disponibile.",
         empty_phone_number: "Numero di telefono non disponibile.",
         empty_languages: "Lingue non disponibili.",
-        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
+        trenitalia_general_info_title: "La mobilità integrata sostenibile",
+        trenitalia_general_info_text: "Nelle Marche, entro i confini geografici della regione, il transporto della bici è gratuito sui treni Trenitalia.",
+        trenitalia_bike_trains_title: "Trasporto bici a bordo dei treni regionali",
+        trenitalia_bike_trains_text: "Nelle Marche, tutti i treni regionali sono attrezzati per il trasporto delle biciclette a bordo e il trasporto della bici è gratuito.\n\n" +
+            "Un’ottima occasione per muoversi e conoscere il territorio marchigiano in modo sostenibile, pratico ed economico.",
+        trenitalia_useful_info_title: "Informazioni Utili",
+        trenitalia_useful_info_link_text: "Informazioni Utili - Marche - Trenitalia",
     },
 
     // Aggiungi altre lingue qui
