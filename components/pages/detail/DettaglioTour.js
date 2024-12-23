@@ -1,35 +1,26 @@
-import React, { useEffect } from 'react';
-import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import React from 'react';
+import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground, Linking } from 'react-native';
+import { RenderHTML } from 'react-native-render-html';
+
+import he from 'he';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { WebView } from 'react-native-webview';
-import * as WebBrowser from 'expo-web-browser';
 
 import detailStyle from '../../../assets/styles/DetailStyle';
-import IconDecisionMaker from '../../utilities/IconDecisionMaker';
-import { Dimensions } from 'react-native';
-import { Linking } from 'react-native';
-import { _listEmptyComponent, sendStats } from '../../utilities/Utils';
-import { RenderHTML } from 'react-native-render-html';
-import he from 'he';
 import HTMLStyle from '../../../assets/styles/HTMLStyle';
 import mainStyle from '../../../assets/styles/MainStyle';
+import IconDecisionMaker from '../../utilities/IconDecisionMaker';
+import { _listEmptyComponent, sendStats } from '../../utilities/Utils';
 import notification from '../../utilities/Alert';
-
-import translations from '../../../translations/translations';
 import MapComponent from '../../utilities/MapComponent';
+import translations from '../../../translations/translations';
 
 function DettaglioTour({ navigation, route }) {
   const { id, nome, categoria, provincia, codice_provincia, comune, localita, gpx, map, linkgpx, telefono, email, descrizione, immagini } = route.params;
 
-  useEffect(() => {
-    //W navigation.setOptions({title: nome});
-  }, []);
-
   // utility variables
   const marginTopValue = map !== "" ? 10 : gpx !== "" ? 100 : 50;
-
-  var ln = global.currentLanguage;
-  var t = translations;
+  const ln = global.currentLanguage;
+  const t = translations;
 
   sendStats('tour', id);
 
@@ -99,16 +90,10 @@ function DettaglioTour({ navigation, route }) {
             <Ionicons name={IconDecisionMaker('glasses')} style={detailStyle.sectionIcon} size={30} color='#294075' />
           </View>
 
-          <MapComponent gpxFileUri={gpx} />
-
-          {/* {(map !== "") ?
-            <WebView
-              nestedScrollEnabled
-              source={{ uri: map }}
-              style={{ marginTop: 10, height: Dimensions.get('window').height / 2, opacity: 0.99 }}
-            />
+          {(map !== "") ?
+            <MapComponent gpxFileUri={linkgpx} />
             : _listEmptyComponent(t[ln].msg_Mappa)
-          } */}
+          }
 
           <Text style={{ padding: 2, alignSelf: 'center', marginTop: marginTopValue }}>
             {(gpx !== "") ?
@@ -130,20 +115,6 @@ function DettaglioTour({ navigation, route }) {
             }
           </Text>
         </View>
-
-        {
-          /*<View style={detailStyle.sectionView}>
-          <View style={detailStyle.flexDirectionRow}>
-            <Text style={detailStyle.sectionTitle}>{"Posizione"}</Text>
-            <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='dodgerblue'/>
-          </View>
-          <MapView provider={PROVIDER_GOOGLE} style={detailStyle.map} 
-            region= {{latitude: lat, longitude: lgt, latitudeDelta: 1, longitudeDelta: 1,}}> 
-            <Marker coordinate={{latitude: lat, longitude: lgt}} 
-              onPress={() => { geo(lat, lgt, nome) }} />
-          </MapView> 
-        </View>*/
-        }
 
       </ScrollView>
     </View>

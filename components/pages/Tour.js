@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Image, ScrollView, Text, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { Card } from 'react-native-paper';
 import { FlatList } from 'react-native-gesture-handler';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -14,23 +14,40 @@ import listStyle from "../../assets/styles/ListStyle";
 import mainStyle from '../../assets/styles/MainStyle';
 import translations from '../../translations/translations';
 
-
+/**
+ * Tour Component
+ * Displays a list of tours grouped by province.
+ * @param {*} navigation Navigation object for screen transitions
+ * @param {*} route Route object for passing parameters between screens
+ */
 function Tour({ navigation, route }) {
-
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
   const dataLength = Object.keys(data).length;
 
+  // Utility variables
   const { regioneId } = route.params;
+  const ln = global.currentLanguage;
+  const t = translations;
+  const keys = Object.keys(data);
+  routeName = t[ln].rt_tour;
 
+  /**
+   * Fetch tours based on the region ID and group them by province.
+   * 
+   */
   const getTours = async () => {
     try {
-      var province = await getProvinceByRegione(regioneId);
+      const provinces = await getProvinceByRegione(regioneId);
       let tours = [];
-      for (let i = 0; i < province.length; i++) {
-        let json = await fetcher(urls.tour.url + global.currentLanguage + "&provincia=" + province[i].codice_provincia);
+
+      for (const province of provinces) {
+        const json = await fetcher(
+          `${urls.tour.url}${global.currentLanguage}&provincia=${province.codice_provincia}`
+        );
         tours = tours.concat(json);
       }
+
       setData(await groupByCategory(tours));
     } catch (error) {
       console.error(error);
@@ -39,16 +56,29 @@ function Tour({ navigation, route }) {
     }
   }
 
+  /**
+   * Fetch tours when the component mounts.
+   */
   useEffect(() => {
     getTours();
   }, []);
 
-  var ln = global.currentLanguage;
-  var t = translations;
+  // #region Async Functions
 
-  routeName = t[ln].rt_tour;
+  /**
+   * Groups the tours by their province.
+   * @param {*} data An array of tours.
+   * @returns An object where the keys are the province names and the values are the tours in that province.
+   */
+  async function groupByCategory(data) {
+    return data.reduce((result, item) => {
+      result[item.nome_provincia] = result[item.nome_provincia] || [];
+      result[item.nome_provincia].push(item);
+      return result;
+    }, {});
+  }
 
-  let keys = Object.keys(data);
+  // #endregion
 
   return (
     <BackgroundWrapper dataLength={dataLength} styles={mainStyle}>
@@ -114,15 +144,6 @@ function Tour({ navigation, route }) {
       )}
     </BackgroundWrapper>
   );
-}
-
-async function groupByCategory(data) {
-  let result = data.reduce(function (r, a) {
-    r[a.nome_provincia] = r[a.nome_provincia] || [];
-    r[a.nome_provincia].push(a);
-    return r;
-  }, Object.create(null));
-  return result;
 }
 
 export default Tour;
