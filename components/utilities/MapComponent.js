@@ -5,6 +5,7 @@ import { DOMParser } from "xmldom";
 import { gpx } from "@tmcw/togeojson";
 import * as turf from "@turf/turf";
 import { getUserLocation } from "./Utils";
+import translations from '../../translations/translations';
 
 /**
  * A React component that displays a map with an itinerary and the user's location.
@@ -16,6 +17,10 @@ const MapComponent = ({ gpxFileUri }) => {
     const [userLocation, setUserLocation] = useState(null);
     const [nearestPoint, setNearestPoint] = useState(null);
     const [region, setRegion] = useState(null);
+
+    // Utility variables
+    const ln = global.currentLanguage;
+    const t = translations;
 
     /**
      * Parses a GPX file from a given URI and extracts an array of geographic coordinates.
@@ -149,7 +154,7 @@ const MapComponent = ({ gpxFileUri }) => {
                         {userLocation && (
                             <Marker
                                 coordinate={userLocation}
-                                title="La tua posizione"
+                                title={t[ln].your_location}
                                 pinColor="green"
                             />
                         )}
@@ -158,7 +163,7 @@ const MapComponent = ({ gpxFileUri }) => {
                         {nearestPoint && (
                             <Marker
                                 coordinate={nearestPoint}
-                                title="Punto più vicino"
+                                title={t[ln].nearest_point}
                                 pinColor="red"
                             />
                         )}

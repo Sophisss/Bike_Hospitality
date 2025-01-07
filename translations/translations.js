@@ -62,8 +62,9 @@ const translations = {
         empty_email: "Email not available.",
         empty_phone_number: "Phone number not available.",
         empty_languages: "Languages not available.",
-        loading_data: "We are retrieving the data, almost there..."
-
+        loading_data: "We are retrieving the data, almost there...",
+        your_location: "Your position",
+        nearest_point: "Nearest point",
     },
     it: {
         attention: "Attenzione",
@@ -128,7 +129,9 @@ const translations = {
         empty_email: "Email non disponibile.",
         empty_phone_number: "Numero di telefono non disponibile.",
         empty_languages: "Lingue non disponibili.",
-        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
+        your_location: "La tua posizione",
+        nearest_point: "Punto più vicino",
     },
 
     // Aggiungi altre lingue qui
