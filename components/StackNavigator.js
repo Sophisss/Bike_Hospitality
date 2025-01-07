@@ -4,7 +4,6 @@ import { TouchableOpacity } from 'react-native';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useContext } from 'react';
-
 import Home from './Home';
 import Accomodation from './pages/Strutture';
 import HStyle from '../assets/styles/HeaderStyle';
@@ -25,7 +24,7 @@ import Enogastronomia from './pages/Enogastronomia';
 import Noleggio from './pages/Noleggio';
 import DettaglioEventi from './pages/detail/DettaglioEventi';
 import Regions from '../components/Regions';
-
+import LoginScreen from './LoginScreen';
 import { LanguageContext } from './LanguageContext';
 import translations from '../translations/translations';
 
@@ -54,22 +53,25 @@ const StackNavigator = () => {
   };
 
   return (
-    <Stack.Navigator initialRouteName="Home" screenOptions={{
-      cardStyle: HStyle.cardStyle,
-      headerStyle: HStyle.headerStyle,
-      headerTitleStyle: HStyle.headerTitleStyle,
-      headerTintColor: HStyle.headerTintColor,
-      headerTitleAlign: HStyle.headerTitleAlign,
-      headerShown: true,
-      headerRight: () => (
-        <TouchableOpacity onPress={() => { setLanguage(navigation); changeLabel() }}>
-          <Image source={icon} style={{ width: 34, height: 34, marginRight: 12 }} />
-        </TouchableOpacity>
-      )
+    <Stack.Navigator 
+      initialRouteName="Login"
+      screenOptions={{
+        cardStyle: HStyle.cardStyle,
+        headerStyle: HStyle.headerStyle,
+        headerTitleStyle: HStyle.headerTitleStyle,
+        headerTintColor: HStyle.headerTintColor,
+        headerTitleAlign: HStyle.headerTitleAlign,
+        headerShown: true,
+        headerRight: () => (
+          <TouchableOpacity onPress={() => { setLanguage(navigation); changeLabel() }}>
+            <Image source={icon} style={{ width: 34, height: 34, marginRight: 12 }} />
+          </TouchableOpacity>
+        )
     }}>
 
-      <Stack.Screen name={translations[global.currentLanguage].select_region} component={Regions} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
+      <Stack.Screen name={translations[global.currentLanguage].select_region} component={Regions} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />
       <Stack.Screen name={urls.comunien.routeName} component={Comuni} options={{ Title: urls.comunien.routeName }} />
       <Stack.Screen name={"Scheda Comune"} component={DettaglioComuni} options={{ Title: "Dettaglio Comuni" }} />
