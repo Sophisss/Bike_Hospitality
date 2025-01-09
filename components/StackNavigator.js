@@ -27,6 +27,7 @@ import Regions from '../components/Regions';
 import LoginScreen from './LoginScreen';
 import { LanguageContext } from './LanguageContext';
 import translations from '../translations/translations';
+import RegisterScreen from './RegisterScreen';
 
 
 const Stack = createStackNavigator();
@@ -70,6 +71,7 @@ const StackNavigator = () => {
     }}>
 
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
       <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={translations[global.currentLanguage].select_region} component={Regions} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />
