@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import translations from '../translations/translations';
 
 function LoginScreen({ navigation }) {
@@ -20,7 +21,8 @@ function LoginScreen({ navigation }) {
             });
     
             const json = await response.json();
-            if (json.authenticated) {
+            if (json.authenticated && json.token) {
+                await AsyncStorage.setItem('userToken', json.token);
                 navigation.replace(translations[global.currentLanguage].select_region);
             } else {
                 Alert.alert('Errore', 'Username o password non validi');
@@ -28,6 +30,10 @@ function LoginScreen({ navigation }) {
         } catch (error) {
             Alert.alert('Errore', error.toString());
         }
+    };
+
+    const navigateToRegister = () => {
+        navigation.navigate('Register'); 
     };
 
     return (
@@ -45,7 +51,9 @@ function LoginScreen({ navigation }) {
                 onChangeText={setPassword}
                 secureTextEntry
             />
-            <Button title="Login" onPress={handleLogin} />
+            <Button title="Login" onPress={handleLogin} color="#294196" />
+            <View style={styles.spacing} />
+            <Button title="Non sei registrato? Registrati ora" onPress={navigateToRegister} color="black" />
         </View>
     );
 }
@@ -55,11 +63,16 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: 20,
+        alignItems: 'center',
     },
     input: {
+        width: '100%', // Assicurati che l'input sia allargato al 100%
         marginBottom: 10,
         borderWidth: 1,
         padding: 10,
+    },
+    spacing: {
+        height: 10, 
     }
 });
 
