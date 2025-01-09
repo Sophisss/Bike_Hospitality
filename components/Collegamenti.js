@@ -20,6 +20,11 @@ import translations from "../translations/translations";
 function Collegamenti() {
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = Object.keys(data).length;
+
+  // Utility variables
+  const ln = global.currentLanguage;
+  const t = translations;
 
   /**
    * Fetches the Collegamenti data from
@@ -49,35 +54,37 @@ function Collegamenti() {
         <Text style={[listStyle.categoryText, { marginLeft: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloColl}</Text>
 
         <View style={mainStyle.body} keyboardShouldPersistTaps={'handled'}>
-          {loaded ? <ActivityIndicator size="large" color="black" style={{ justifyContent: 'center' }} /> : (
+          {loaded ? <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
+            <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></> : (
 
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              _listEmptyComponent={_listEmptyComponent("Nessun collegamento disponibile.")}
-              data={data}
-              renderItem={({ item }) => (
-                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
-                  <View style={detailStyle.sectionView}>
-                    <View style={detailStyle.flexDirectionRow}>
-                      <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>{item.nome}</Text>
-                      <View>
-                        <TouchableOpacity width={'auto'} onPress={() => {
-                          item.web !== null && item.web !== undefined && item.web !== "" ?
-                            Linking.openURL(item.web) :
-                            notification("Attenzione", "Sito web non disponibile.", "Ok")()
-                        }}
-                        >
-                          <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
-                        </TouchableOpacity>
+            (dataLength === 0 || dataLength == undefined) ?
+              _listEmptyComponent(t[ln].empty_connections, true) :
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                data={data}
+                renderItem={({ item }) => (
+                  <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
+                    <View style={detailStyle.sectionView}>
+                      <View style={detailStyle.flexDirectionRow}>
+                        <Text style={[detailStyle.sectionTitle, { flex: 1, textAlign: 'left' }]}>{item.nome}</Text>
+                        <View>
+                          <TouchableOpacity width={'auto'} onPress={() => {
+                            item.web !== null && item.web !== undefined && item.web !== "" ?
+                              Linking.openURL(item.web) :
+                              notification("Attenzione", "Sito web non disponibile.", "Ok")()
+                          }}
+                          >
+                            <Ionicons name={IconDecisionMaker('link')} size={30} color='#294196' />
+                          </TouchableOpacity>
+                        </View>
                       </View>
+                      <Image style={detailStyle.collPhoto} source={{ uri: item.immagine }} />
                     </View>
-                    <Image style={detailStyle.collPhoto} source={{ uri: item.immagine }} />
-                  </View>
-                </Card>
-              )
-              }
-            />
+                  </Card>
+                )
+                }
+              />
           )}
         </View>
       </View>

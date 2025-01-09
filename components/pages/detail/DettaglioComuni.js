@@ -25,7 +25,9 @@ function DettaglioComuni({ navigation, route }) {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = Object.keys(data).length;
   const [tour, setTour] = useState([]);
+  const tourLength = Object.keys(tour).length;
 
   var ln = global.currentLanguage;
   var t = translations;
@@ -87,47 +89,49 @@ function DettaglioComuni({ navigation, route }) {
             <Ionicons name={IconDecisionMaker('bed')} style={[detailStyle.sectionIcon, { alignSelf: 'center' }]} size={30} color='#294075' />
           </View>
 
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            _listEmptyComponent={_listEmptyComponent(t[ln].empty_accommodations)}
-            horizontal={true}
-            data={data}
-            renderItem={({ item }) => (
-              <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
-                onPress={() => navigation.navigate(t[ln].rt_struttura, {
-                  nome: item.nome,
-                  categoria: item.categoria,
-                  codice_provincia: item.codice_provincia,
-                  email: item.email,
-                  localita: item.localita,
-                  indirizzo: item.indirizzo,
-                  immagine: item.immagine,
-                  telefono: item.telefono,
-                  url: item.url,
-                  wiki: item.wiki,
-                  coords: item.coords,
-                  descrizione: item.descrizione,
-                })}
-              >
-                <Image style={listStyle.itemImageVertical} source={{ uri: item.immagine }} />
+          {(dataLength === 0 || dataLength == undefined) ?
+            _listEmptyComponent(t[ln].empty_accommodations) : (
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                horizontal={true}
+                data={data}
+                renderItem={({ item }) => (
+                  <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
+                    onPress={() => navigation.navigate(t[ln].rt_struttura, {
+                      nome: item.nome,
+                      categoria: item.categoria,
+                      codice_provincia: item.codice_provincia,
+                      email: item.email,
+                      localita: item.localita,
+                      indirizzo: item.indirizzo,
+                      immagine: item.immagine,
+                      telefono: item.telefono,
+                      url: item.url,
+                      wiki: item.wiki,
+                      coords: item.coords,
+                      descrizione: item.descrizione,
+                    })}
+                  >
+                    <Image style={listStyle.itemImageVertical} source={{ uri: item.immagine }} />
 
-                <View style={[listStyle.infoContainer, { gap: 8 }]}>
-                  <Text style={listStyle.accName}>{item.nome}</Text>
-                  <View style={listStyle.textContainer}>
-                    <Icon name={IconDecisionMaker('map')} size={20} color="#6DBE45" />
-                    <Text style={[listStyle.text, { color: '#F0F0F0', fontWeight: 'bold' }]}> {item.localita} </Text>
-                  </View>
-                  <View style={listStyle.textContainer}>
-                    <Icon name={IconDecisionMaker('location')} size={25} color="red" />
-                    <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}>
-                      {item.indirizzo ? item.indirizzo : t[ln].empty_address}
-                    </Text>
-                  </View>
-                </View>
-              </Card>
+                    <View style={[listStyle.infoContainer, { gap: 8 }]}>
+                      <Text style={listStyle.accName}>{item.nome}</Text>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('map')} size={20} color="#6DBE45" />
+                        <Text style={[listStyle.text, { color: '#F0F0F0', fontWeight: 'bold' }]}> {item.localita} </Text>
+                      </View>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('location')} size={25} color="red" />
+                        <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}>
+                          {item.indirizzo ? item.indirizzo : t[ln].empty_address}
+                        </Text>
+                      </View>
+                    </View>
+                  </Card>
+                )}
+              />
             )}
-          />
         </View>
 
 
@@ -137,51 +141,52 @@ function DettaglioComuni({ navigation, route }) {
             <Ionicons name={IconDecisionMaker('bicycle-sharp')} style={[detailStyle.sectionIcon, { alignSelf: 'center' }]} size={30} color='#294075' />
           </View>
 
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            _listEmptyComponent={_listEmptyComponent(t[ln].empty_bike_routes)}
-            horizontal={true}
-            data={tour}
-            renderItem={({ item }) => (
-              <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
-                onPress={() => navigation.navigate(t[ln].rt_tour, {
-                  nome: item.nome,
-                  categoria: item.categoria,
-                  provincia: item.provincia,
-                  codice_provincia: item.codice_provincia,
-                  comune: item.comune,
-                  localita: item.localita,
-                  mail: item.mail,
-                  gpx: item.gpx,
-                  map: item.map,
-                  linkgpx: item.linkgpx,
-                  telefono: item.telefono,
-                  email: item.email,
-                  descrizione: item.descrizione,
-                  immagini: item.immagini,
-                })
+          {(tourLength === 0 || tourLength == undefined) ?
+            _listEmptyComponent(t[ln].empty_bike_routes) : (
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                horizontal={true}
+                data={tour}
+                renderItem={({ item }) => (
+                  <Card style={[listStyle.itemCard, { borderRadius: 15, height: 'auto' }]}
+                    onPress={() => navigation.navigate(t[ln].rt_tour, {
+                      nome: item.nome,
+                      categoria: item.categoria,
+                      provincia: item.provincia,
+                      codice_provincia: item.codice_provincia,
+                      comune: item.comune,
+                      localita: item.localita,
+                      mail: item.mail,
+                      gpx: item.gpx,
+                      map: item.map,
+                      linkgpx: item.linkgpx,
+                      telefono: item.telefono,
+                      email: item.email,
+                      descrizione: item.descrizione,
+                      immagini: item.immagini,
+                    })
+                    }
+                  >
+
+                    <Image style={listStyle.itemImageVertical} source={{ uri: item.immagini[0] }} />
+
+                    <View style={[listStyle.infoContainer, { gap: 8 }]}>
+                      <Text style={listStyle.accName}>{item.nome}</Text>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('map')} size={20} color="#6DBE45" />
+                        <Text style={[listStyle.text, { color: '#F0F0F0', fontWeight: 'bold' }]}> {item.comune + " (" + item.provincia + ")"} </Text>
+                      </View>
+                      <View style={listStyle.textContainer}>
+                        <Icon name={IconDecisionMaker('list')} size={25} color="white" />
+                        <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}> {item.categoria} </Text>
+                      </View>
+                    </View>
+                  </Card>
+                )
                 }
-              >
-
-                <Image style={listStyle.itemImageVertical} source={{ uri: item.immagini[0] }} />
-
-                <View style={[listStyle.infoContainer, { gap: 8 }]}>
-                  <Text style={listStyle.accName}>{item.nome}</Text>
-                  <View style={listStyle.textContainer}>
-                    <Icon name={IconDecisionMaker('map')} size={20} color="#6DBE45" />
-                    <Text style={[listStyle.text, { color: '#F0F0F0', fontWeight: 'bold' }]}> {item.comune + " (" + item.provincia + ")"} </Text>
-                  </View>
-                  <View style={listStyle.textContainer}>
-                    <Icon name={IconDecisionMaker('list')} size={25} color="white" />
-                    <Text style={[listStyle.text, listStyle.textItalic, { color: '#F0F0F0' }]}> {item.categoria} </Text>
-                  </View>
-                </View>
-              </Card>
-            )
-            }
-          />
-
+              />
+            )}
         </View>
 
       </ScrollView >

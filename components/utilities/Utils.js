@@ -14,11 +14,12 @@ import * as Location from "expo-location";
  * @param {*} result_text text to be shown
  * @returns a View containing the text passed as parameter, or a default text if the parameter is empty
  */
-function _listEmptyComponent(result_text) {
+function _listEmptyComponent(result_text, empty_page = false) {
+  const dynamicStyle = empty_page ? { position: 'absolute', top: '45%' } : {};
   result_text = (result_text == "" || result_text == null) ? "Nessun risultato disponibile." : result_text;
 
   return (
-    <Text style={mainStyle.empty_data}>{result_text}</Text>
+    <Text style={[mainStyle.empty_data, dynamicStyle]}>{result_text}</Text>
   )
 }
 

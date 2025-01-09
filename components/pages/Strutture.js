@@ -53,7 +53,7 @@ function Accomodation({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_accommodations)
+          _listEmptyComponent(t[ln].empty_accommodations, true)
           :
           <ScrollView showsVerticalScrollIndicator={false} style={mainStyle.box}>
             {keys.map((key) => (

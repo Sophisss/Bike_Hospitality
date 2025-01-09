@@ -47,7 +47,7 @@ function Promozioni({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_attractions)
+          _listEmptyComponent(t[ln].empty_attractions, true)
           :
           <View style={mainStyle.box}>
             <FlatList

@@ -47,7 +47,7 @@ function Noleggio({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_bike_rental)
+          _listEmptyComponent(t[ln].empty_bike_rental, true)
           :
           <View style={mainStyle.box}>
             <FlatList

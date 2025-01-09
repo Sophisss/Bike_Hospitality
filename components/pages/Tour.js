@@ -87,7 +87,7 @@ function Tour({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_bike_routes)
+          _listEmptyComponent(t[ln].empty_bike_routes, true)
           :
           <ScrollView showsVerticalScrollIndicator={false} style={mainStyle.box}>
             {keys.map((key) => (

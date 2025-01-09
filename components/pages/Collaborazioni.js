@@ -44,7 +44,7 @@ function Collaborazioni({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_collaborations)
+          _listEmptyComponent(t[ln].empty_collaborations, true)
           :
           <View style={mainStyle.box}>
             <FlatList

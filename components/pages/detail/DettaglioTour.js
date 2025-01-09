@@ -18,9 +18,12 @@ function DettaglioTour({ navigation, route }) {
   const { id, nome, categoria, provincia, codice_provincia, comune, localita, gpx, map, linkgpx, telefono, email, descrizione, immagini } = route.params;
 
   // utility variables
-  const marginTopValue = map !== "" ? 10 : gpx !== "" ? 100 : 50;
   const ln = global.currentLanguage;
   const t = translations;
+
+  const isGpxFile = (fileUri) => {
+    return fileUri.endsWith('.gpx');
+  };
 
   sendStats('tour', id);
 
@@ -90,12 +93,12 @@ function DettaglioTour({ navigation, route }) {
             <Ionicons name={IconDecisionMaker('glasses')} style={detailStyle.sectionIcon} size={30} color='#294075' />
           </View>
 
-          {(map !== "") ?
+          {(linkgpx !== "" && isGpxFile(linkgpx)) ?
             <MapComponent gpxFileUri={linkgpx} />
             : _listEmptyComponent(t[ln].msg_Mappa)
           }
 
-          <Text style={{ padding: 2, alignSelf: 'center', marginTop: marginTopValue }}>
+          <Text style={{ padding: 2, alignSelf: 'center' }}>
             {(gpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(gpx)}>
                 <Ionicons name={IconDecisionMaker('map')} size={30} color='#6DBE45' />
