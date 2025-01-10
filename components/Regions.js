@@ -4,7 +4,7 @@ import { Image, ImageBackground, View } from 'react-native';
 import { responsiveHeight, responsiveWidth } from "react-native-responsive-dimensions";
 import Svg, { Path } from "react-native-svg";
 
-import homeStyle from '../assets/styles/HomeStyle';
+import mainStyle from '../assets/styles/MainStyle';
 
 import urls from './utilities/Urls.json';
 import fetcher from './utilities/Fetcher';
@@ -52,19 +52,19 @@ function Regions() {
      * This method handles the selection of a region.
      * @param {*} regionId the id of the selected region
      */
-    const handleRegionSelection = (regionId) => {
-        const abilitata = data.find(region => region.id_regione === regionId).abilitata;
-        navigation.navigate(urls.home.routeName, { regioneId: regionId, abilitata: abilitata });
+    const handleRegionSelection = (selected_region) => {
+        const abilitata = data.find(region => region.id_regione === selected_region.id_regione).abilitata;
+        navigation.navigate(urls.home.routeName, { region: selected_region });
     };
 
     return (
-        <View style={homeStyle.mainContainer}>
-            <ImageBackground source={require('../assets/images/background.png')} style={homeStyle.imageBackground} />
+        <View style={mainStyle.mainContainer}>
+            <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-            <View style={homeStyle.box}>
+            <View style={mainStyle.box}>
 
-                <View style={homeStyle.header}>
-                    <Image style={homeStyle.logoBH}
+                <View style={mainStyle.header}>
+                    <Image style={mainStyle.logoBH}
                         source={require('../assets/images/logoBH.png')} />
                 </View>
 
@@ -89,7 +89,7 @@ function Regions() {
                                     fill={isSelected ? '#4C90B1' : '#ffffff'}
                                     onPressIn={() => setSelectedRegion(region.id_regione)}
                                     onPressOut={() => setSelectedRegion(null)}
-                                    onPress={() => handleRegionSelection(region.id_regione)}
+                                    onPress={() => handleRegionSelection(region)}
                                 />
                             );
                         })}

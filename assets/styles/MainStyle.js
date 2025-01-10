@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 const screenHeight = Dimensions.get('window').height;
 
 
-const homeStyle = StyleSheet.create({
+const mainStyle = StyleSheet.create({
   mainContainer: {
     backgroundColor: 'royalblue',
     flexGrow: 1,
@@ -48,9 +48,32 @@ const homeStyle = StyleSheet.create({
     width: undefined, // Clear fixed width
   },
 
+  loadIndicator: {
+    alignSelf: 'center',
+    position: 'absolute',
+    top: '45%'
+  },
+
+  loadText: {
+    position: 'absolute',
+    alignSelf: 'center',
+    top: '53%',
+    fontSize: 16,
+    color: '#333'
+  },
+
   body: {
     flex: 1,
     maxHeight: screenHeight > 680 ? Dimensions.get('window').height : Dimensions.get('window').height * 0.48
+  },
+
+  empty_data: {
+    position: 'absolute',
+    fontSize: 20, 
+    color: "#294075",
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    top: '45%'
   },
 
   touchableRow: {
@@ -59,6 +82,7 @@ const homeStyle = StyleSheet.create({
 
   touchableRowItem: {
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#294075',
     borderRadius: 10,
     flex: 1,
@@ -111,4 +135,4 @@ const homeStyle = StyleSheet.create({
 
 
 
-export default homeStyle;
+export default mainStyle;

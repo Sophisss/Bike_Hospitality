@@ -41,7 +41,7 @@ function DettaglioEventi({ navigation, route }) {
       <View style={detailStyle.sectionView}>
         <View style={detailStyle.flexDirectionRow}>
           <Text style={detailStyle.sectionTitle}>{t[ln].descriz}</Text>
-          <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={30} color='dodgerblue'/>
+          <Ionicons name={IconDecisionMaker('book')} style={detailStyle.sectionIcon} size={25} color='dodgerblue'/>
         </View>
         <HTML source={{html: he.decode(descrizione)}} contentWidth={200} />
       </View>
