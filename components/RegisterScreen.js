@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import mainStyle from '../assets/styles/MainStyle';
 import authStyle from '../assets/styles/AuthStyle';
+import translations from '../translations/translations';
 
 const headerHeight = Dimensions.get('window').height * 8 / 100;
 
@@ -13,6 +14,8 @@ function RegisterScreen({ navigation }) {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    var ln = global.currentLanguage;
+    var t = translations;
     const isFormValid = username !== '' && password !== '' && email !== '';
 
     /**
@@ -20,7 +23,7 @@ function RegisterScreen({ navigation }) {
      */
     const handleRegister = async () => {
         if (!isFormValid) {
-            Alert.alert('Error', 'Please fill all the fields.');
+            Alert.alert(t[ln].error, t[ln].fill_fields);
             return;
         }
 
@@ -28,10 +31,10 @@ function RegisterScreen({ navigation }) {
             const response = await _register();
             const json = await response.json();
             if (json.message === "Utente creato con successo") {
-                Alert.alert("Success", "User registered successfully.");
+                Alert.alert("Success",  t[ln].registration_success);
                 navigation.goBack();
             } else {
-                Alert.alert("Error", json.message);
+                Alert.alert(t[ln].error, json.message);
             }
         } catch (error) {
             Alert.alert("Network Error", error.toString());
@@ -73,21 +76,18 @@ function RegisterScreen({ navigation }) {
             <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
             <View style={[mainStyle.box, { marginTop: headerHeight }]}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={authStyle.backButton}>
-                    <Ionicons name="arrow-back" size={24} color="#294075" />
-                </TouchableOpacity>
-
+            
                 <View style={mainStyle.header}>
                     <Image style={mainStyle.logoBH}
                         source={require('../assets/images/logoBH.png')} />
                 </View>
-                <Text style={authStyle.title}>Registration</Text>
+                <Text style={authStyle.title}>{t[ln].welcome}</Text>
 
                 <View style={[mainStyle.body, { padding: 10 }]} keyboardShouldPersistTaps={'handled'}>
                     <View style={authStyle.inputContainer}>
                         <TextInput
                             style={authStyle.input}
-                            placeholder="Username"
+                            placeholder={t[ln].username}
                             placeholderTextColor="#aaa"
                             value={username}
                             onChangeText={setUsername}
@@ -122,7 +122,7 @@ function RegisterScreen({ navigation }) {
                     <View style={authStyle.inputContainer}>
                         <TextInput
                             style={authStyle.input}
-                            placeholder="Password"
+                            placeholder={t[ln].password}
                             placeholderTextColor="#aaa"
                             value={password}
                             onChangeText={setPassword}
@@ -149,11 +149,11 @@ function RegisterScreen({ navigation }) {
                     </View>
 
                     <TouchableOpacity style={authStyle.authButton} onPress={handleRegister}>
-                        <Text style={authStyle.authButtonText}>Register</Text>
+                        <Text style={authStyle.authButtonText}>{t[ln].registration}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={authStyle.secondaryButton} onPress={navigateToLogin}>
                         <Text style={authStyle.secondaryButtonText}>
-                            Already have an account? Login here
+                            {t[ln].login_invite}
                         </Text>
                     </TouchableOpacity>
                 </View>

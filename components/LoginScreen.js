@@ -15,6 +15,9 @@ function LoginScreen({ navigation }) {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
+    var ln = global.currentLanguage;
+    var t = translations;
+
     const isFormValid = username !== '' && password !== '';
 
     /**
@@ -22,7 +25,7 @@ function LoginScreen({ navigation }) {
      */
     const handleLogin = async () => {
         if (!isFormValid) {
-            Alert.alert('Error', 'Please fill all the fields.');
+            Alert.alert(t[ln].error, t[ln].fill_fields);
             return;
         }
 
@@ -33,10 +36,10 @@ function LoginScreen({ navigation }) {
                 await AsyncStorage.setItem('userToken', json.token);
                 navigation.replace(translations[global.currentLanguage].select_region);
             } else {
-                Alert.alert('Error', 'Invalid username or password');
+                Alert.alert(t[ln].error, t[ln].invalid_credentials);
             }
         } catch (error) {
-            Alert.alert('Error', error.toString());
+            Alert.alert(t[ln].error, error.toString());
         }
     };
 
@@ -76,13 +79,13 @@ function LoginScreen({ navigation }) {
                     <Image style={mainStyle.logoBH}
                         source={require('../assets/images/logoBH.png')} />
                 </View>
-                <Text style={authStyle.title}>Welcome back!</Text>
+                <Text style={authStyle.title}>{t[ln].welcome_back}</Text>
 
                 <View style={[mainStyle.body, { padding: 10 }]} keyboardShouldPersistTaps={'handled'}>
                     <View style={authStyle.inputContainer}>
                         <TextInput
                             style={authStyle.input}
-                            placeholder="Username"
+                            placeholder={t[ln].username}
                             placeholderTextColor="#aaa"
                             value={username}
                             onChangeText={setUsername}
@@ -99,7 +102,7 @@ function LoginScreen({ navigation }) {
                     <View style={authStyle.inputContainer}>
                         <TextInput
                             style={authStyle.input}
-                            placeholder="Password"
+                            placeholder={t[ln].password}
                             placeholderTextColor="#aaa"
                             value={password}
                             onChangeText={setPassword}
@@ -127,11 +130,11 @@ function LoginScreen({ navigation }) {
 
                     <TouchableOpacity style={authStyle.authButton}
                         onPress={handleLogin}>
-                        <Text style={authStyle.authButtonText}>Log in</Text>
+                        <Text style={authStyle.authButtonText}>{t[ln].login}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={authStyle.secondaryButton} onPress={navigateToRegister}>
                         <Text style={authStyle.secondaryButtonText}>
-                            Don't have an account? Register now
+                            {t[ln].registration_invite}
                         </Text>
                     </TouchableOpacity>
                 </View>
