@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Text, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, FlatList, Text, View, ImageBackground, Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import RenderHTML from "react-native-render-html";
@@ -19,10 +20,12 @@ import translations from "../translations/translations";
  * @returns {View} View containing the Disciplinario data.
  */
 function Disciplinario() {
-
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Utility variables
+  const headerHeight = Dimensions.get('window').height * 8 / 100;
   const ln = global.currentLanguage;
   const t = translations;
 
@@ -41,7 +44,16 @@ function Disciplinario() {
     }
   }
 
+  /**
+   * Check if the user is authenticated.
+   */
+  const checkAuth = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    setIsAuthenticated(!!token);
+  }
+
   useEffect(() => {
+    checkAuth();
     getDisciplinario();
   }, []);
 
@@ -50,7 +62,7 @@ function Disciplinario() {
     <View style={mainStyle.mainContainer}>
       <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-      <View style={mainStyle.box}>
+      <View style={[mainStyle.box, { marginTop: isAuthenticated ? 0 : headerHeight }]}>
         <Text style={[listStyle.categoryText, { marginHorizontal: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloDisc}</Text>
 
         <View style={mainStyle.body} keyboardShouldPersistTaps={'handled'}>

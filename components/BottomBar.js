@@ -17,17 +17,17 @@ function BottomBar() {
     const { label1 } = useContext(LanguageContext);
     var language = global.currentLanguage;
     var t = translations;
-    
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+
+    const checkLoginStatus = async () => {
+        const userToken = await AsyncStorage.getItem('userToken');
+        setIsUserLoggedIn(userToken !== null);
+    };
 
     useEffect(() => {
-        const checkAuth = async () => {
-            const token = await AsyncStorage.getItem('userToken');
-            setIsAuthenticated(!!token);
-        };
-
-        checkAuth();
-    }, []);
+        checkLoginStatus();
+    }, [])
 
     return (
         <Tab.Navigator initialRouteName="Home" screenOptions={{
@@ -48,7 +48,19 @@ function BottomBar() {
                 )
             }} />
 
-            {isAuthenticated && (
+            <Tab.Screen name={t[language].disciplinare} component={Disciplinario} options={{
+                headerShown: isUserLoggedIn, tabBarLabel: t[language].disciplinare, tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="file" color={color} size={size} />
+                )
+            }} />
+
+            <Tab.Screen name={t[language].collegamenti} component={Collegamenti} options={{
+                headerShown: isUserLoggedIn, tabBarLabel: t[language].collegamenti, tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="link" color={color} size={size} />
+                )
+            }} />
+
+            {/* {isAuthenticated && (
                 <>
                     <Tab.Screen name={t[language].disciplinare} component={Disciplinario} options={{
                         tabBarLabel: t[language].disciplinare, tabBarIcon: ({ color, size }) => (
@@ -62,7 +74,7 @@ function BottomBar() {
                         )
                     }} />
                 </>
-            )}
+            )} */}
         </Tab.Navigator>
     );
 }

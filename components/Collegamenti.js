@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View, ImageBackground, Linking } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View, ImageBackground, Linking, Dimensions } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -20,6 +21,10 @@ import translations from "../translations/translations";
 function Collegamenti() {
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  // Utility variables
+  const headerHeight = Dimensions.get('window').height * 8 / 100;
 
   /**
    * Fetches the Collegamenti data from
@@ -36,7 +41,16 @@ function Collegamenti() {
     }
   }
 
+  /**
+   * Check if the user is authenticated.
+   */
+  const checkAuth = async () => {
+    const token = await AsyncStorage.getItem('userToken');
+    setIsAuthenticated(!!token);
+  }
+
   useEffect(() => {
+    checkAuth();
     getCollegamenti();
   }, []);
 
@@ -45,7 +59,7 @@ function Collegamenti() {
     <View style={mainStyle.mainContainer}>
       <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
 
-      <View style={mainStyle.box}>
+      <View style={[mainStyle.box, { marginTop: isAuthenticated ? 0 : headerHeight }]}>
         <Text style={[listStyle.categoryText, { marginLeft: 15, marginBottom: 10 }]}>{translations[global.currentLanguage].titoloColl}</Text>
 
         <View style={mainStyle.body} keyboardShouldPersistTaps={'handled'}>

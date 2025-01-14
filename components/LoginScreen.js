@@ -1,79 +1,143 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, TextInput, Alert, ImageBackground, Image, TouchableOpacity, Text, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+import mainStyle from '../assets/styles/MainStyle';
+import authStyle from '../assets/styles/AuthStyle';
 import translations from '../translations/translations';
+import { set } from 'ramda';
+
+const headerHeight = Dimensions.get('window').height * 8 / 100;
 
 function LoginScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
+    const isFormValid = username !== '' && password !== '';
+
+    /**
+     * Handle the login process.
+     */
     const handleLogin = async () => {
+        if (!isFormValid) {
+            Alert.alert('Error', 'Please fill all the fields.');
+            return;
+        }
+
         try {
-            const response = await fetch('http://IP/API/index.php?action=login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    username: username,
-                    password: password
-                })
-            });
-    
+            const response = await _login();
             const json = await response.json();
             if (json.authenticated && json.token) {
                 await AsyncStorage.setItem('userToken', json.token);
                 navigation.replace(translations[global.currentLanguage].select_region);
             } else {
-                Alert.alert('Errore', 'Username o password non validi');
+                Alert.alert('Error', 'Invalid username or password');
             }
         } catch (error) {
-            Alert.alert('Errore', error.toString());
+            Alert.alert('Error', error.toString());
         }
     };
 
+    /**
+     * Navigate to the register screen 
+     * if the user doesn't have an account.
+     */
     const navigateToRegister = () => {
-        navigation.navigate('Register'); 
+        resetValues();
+        navigation.navigate('Register');
+    };
+
+    const resetValues = () => {
+        setUsername('');
+        setPassword('');
+    };
+
+    const _login = async () => {
+        return response = await fetch('http://IP/API/index.php?action=login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
     };
 
     return (
-        <View style={styles.container}>
-            <TextInput
-                style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Password"
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-            />
-            <Button title="Login" onPress={handleLogin} color="#294196" />
-            <View style={styles.spacing} />
-            <Button title="Non sei registrato? Registrati ora" onPress={navigateToRegister} color="black" />
+        <View style={mainStyle.mainContainer}>
+            <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
+
+            <View style={[mainStyle.box, { marginTop: headerHeight }]}>
+                <View style={mainStyle.header}>
+                    <Image style={mainStyle.logoBH}
+                        source={require('../assets/images/logoBH.png')} />
+                </View>
+                <Text style={authStyle.title}>Welcome back!</Text>
+
+                <View style={[mainStyle.body, { padding: 10 }]} keyboardShouldPersistTaps={'handled'}>
+                    <View style={authStyle.inputContainer}>
+                        <TextInput
+                            style={authStyle.input}
+                            placeholder="Username"
+                            placeholderTextColor="#aaa"
+                            value={username}
+                            onChangeText={setUsername}
+                        />
+                        {username.length > 0 && (
+                            <TouchableOpacity
+                                style={authStyle.clearButton}
+                                onPress={() => setUsername('')}
+                            >
+                                <Ionicons name="close-circle" size={24} color="#294075" />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+                    <View style={authStyle.inputContainer}>
+                        <TextInput
+                            style={authStyle.input}
+                            placeholder="Password"
+                            placeholderTextColor="#aaa"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry={!showPassword}
+                        />
+                        <TouchableOpacity
+                            style={authStyle.eyeIcon}
+                            onPress={() => setShowPassword(!showPassword)}
+                        >
+                            <Ionicons
+                                name={showPassword ? "eye-off" : "eye"}
+                                size={24}
+                                color="#294075"
+                            />
+                        </TouchableOpacity>
+                        {password.length > 0 && (
+                            <TouchableOpacity
+                                style={[authStyle.clearButton, { right: 40 }]}
+                                onPress={() => setPassword('')}
+                            >
+                                <Ionicons name="close-circle" size={24} color="#294075" />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+
+                    <TouchableOpacity style={authStyle.authButton}
+                        onPress={handleLogin}>
+                        <Text style={authStyle.authButtonText}>Log in</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={authStyle.secondaryButton} onPress={navigateToRegister}>
+                        <Text style={authStyle.secondaryButtonText}>
+                            Don't have an account? Register now
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 20,
-        alignItems: 'center',
-    },
-    input: {
-        width: '100%', // Assicurati che l'input sia allargato al 100%
-        marginBottom: 10,
-        borderWidth: 1,
-        padding: 10,
-    },
-    spacing: {
-        height: 10, 
-    }
-});
 
 export default LoginScreen;
