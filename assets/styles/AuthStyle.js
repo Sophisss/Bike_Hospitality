@@ -16,7 +16,7 @@ const authStyle = StyleSheet.create({
         alignItems: 'center',
         width: '100%',
         borderBottomWidth: 1,
-        borderColor: '#ccc'
+        borderColor: '#66000000'
     },
 
     input: {
@@ -34,7 +34,7 @@ const authStyle = StyleSheet.create({
         elevation: 3,
         height: 50,
         borderBottomWidth: 0,
-    },
+        },
 
     eyeIcon: {
         position: 'absolute',

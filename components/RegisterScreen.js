@@ -6,7 +6,7 @@ import mainStyle from '../assets/styles/MainStyle';
 import authStyle from '../assets/styles/AuthStyle';
 import translations from '../translations/translations';
 
-const headerHeight = Dimensions.get('window').height * 8 / 100;
+const headerHeight = Dimensions.get('window').height * 1 / 100;
 
 function RegisterScreen({ navigation }) {
     const [username, setUsername] = useState('');

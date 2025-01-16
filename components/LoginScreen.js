@@ -8,7 +8,7 @@ import authStyle from '../assets/styles/AuthStyle';
 import translations from '../translations/translations';
 import { set } from 'ramda';
 
-const headerHeight = Dimensions.get('window').height * 8 / 100;
+const headerHeight = Dimensions.get('window').height * 1 / 100;
 
 function LoginScreen({ navigation }) {
     const [username, setUsername] = useState('');
