@@ -70,8 +70,8 @@ const StackNavigator = () => {
         )
     }}>
 
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{ Title: translations[global.currentLanguage].login}} />
+      <Stack.Screen name="Register" component={RegisterScreen} options={{ Title: translations[global.currentLanguage].registration}} />
       <Stack.Screen name={urls.home.routeName} component={Home} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={translations[global.currentLanguage].select_region} component={Regions} options={{ Title: urls.home.routeName }} />
       <Stack.Screen name={urls.comuni.routeName} component={Comuni} options={{ Title: urls.comuni.routeName }} />

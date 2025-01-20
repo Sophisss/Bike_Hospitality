@@ -1,3 +1,5 @@
+import { use } from "react";
+
 const translations = {
     en: {
         attention: "Attention",
@@ -62,7 +64,20 @@ const translations = {
         empty_email: "Email not available.",
         empty_phone_number: "Phone number not available.",
         empty_languages: "Languages not available.",
-        loading_data: "We are retrieving the data, almost there..."
+        loading_data: "We are retrieving the data, almost there...",
+        registration_invite: "Don't have an account? Register here!",
+        login_invite: "Already have an account? Login here!",
+        registration: "Registration",
+        welcome_back: "Welcome back!",
+        welcome: "Welcome!",
+        username: "Username",
+        password: "Password",
+        login: "Login",
+        fill_fields: "Please fill all the fields.",
+        invalid_credentials: "Invalid username or password.",
+        registration_success: "User registered successfully.",
+        error: "Error"
+
 
     },
     it: {
@@ -128,7 +143,20 @@ const translations = {
         empty_email: "Email non disponibile.",
         empty_phone_number: "Numero di telefono non disponibile.",
         empty_languages: "Lingue non disponibili.",
-        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
+        registration_invite: "Non hai un account? Registrati qui!",
+        login_invite: "Hai già un account? Accedi qui!",
+        registration: "Registrati",
+        welcome_back: "Bentornato!",
+        welcome: "Benvenuto!",
+        username: "Nome utente",
+        password: "Password",
+        login: "Accedi",
+        fill_fields: "Per favore compila tutti i campi.",
+        invalid_credentials: "Nome utente o password non validi.",
+        registration_success: "Utente registrato con successo.",
+        error: "Errore"
+
     },
 
     // Aggiungi altre lingue qui
