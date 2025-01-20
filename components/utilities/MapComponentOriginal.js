@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MapView, { Polyline, Marker } from "react-native-maps";
-import { Dimensions, View, ActivityIndicator, Button, Linking } from "react-native";
+import { Dimensions, View, ActivityIndicator } from "react-native";
 import { DOMParser } from "xmldom";
 import { gpx } from "@tmcw/togeojson";
 import * as turf from "@turf/turf";
@@ -21,16 +21,6 @@ const MapComponent = ({ gpxFileUri }) => {
     // Utility variables
     const ln = global.currentLanguage;
     const t = translations;
-
-    // Segmentation: Split the itinerary into smaller chunks to optimize rendering
-    const chunkSize = 500;
-    const chunkItinerary = (coords) => {
-        const chunks = [];
-        for (let i = 0; i < coords.length; i += chunkSize) {
-            chunks.push(coords.slice(i, i + chunkSize));
-        }
-        return chunks;
-    };
 
     /**
      * Parses a GPX file from a given URI and extracts an array of geographic coordinates.
@@ -58,10 +48,15 @@ const MapComponent = ({ gpxFileUri }) => {
      * @returns A coordinate object representing the nearest point on the line.
      */
     function findNearestPoint(userLocation, itineraryPoints) {
+        // Convert the user's location to a GeoJSON point
         const userPoint = turf.point([userLocation.longitude, userLocation.latitude]);
+
+        // Convert the itinerary points to a GeoJSON LineString
         const line = turf.lineString(
             itineraryPoints.map((point) => [point.longitude, point.latitude])
         );
+
+        // Find the nearest point on the line
         const nearestPoint = turf.nearestPointOnLine(line, userPoint);
 
         return {
@@ -97,39 +92,32 @@ const MapComponent = ({ gpxFileUri }) => {
     }
 
     /**
-     * Generates a Google Maps link for the itinerary with a travel mode of biking.
-     * @param {*} itinerary The list of coordinates for the itinerary.
-     * @returns A string containing the URL for Google Maps.
+     * Initializes the map by parsing the GPX file, getting the user's location, 
+     * and calculating the nearest point.
      */
-    function generateGoogleMapsLink(itinerary) {
-        if (itinerary.length < 2) {
-            return null;  // Non è possibile generare un link con meno di 2 coordinate
-        }
-
-        const waypoints = itinerary
-            .map(point => `${point.latitude},${point.longitude}`)
-            .join('|');
-
-        return `https://www.google.com/maps/dir/?api=1&waypoints=48.8566,2.3522|48.8584,2.2945&travelmode=bicycling`;
-    }
-
     async function initializeMap() {
         try {
+            //Verify that the GPX file URL is valid
             if (!gpxFileUri) {
                 throw new Error("URL del file GPX non valido o vuoto.");
             }
 
+            // Parsing GPX file
             const parsedItinerary = await parseGpx(gpxFileUri);
             setItinerary(parsedItinerary);
+
+            // User's current location
             const location = await getUserLocation();
             if (!location) {
                 throw new Error("Impossibile ottenere la posizione dell'utente.");
             }
             setUserLocation(location);
 
+            // Calculate the nearest point
             const nearest = findNearestPoint(location, parsedItinerary);
             setNearestPoint(nearest);
 
+            // Calculate the region to display
             const calculatedRegion = calculateRegion(location, nearest);
             setRegion(calculatedRegion);
         } catch (error) {
@@ -146,23 +134,23 @@ const MapComponent = ({ gpxFileUri }) => {
             <View style={{ justifyContent: "center", alignItems: "center", flex: 1 }}>
                 <ActivityIndicator size="large" color="black" />
             </View> :
+
             <View style={{ height: Dimensions.get("window").height / 2 }}>
                 {region && (
                     <MapView
                         style={{ flex: 1 }}
                         region={region}
                     >
-                        {/* Show the itinerary */}
-                        {chunkItinerary(itinerary).map((chunk, index) => (
+                        {/*Show the itinerary*/}
+                        {itinerary.length > 0 && (
                             <Polyline
-                                key={index}
-                                coordinates={chunk}
+                                coordinates={itinerary}
                                 strokeWidth={3}
                                 strokeColor="blue"
                             />
-                        ))}
+                        )}
 
-                        {/* Show the user's location */}
+                        {/*Show the user's location*/}
                         {userLocation && (
                             <Marker
                                 coordinate={userLocation}
@@ -171,7 +159,7 @@ const MapComponent = ({ gpxFileUri }) => {
                             />
                         )}
 
-                        {/* Show the nearest point */}
+                        {/*Show the nearest point*/}
                         {nearestPoint && (
                             <Marker
                                 coordinate={nearestPoint}
@@ -181,16 +169,6 @@ const MapComponent = ({ gpxFileUri }) => {
                         )}
                     </MapView>
                 )}
-
-                <Button
-                    title="Segui il percorso in Google Maps"
-                    onPress={() => {
-                        const routeLink = generateGoogleMapsLink(itinerary);
-                        if (routeLink) {
-                            Linking.openURL(routeLink);
-                        }
-                    }}
-                />
             </View>
     );
 };
