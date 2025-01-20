@@ -103,14 +103,14 @@ const MapComponent = ({ gpxFileUri }) => {
      */
     function generateGoogleMapsLink(itinerary) {
         if (itinerary.length < 2) {
-            return null;  // Non è possibile generare un link con meno di 2 coordinate
+            return null; 
         }
 
         const waypoints = itinerary
             .map(point => `${point.latitude},${point.longitude}`)
             .join('|');
 
-        return `https://www.google.com/maps/dir/?api=1&waypoints=48.8566,2.3522|48.8584,2.2945&travelmode=bicycling`;
+        return `https://www.google.com/maps/dir/?api=1&waypoints=${waypoints}&travelmode=bicycling`;
     }
 
     async function initializeMap() {
