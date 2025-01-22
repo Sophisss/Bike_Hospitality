@@ -62,7 +62,8 @@ const translations = {
         empty_email: "Email not available.",
         empty_phone_number: "Phone number not available.",
         empty_languages: "Languages not available.",
-        loading_data: "We are retrieving the data, almost there..."
+        loading_data: "We are retrieving the data, almost there...",
+        contact_info_text: "For further information or assistance, use the region contacts below:"
 
     },
     it: {
@@ -128,7 +129,8 @@ const translations = {
         empty_email: "Email non disponibile.",
         empty_phone_number: "Numero di telefono non disponibile.",
         empty_languages: "Lingue non disponibili.",
-        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
+        contact_info_text: "Per ulteriori informazioni o assistenza, utilizza i contatti della regione qui sotto:"
     },
 
     // Aggiungi altre lingue qui

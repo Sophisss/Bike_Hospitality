@@ -138,17 +138,15 @@ function Home({ navigation, route }) {
 
                     {
                         abilitata == 0 ? (
-                            <View style={{ padding: 10, gap: 10, flex: 1 }}>
+                            <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 10, gap: 10, flex: 1 }}>
                                 <LottieView source={require('../assets/animations/cycling.json')} ref={animationRef} autoPlay loop style={mainStyle.animation} />
                                 <Text style={mainStyle.disabled_region}>
                                     {t[language].region + ' ' + formatRegionName(region.nome_regione) + ' ' + t[language].disabled_region}
                                 </Text>
 
-                                <TouchableOpacity>
-                                    <Text style={mainStyle.linkText}>
-                                        {t[language].disabled_region_link}
-                                    </Text>
-                                </TouchableOpacity>
+                                <Text style={mainStyle.linkText}>
+                                    {t[language].disabled_region_link}
+                                </Text>
 
                                 <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]}>
                                     <View style={detailStyle.sectionView}>
@@ -166,7 +164,43 @@ function Home({ navigation, route }) {
                                         <Image style={{ aspectRatio: 2, resizeMode: 'contain' }} source={{ uri: urls.bikeHospitalitySiteImage.url }} />
                                     </View>
                                 </Card>
-                            </View>
+
+                                <View style={detailStyle.mainContentView}>
+                                    <View style={detailStyle.flexDirectionRow}>
+                                        <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[language].lb_contatti}</Text>
+                                        <Ionicons name={IconDecisionMaker('chatbubble-ellipses')} style={detailStyle.sectionIcon} size={25} color='#294075' />
+                                    </View>
+
+                                    <Text style={{ color: '#4d4d4d', marginTop: 2, fontSize: 18, fontWeight: 'bold', textAlign: 'center', alignSelf: 'center' }}>
+                                        {t[language].contact_info_text}
+                                    </Text>
+
+                                    <View style={{ flexGrow: 0, flexDirection: 'row', flex: 1, flexWrap: 'wrap', alignSelf: 'stretch', justifyContent: 'space-between' }}>
+                                        <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
+                                            // {
+                                            //     telefono !== null && telefono !== undefined && telefono !== "" ?
+                                            //         Linking.openURL(`tel:${telefono}`) :
+                                            //         notification(t[ln].attention, t[ln].empty_phone_number, "Ok")()
+                                            // }
+                                        }}
+                                        >
+                                            <Ionicons name={IconDecisionMaker('call')} size={30} color='#6DBE45' />
+                                            <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex]}>{t[language].lb_chiama}</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={[detailStyle.button, detailStyle.buttonFlex]} width={'auto'} onPress={() => {
+                                            // {
+                                            //     email !== null && email !== undefined && email !== "" ?
+                                            //         Linking.openURL(`mailto:${email}`) :
+                                            //         notification(t[ln].attention, t[ln].empty_email, "Ok")()
+                                            // }
+                                        }}
+                                        >
+                                            <Ionicons name={IconDecisionMaker('mail')} size={30} color='#294075' />
+                                            <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex]}>EMAIL</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                            </ScrollView>
                         ) : (
                             <View>
                                 <ScrollView showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
@@ -215,7 +249,7 @@ function Home({ navigation, route }) {
                                     </View>
 
                                     <View style={mainStyle.touchableRow}>
-                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlanguageoleggio, { regioneId: regioneId }) }}>
                                             <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
                                             <Text style={mainStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
                                         </TouchableOpacity>
@@ -231,7 +265,7 @@ function Home({ navigation, route }) {
 
                 </View>
             </View>
-        </View>
+        </View >
     )
 }
 
