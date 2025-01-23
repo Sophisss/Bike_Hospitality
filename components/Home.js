@@ -249,7 +249,7 @@ function Home({ navigation, route }) {
                                     </View>
 
                                     <View style={mainStyle.touchableRow}>
-                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlanguageoleggio, { regioneId: regioneId }) }}>
+                                        <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlNoleggio, { regioneId: regioneId }) }}>
                                             <Icon name={IconDecisionMaker("cart")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
                                             <Text style={mainStyle.touchableItemText}>{t[language].noleggio.toUpperCase()}</Text>
                                         </TouchableOpacity>
