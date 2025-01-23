@@ -66,7 +66,7 @@ const translations = {
         empty_languages: "Languages not available.",
         loading_data: "We are retrieving the data, almost there...",
         your_location: "Your position",
-        nearest_point: "Nearest point",
+        nearest_point: "Nearest access point",
     },
     it: {
         attention: "Attenzione",
@@ -135,7 +135,7 @@ const translations = {
         empty_languages: "Lingue non disponibili.",
         loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
         your_location: "La tua posizione",
-        nearest_point: "Punto più vicino",
+        nearest_point: "Punto d'accesso più vicino",
     },
 
     // Aggiungi altre lingue qui
