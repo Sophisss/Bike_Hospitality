@@ -11,6 +11,7 @@ import translations from '../../translations/translations';
 import IconDecisionMaker from '../utilities/IconDecisionMaker';
 import { PROVIDER_GOOGLE } from 'react-native-maps/lib/ProviderConstants';
 import Feather from '@expo/vector-icons/Feather';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 /**
  * A React component that displays a map with an itinerary and the user's location.
@@ -150,9 +151,9 @@ const MapComponent = ({ gpxFileUri }) => {
             </View> :
 
             <><View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, marginBottom: 8 }}>
-                <Feather name="map-pin" size={20} color="green" />
+                <MaterialIcons name="location-pin" size={30} color="green"/>
                 <Text style={{ marginLeft: 5 }}>{t[ln].your_location}</Text>
-                <Feather name="map-pin" size={20} color="red" style={{ marginLeft: 15 }} />
+                <MaterialIcons name="location-pin" size={30} color="red" />
                 <Text style={{ marginLeft: 5 }}>{t[ln].nearest_point}</Text>
             </View>
 
@@ -194,7 +195,7 @@ const MapComponent = ({ gpxFileUri }) => {
                     <View>
                         {(gpxFileUri !== "") ?
                             <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center', marginTop: 8 }]} onPress={() => Linking.openURL(mapsUrl)}>
-                                <Ionicons name={IconDecisionMaker('navigate-outline')} size={24} color='#294075' />
+                                <Ionicons name={IconDecisionMaker('navigate-outline')} size={24} color='white' />
                                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].follow_route.toUpperCase()}</Text>
                             </TouchableOpacity>
                             : "Nessun file GPX disponibile."}
