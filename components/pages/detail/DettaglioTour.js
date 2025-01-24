@@ -1,34 +1,31 @@
-import React, { useEffect } from 'react';
-import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import React from 'react';
+import { Image, View, Text, ScrollView, TouchableOpacity, ImageBackground, Linking } from 'react-native';
+import { RenderHTML } from 'react-native-render-html';
+
+
+
+import he from 'he';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { WebView } from 'react-native-webview';
-import * as WebBrowser from 'expo-web-browser';
 
 import detailStyle from '../../../assets/styles/DetailStyle';
-import IconDecisionMaker from '../../utilities/IconDecisionMaker';
-import { Dimensions } from 'react-native';
-import { Linking } from 'react-native';
-import { _listEmptyComponent, sendStats } from '../../utilities/Utils';
-import { RenderHTML } from 'react-native-render-html';
-import he from 'he';
 import HTMLStyle from '../../../assets/styles/HTMLStyle';
 import mainStyle from '../../../assets/styles/MainStyle';
+import IconDecisionMaker from '../../utilities/IconDecisionMaker';
+import { _listEmptyComponent, sendStats } from '../../utilities/Utils';
 import notification from '../../utilities/Alert';
-
+import MapComponent from '../../utilities/MapComponent';
 import translations from '../../../translations/translations';
 
 function DettaglioTour({ navigation, route }) {
   const { id, nome, categoria, provincia, codice_provincia, comune, localita, gpx, map, linkgpx, telefono, email, descrizione, immagini } = route.params;
 
-  useEffect(() => {
-    //W navigation.setOptions({title: nome});
-  }, []);
-
   // utility variables
-  const marginTopValue = map !== "" ? 10 : gpx !== "" ? 100 : 50;
+  const ln = global.currentLanguage;
+  const t = translations;
 
-  var ln = global.currentLanguage;
-  var t = translations;
+  const isGpxFile = (fileUri) => {
+    return fileUri.endsWith('.gpx');
+  };
 
   sendStats('tour', id);
 
@@ -95,22 +92,26 @@ function DettaglioTour({ navigation, route }) {
         <View style={detailStyle.mainContentView}>
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_DettTour}</Text>
-            <Ionicons name={IconDecisionMaker('glasses')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+            <Ionicons name={IconDecisionMaker("navigate-circle-outline")} style={detailStyle.sectionIcon} size={35} color='#294075' />
           </View>
 
-          {(map !== "") ?
-            <WebView
-              nestedScrollEnabled
-              source={{ uri: map }}
-              style={{ marginTop: 10, height: Dimensions.get('window').height / 2, opacity: 0.99 }}
-            />
+          {(linkgpx !== "" && isGpxFile(linkgpx)) ?
+            <MapComponent gpxFileUri={linkgpx} />
             : _listEmptyComponent(t[ln].msg_Mappa)
           }
 
-          <Text style={{ padding: 2, alignSelf: 'center', marginTop: marginTopValue }}>
+        </View>
+
+        <View style={detailStyle.mainContentView}>
+          <View style={detailStyle.flexDirectionRow}>
+              <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>Download</Text>
+              <Ionicons name={IconDecisionMaker("arrow-down-circle")} style={detailStyle.sectionIcon} size={35} color='#294075' />
+          </View>
+
+          <Text style={{ padding: 2, alignSelf: 'center' }}>
             {(gpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(gpx)}>
-                <Ionicons name={IconDecisionMaker('map')} size={30} color='#6DBE45' />
+                <Ionicons name={IconDecisionMaker('compass-outline')} size={30} color='white' />
                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].lb_Altimetria}</Text>
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_Altimetr)
@@ -120,27 +121,14 @@ function DettaglioTour({ navigation, route }) {
           <Text style={{ padding: 2, alignSelf: 'center', justifyContent: 'space-between' }}>
             {(linkgpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(linkgpx)}>
-                <Ionicons name={IconDecisionMaker('download')} size={30} color='white' />
+                <Ionicons name={IconDecisionMaker('map-outline')} size={30} color='white' />
                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].lb_DownlGpx}</Text>
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_DownlGpx)
             }
           </Text>
-        </View>
 
-        {
-          /*<View style={detailStyle.sectionView}>
-          <View style={detailStyle.flexDirectionRow}>
-            <Text style={detailStyle.sectionTitle}>{"Posizione"}</Text>
-            <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='dodgerblue'/>
-          </View>
-          <MapView provider={PROVIDER_GOOGLE} style={detailStyle.map} 
-            region= {{latitude: lat, longitude: lgt, latitudeDelta: 1, longitudeDelta: 1,}}> 
-            <Marker coordinate={{latitude: lat, longitude: lgt}} 
-              onPress={() => { geo(lat, lgt, nome) }} />
-          </MapView> 
-        </View>*/
-        }
+        </View>
 
       </ScrollView>
     </View>

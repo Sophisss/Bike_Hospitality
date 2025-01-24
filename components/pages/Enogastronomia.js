@@ -48,7 +48,7 @@ function Enogastronomia({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_food_and_wine)
+          _listEmptyComponent(t[ln].empty_food_and_wine, true)
           :
           <View style={mainStyle.box}>
             <FlatList

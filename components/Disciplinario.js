@@ -22,6 +22,7 @@ function Disciplinario() {
 
   const [loaded, setLoadStatus] = useState(true);
   const [data, setData] = useState([]);
+  const dataLength = Object.keys(data).length;
 
   const ln = global.currentLanguage;
   const t = translations;
@@ -58,24 +59,25 @@ function Disciplinario() {
             <><ActivityIndicator size="large" color="black" style={mainStyle.loadIndicator} />
               <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
           ) : (
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              showsVerticalScrollIndicator={false}
-              _listEmptyComponent={_listEmptyComponent("Disciplinare non disponibile.")}
-              data={data}
-              renderItem={({ item }) => (
-                <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]} >
-                  <View style={[detailStyle.sectionView, { gap: 5 }]}>
-                    <View style={detailStyle.flexDirectionRow}>
-                      <Text style={[detailStyle.sectionTitle, { textAlign: 'left' }]}>{item.titolo}</Text>
-                      <Ionicons name={Platform.OS === "ios" ? "ios-information-circle" : "md-information-circle"} size={30} color={((item.titolo.includes("obbl") || item.titolo.includes("Mand")) ? 'red' : 'green')} />
+            (dataLength === 0 || dataLength == undefined) ?
+              _listEmptyComponent(t[ln].empty_regulations, true) :
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                data={data}
+                renderItem={({ item }) => (
+                  <Card style={[listStyle.itemCardLeftImage, { margin: 10, alignContent: 'center' }]} >
+                    <View style={[detailStyle.sectionView, { gap: 5 }]}>
+                      <View style={detailStyle.flexDirectionRow}>
+                        <Text style={[detailStyle.sectionTitle, { textAlign: 'left' }]}>{item.titolo}</Text>
+                        <Ionicons name={Platform.OS === "ios" ? "ios-information-circle" : "md-information-circle"} size={30} color={((item.titolo.includes("obbl") || item.titolo.includes("Mand")) ? 'red' : 'green')} />
+                      </View>
+                      <RenderHTML source={{ html: he.decode(item.testo), }} contentWidth={200} baseStyle={HTMLStyle.text} />
                     </View>
-                    <RenderHTML source={{ html: he.decode(item.testo), }} contentWidth={200} baseStyle={HTMLStyle.text} />
-                  </View>
-                </Card>
-              )
-              }
-            />
+                  </Card>
+                )
+                }
+              />
           )}
         </View>
       </View>

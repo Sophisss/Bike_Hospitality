@@ -50,7 +50,7 @@ function Guide({ navigation, route }) {
           <Text style={mainStyle.loadText}>{t[ln].loading_data}</Text></>
       ) : (
         (dataLength === 0 || dataLength == undefined) ?
-          _listEmptyComponent(t[ln].empty_cycling_guides)
+          _listEmptyComponent(t[ln].empty_cycling_guides, true)
           :
           <View style={[mainStyle.box, { padding: 15 }]}>
             <FlatList
