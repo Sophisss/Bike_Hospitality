@@ -6,7 +6,6 @@ import { RenderHTML } from 'react-native-render-html';
 
 import he from 'he';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import Feather from '@expo/vector-icons/Feather';
 
 import detailStyle from '../../../assets/styles/DetailStyle';
 import HTMLStyle from '../../../assets/styles/HTMLStyle';
@@ -100,13 +99,6 @@ function DettaglioTour({ navigation, route }) {
             <MapComponent gpxFileUri={linkgpx} />
             : _listEmptyComponent(t[ln].msg_Mappa)
           }
-
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 10 }}>
-          <Feather name="map-pin" size={20} color="green" />
-          <Text style={{ marginLeft: 5 }}>{t[ln].your_location}</Text>
-          <Feather name="map-pin" size={20} color="red" style={{ marginLeft: 15 }} />
-          <Text style={{ marginLeft: 5 }}>{t[ln].nearest_point}</Text>
-        </View>
 
           <Text style={{ padding: 2, alignSelf: 'center' }}>
             {(gpx !== "") ?

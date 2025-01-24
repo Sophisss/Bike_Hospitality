@@ -10,6 +10,7 @@ import detailStyle from '../../assets/styles/DetailStyle';
 import translations from '../../translations/translations';
 import IconDecisionMaker from '../utilities/IconDecisionMaker';
 import { PROVIDER_GOOGLE } from 'react-native-maps/lib/ProviderConstants';
+import Feather from '@expo/vector-icons/Feather';
 
 /**
  * A React component that displays a map with an itinerary and the user's location.
@@ -20,6 +21,7 @@ const MapComponent = ({ gpxFileUri }) => {
     const [itinerary, setItinerary] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
     const [nearestPoint, setNearestPoint] = useState(null);
+    const [mapsUrl, setMapsUrl] = useState(null);
     const [region, setRegion] = useState(null);
 
     // Utility variables
@@ -121,6 +123,14 @@ const MapComponent = ({ gpxFileUri }) => {
             const nearest = findNearestPoint(location, parsedItinerary);
             setNearestPoint(nearest);
 
+            if (location && nearest) {
+                const url = `https://www.google.com/maps/dir/?api=1` +
+                    `&origin=${location.latitude},${location.longitude}` +
+                    `&destination=${nearest.latitude},${nearest.longitude}` +
+                    `&travelmode=driving`;
+                setMapsUrl(url);
+            }
+
             // Calculate the region to display
             const calculatedRegion = calculateRegion(location, nearest);
             setRegion(calculatedRegion);
@@ -128,11 +138,6 @@ const MapComponent = ({ gpxFileUri }) => {
             console.error("Errore durante l'inizializzazione della mappa:", error.message);
         }
     }
-
-    const mapsUrl = `https://www.google.com/maps/dir/?api=1` +
-        `&origin=${userLocation.latitude},${userLocation.longitude}` +
-        `&destination=${nearestPoint.latitude},${nearestPoint.longitude}` +
-        `&travelmode=driving`;
 
     useEffect(() => {
         initializeMap();
@@ -144,48 +149,57 @@ const MapComponent = ({ gpxFileUri }) => {
                 <ActivityIndicator size="large" color="black" />
             </View> :
 
-            <><View style={{ height: Dimensions.get("window").height / 2 }}>
-                {region && (
-                    <MapView
-                        provider={PROVIDER_GOOGLE}
-                        style={{ flex: 1 }}
-                        region={region}
-                    >
-                        {/*Show the itinerary*/}
-                        {itinerary.length > 0 && (
-                            <Polyline
-                                coordinates={itinerary}
-                                strokeWidth={3}
-                                strokeColor="blue" />
-                        )}
+            <><View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, marginBottom: 8 }}>
+                <Feather name="map-pin" size={20} color="green" />
+                <Text style={{ marginLeft: 5 }}>{t[ln].your_location}</Text>
+                <Feather name="map-pin" size={20} color="red" style={{ marginLeft: 15 }} />
+                <Text style={{ marginLeft: 5 }}>{t[ln].nearest_point}</Text>
+            </View>
 
-                        {/*Show the user's location*/}
-                        {userLocation && (
-                            <Marker
-                                coordinate={userLocation}
-                                title={t[ln].your_location}
-                                pinColor="green" />
-                        )}
+                <><View style={{ height: Dimensions.get("window").height / 2 }}>
+                    {region && (
+                        <MapView
+                            provider={PROVIDER_GOOGLE}
+                            style={{ flex: 1 }}
+                            region={region}
+                        >
+                            {/*Show the itinerary*/}
+                            {itinerary.length > 0 && (
+                                <Polyline
+                                    coordinates={itinerary}
+                                    strokeWidth={3}
+                                    strokeColor="blue" />
+                            )}
 
-                        {/*Show the nearest point*/}
-                        {nearestPoint && (
-                            <Marker
-                                coordinate={nearestPoint}
-                                title={t[ln].nearest_point}
-                                pinColor="red" />
-                        )}
-                    </MapView>
-                )}
+                            {/*Show the user's location*/}
+                            {userLocation && (
+                                <Marker
+                                    coordinate={userLocation}
+                                    title={t[ln].your_location}
+                                    pinColor="green" />
+                            )}
+
+                            {/*Show the nearest point*/}
+                            {nearestPoint && (
+                                <Marker
+                                    coordinate={nearestPoint}
+                                    title={t[ln].nearest_point}
+                                    pinColor="red" />
+                            )}
+                        </MapView>
+                    )}
 
 
-            </View><View>
-                    {(gpxFileUri !== "") ?
-                        <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(mapsUrl)}>
-                            <Ionicons name={IconDecisionMaker('map')} size={30} color='white' />
-                            <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>Segui il percorso</Text>
-                        </TouchableOpacity>
-                        : "Nessun file GPX disponibile."}
-                </View></>
+                </View>
+                    <View>
+                        {(gpxFileUri !== "") ?
+                            <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center', marginTop: 8 }]} onPress={() => Linking.openURL(mapsUrl)}>
+                                <Ionicons name={IconDecisionMaker('navigate-outline')} size={24} color='#294075' />
+                                <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].follow_route.toUpperCase()}</Text>
+                            </TouchableOpacity>
+                            : "Nessun file GPX disponibile."}
+                    </View>
+                </></>
     );
 };
 
