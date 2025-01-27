@@ -33,7 +33,6 @@ function DettaglioStrutture({ navigation, route }) {
   }, []);
 
   const isValidCoordinate = (latitude, longitude) => {
-    console.log(email)
     return (
       typeof latitude === "number" &&
       typeof longitude === "number" &&

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, Text, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
 import Icon from '@expo/vector-icons/Ionicons';
@@ -127,6 +127,7 @@ async function groupByCategory(data) {
 }
 
 async function groupByProvincia(data) {
+  data.sort((a, b) => a.provincia.localeCompare(b.provincia));
 
   let result = data.reduce(function (r, a) {
     r[a.provincia] = r[a.provincia] || [];

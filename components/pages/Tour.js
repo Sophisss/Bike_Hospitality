@@ -47,8 +47,7 @@ function Tour({ navigation, route }) {
         );
         tours = tours.concat(json);
       }
-
-      setData(await groupByCategory(tours));
+      setData(await groupByProvincia(tours));
     } catch (error) {
       console.error(error);
     } finally {
@@ -144,6 +143,18 @@ function Tour({ navigation, route }) {
       )}
     </BackgroundWrapper>
   );
+}
+
+async function groupByProvincia(data) {
+  data.sort((a, b) => a.nome_provincia.localeCompare(b.nome_provincia));
+
+  let result = data.reduce(function (r, a) {
+    r[a.nome_provincia] = r[a.nome_provincia] || [];
+    r[a.nome_provincia].push(a);
+    return r;
+  }, Object.create(null));
+
+  return result;
 }
 
 export default Tour;
