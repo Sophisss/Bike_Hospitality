@@ -92,7 +92,7 @@ function DettaglioTour({ navigation, route }) {
         <View style={detailStyle.mainContentView}>
           <View style={detailStyle.flexDirectionRow}>
             <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_DettTour}</Text>
-            <Ionicons name={IconDecisionMaker("navigate-circle-outline")} style={detailStyle.sectionIcon} size={35} color='#294075' />
+            <Ionicons name={IconDecisionMaker("navigate-circle")} style={detailStyle.sectionIcon} size={30} color='#294075' />
           </View>
 
           {(linkgpx !== "" && isGpxFile(linkgpx)) ?
@@ -104,14 +104,14 @@ function DettaglioTour({ navigation, route }) {
 
         <View style={detailStyle.mainContentView}>
           <View style={detailStyle.flexDirectionRow}>
-              <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>Download</Text>
-              <Ionicons name={IconDecisionMaker("arrow-down-circle")} style={detailStyle.sectionIcon} size={35} color='#294075' />
+              <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 20, color: '#294075' }]}>{t[ln].lb_OtherFiles}</Text>
+              <Ionicons name={IconDecisionMaker("cloud-download-outline")} style={detailStyle.sectionIcon} size={25} color='#294075' />
           </View>
 
-          <Text style={{ padding: 2, alignSelf: 'center' }}>
+          <Text style={{ padding: 2, alignSelf: 'center', justifyContent: 'space-between' }}>
             {(gpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(gpx)}>
-                <Ionicons name={IconDecisionMaker('compass-outline')} size={30} color='white' />
+                <Ionicons name={IconDecisionMaker('compass')} size={25} color='white' />
                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].lb_Altimetria}</Text>
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_Altimetr)
@@ -121,7 +121,7 @@ function DettaglioTour({ navigation, route }) {
           <Text style={{ padding: 2, alignSelf: 'center', justifyContent: 'space-between' }}>
             {(linkgpx !== "") ?
               <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center' }]} onPress={() => Linking.openURL(linkgpx)}>
-                <Ionicons name={IconDecisionMaker('map-outline')} size={30} color='white' />
+                <Ionicons name={IconDecisionMaker('download')} size={25} color='white' />
                 <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].lb_DownlGpx}</Text>
               </TouchableOpacity>
               : _listEmptyComponent(t[ln].msg_DownlGpx)

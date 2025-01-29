@@ -31,9 +31,10 @@ const translations = {
         lb_lingue: "Languages",
         lb_settori: "Specialties",
         lb_contatti: "Contacts",
-        lb_DownlGpx: "DOWNLOAD GPX",
+        lb_DownlGpx: "Download GPX",
         lb_Altimetria: "Elevation Profile",
-        lb_DettTour: "Route Details",
+        lb_OtherFiles:"Elevation Profile and GPX Track",
+        lb_DettTour: "Bike Route Details",
         lb_Gallery: "Photo Gallery",
         tit_strutture: "Accommodation Facilities in the Province of ",
         tit_itinerari: "Bike Routes in the Province of ",
@@ -67,7 +68,8 @@ const translations = {
         loading_data: "We are retrieving the data, almost there...",
         your_location: "Your position",
         nearest_point: "Nearest access point",
-        follow_route: "Follow the route"
+        reach_nearest_point: "Reach the nearest point",
+        follow_full_route: "Follow the full route"
     },
     it: {
         attention: "Attenzione",
@@ -101,9 +103,10 @@ const translations = {
         lb_lingue: "Lingue",
         lb_settori: "Settori",
         lb_contatti: "Contatti",
-        lb_DownlGpx: "SCARICA GPX",
-        lb_Altimetria: "ALTIMETRIA",
-        lb_DettTour: "Dettagli Percorso",
+        lb_DownlGpx: "Scarica GPX",
+        lb_Altimetria: "Profilo altimetrico",
+        lb_OtherFiles:"Altimetria e Traccia GPX",
+        lb_DettTour: "Dettagli itinerario",
         lb_Gallery: "Galleria Foto",
         tit_strutture: "Strutture Ricettive nella provincia di ",
         tit_itinerari: "Itinerari nella provincia di ",
@@ -137,7 +140,8 @@ const translations = {
         loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
         your_location: "La tua posizione",
         nearest_point: "Punto d'accesso più vicino",
-        follow_route: "Segui il percorso"
+        reach_nearest_point: "Raggiungi il punto più vicino",
+        follow_full_route: "Segui l'intero percorso"
     },
 
     // Aggiungi altre lingue qui

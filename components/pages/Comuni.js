@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, Image, ScrollView, Text, View, ImageBackground } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Card } from 'react-native-paper';
 
@@ -29,7 +29,7 @@ function Comuni({ navigation, route }) {
         let json = await fetcher(urls.comuni.url + global.currentLanguage + "&provincia=" + province[i].codice_provincia);
         comuni = comuni.concat(json);
       }
-      setData(await groupByCategory(comuni));
+      setData(await groupByProvince(comuni));
     } catch (error) {
       console.error("Error: " + error);
     } finally {
@@ -97,7 +97,8 @@ function Comuni({ navigation, route }) {
   );
 }
 
-async function groupByCategory(data) {
+async function groupByProvince(data) {
+  data.sort((a, b) => a.provincia.localeCompare(b.provincia));
 
   let result = data.reduce(function (r, a) {
     r[a.provincia] = r[a.provincia] || [];
@@ -107,5 +108,6 @@ async function groupByCategory(data) {
 
   return result;
 }
+
 
 export default Comuni;
