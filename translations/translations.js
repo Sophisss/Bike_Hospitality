@@ -69,7 +69,7 @@ const translations = {
         your_location: "Your position",
         nearest_point: "Nearest access point",
         reach_nearest_point: "Reach the nearest point",
-        follow_full_route: "Follow the full route"
+        follow_route: "Follow the route"
     },
     it: {
         attention: "Attenzione",
@@ -141,7 +141,7 @@ const translations = {
         your_location: "La tua posizione",
         nearest_point: "Punto d'accesso più vicino",
         reach_nearest_point: "Raggiungi il punto più vicino",
-        follow_full_route: "Segui l'intero percorso"
+        follow_route: "Segui l'itinerario"
     },
 
     // Aggiungi altre lingue qui
