@@ -8,6 +8,7 @@ import urls from './utilities/Urls';
 import Collegamenti from './Collegamenti';
 import Disciplinario from './Disciplinario';
 import HStyle from '../assets/styles/HeaderStyle';
+import ProfileScreen from './ProfileScreen';
 
 import { LanguageContext } from './LanguageContext';
 import translations from '../translations/translations';
@@ -59,22 +60,11 @@ function BottomBar() {
                     <MaterialCommunityIcons name="link" color={color} size={size} />
                 )
             }} />
-
-            {/* {isAuthenticated && (
-                <>
-                    <Tab.Screen name={t[language].disciplinare} component={Disciplinario} options={{
-                        tabBarLabel: t[language].disciplinare, tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="file" color={color} size={size} />
-                        )
-                    }} />
-
-                    <Tab.Screen name={t[language].collegamenti} component={Collegamenti} options={{
-                        tabBarLabel: t[language].collegamenti, tabBarIcon: ({ color, size }) => (
-                            <MaterialCommunityIcons name="link" color={color} size={size} />
-                        )
-                    }} />
-                </>
-            )} */}
+            <Tab.Screen name={"Profilo"} component={ProfileScreen} options={{
+                headerShown: isUserLoggedIn, tabBarLabel: t[language].logout, tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="logout" color={color} size={size} />
+                )
+            }} />
         </Tab.Navigator>
     );
 }

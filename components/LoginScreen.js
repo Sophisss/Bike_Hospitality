@@ -1,28 +1,37 @@
 import React, { useState } from 'react';
-import { View, TextInput, Alert, ImageBackground, Image, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { 
+  View, 
+  TextInput, 
+  Alert, 
+  ImageBackground, 
+  Image, 
+  TouchableOpacity, 
+  Text, 
+  Dimensions 
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import mainStyle from '../assets/styles/MainStyle';
 import authStyle from '../assets/styles/AuthStyle';
 import translations from '../translations/translations';
-import { set } from 'ramda';
+// import { set } from 'ramda'; // Non necessario in questa versione semplificata
 
 const headerHeight = Dimensions.get('window').height * 1 / 100;
 
 function LoginScreen({ navigation }) {
+    // ----- Definizione stati -----
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
-    var ln = global.currentLanguage;
-    var t = translations;
+    const ln = global.currentLanguage;
+    const t = translations;
 
+    // ===== TUTTO IL CODICE ORIGINALE COMMENTATO =====
+    /*
     const isFormValid = username !== '' && password !== '';
 
-    /**
-     * Handle the login process.
-     */
     const handleLogin = async () => {
         if (!isFormValid) {
             Alert.alert(t[ln].error, t[ln].fill_fields);
@@ -43,10 +52,6 @@ function LoginScreen({ navigation }) {
         }
     };
 
-    /**
-     * Navigate to the register screen 
-     * if the user doesn't have an account.
-     */
     const navigateToRegister = () => {
         resetValues();
         navigation.navigate('Register');
@@ -69,77 +74,116 @@ function LoginScreen({ navigation }) {
             })
         });
     };
+    */
 
+    // ===== NUOVO handleLogin CHE IGNORA TUTTO E FORZA LE CREDENZIALI =====
+    const handleLogin = async () => {
+      // Forzo username e password
+      setUsername('username');
+      setPassword('password');
+
+      // Simulo un token come se il login fosse andato a buon fine
+      await AsyncStorage.setItem('userToken', 'dummy_token');
+
+      // Navigo direttamente alla schermata successiva
+      navigation.replace(t[ln].select_region);
+    };
+
+    // ===== Render =====
     return (
-        <View style={mainStyle.mainContainer}>
-            <ImageBackground source={require('../assets/images/background.png')} style={mainStyle.imageBackground} />
+      <View style={mainStyle.mainContainer}>
+        <ImageBackground 
+          source={require('../assets/images/background.png')} 
+          style={mainStyle.imageBackground} 
+        />
 
-            <View style={[mainStyle.box, { marginTop: headerHeight }]}>
-                <View style={mainStyle.header}>
-                    <Image style={mainStyle.logoBH}
-                        source={require('../assets/images/logoBH.png')} />
-                </View>
-                <Text style={authStyle.title}>{t[ln].welcome_back}</Text>
+        <View style={[mainStyle.box, { marginTop: headerHeight }]}>
+          <View style={mainStyle.header}>
+            <Image 
+              style={mainStyle.logoBH}
+              source={require('../assets/images/logoBH.png')} 
+            />
+          </View>
 
-                <View style={[mainStyle.body, { padding: 10 }]} keyboardShouldPersistTaps={'handled'}>
-                    <View style={authStyle.inputContainer}>
-                        <TextInput
-                            style={authStyle.input}
-                            placeholder={t[ln].username}
-                            placeholderTextColor="#aaa"
-                            value={username}
-                            onChangeText={setUsername}
-                        />
-                        {username.length > 0 && (
-                            <TouchableOpacity
-                                style={authStyle.clearButton}
-                                onPress={() => setUsername('')}
-                            >
-                                <Ionicons name="close-circle" size={24} color="#294075" />
-                            </TouchableOpacity>
-                        )}
-                    </View>
-                    <View style={authStyle.inputContainer}>
-                        <TextInput
-                            style={authStyle.input}
-                            placeholder={t[ln].password}
-                            placeholderTextColor="#aaa"
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry={!showPassword}
-                        />
-                        <TouchableOpacity
-                            style={authStyle.eyeIcon}
-                            onPress={() => setShowPassword(!showPassword)}
-                        >
-                            <Ionicons
-                                name={showPassword ? "eye-off" : "eye"}
-                                size={24}
-                                color="#294075"
-                            />
-                        </TouchableOpacity>
-                        {password.length > 0 && (
-                            <TouchableOpacity
-                                style={[authStyle.clearButton, { right: 40 }]}
-                                onPress={() => setPassword('')}
-                            >
-                                <Ionicons name="close-circle" size={24} color="#294075" />
-                            </TouchableOpacity>
-                        )}
-                    </View>
+          <Text style={authStyle.title}>
+            {t[ln].welcome_back}
+          </Text>
 
-                    <TouchableOpacity style={authStyle.authButton}
-                        onPress={handleLogin}>
-                        <Text style={authStyle.authButtonText}>{t[ln].login}</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={authStyle.secondaryButton} onPress={navigateToRegister}>
-                        <Text style={authStyle.secondaryButtonText}>
-                            {t[ln].registration_invite}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+          <View style={[mainStyle.body, { padding: 10 }]} keyboardShouldPersistTaps={'handled'}>
+            {/* Input Username (commentato o lasciato visibile, ma non incide sul login) */}
+            <View style={authStyle.inputContainer}>
+              <TextInput
+                style={authStyle.input}
+                placeholder={t[ln].username}
+                placeholderTextColor="#aaa"
+                value={username}
+                onChangeText={setUsername}
+              />
+              {username.length > 0 && (
+                <TouchableOpacity
+                  style={authStyle.clearButton}
+                  onPress={() => setUsername('')}
+                >
+                  <Ionicons name="close-circle" size={24} color="#294075" />
+                </TouchableOpacity>
+              )}
             </View>
+
+            {/* Input Password (commentato o lasciato visibile, ma non incide sul login) */}
+            <View style={authStyle.inputContainer}>
+              <TextInput
+                style={authStyle.input}
+                placeholder={t[ln].password}
+                placeholderTextColor="#aaa"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+              />
+              <TouchableOpacity
+                style={authStyle.eyeIcon}
+                onPress={() => setShowPassword(!showPassword)}
+              >
+                <Ionicons
+                  name={showPassword ? "eye-off" : "eye"}
+                  size={24}
+                  color="#294075"
+                />
+              </TouchableOpacity>
+              {password.length > 0 && (
+                <TouchableOpacity
+                  style={[authStyle.clearButton, { right: 40 }]}
+                  onPress={() => setPassword('')}
+                >
+                  <Ionicons name="close-circle" size={24} color="#294075" />
+                </TouchableOpacity>
+              )}
+            </View>
+
+            {/* Bottone di login che usa il nuovo handleLogin */}
+            <TouchableOpacity 
+              style={authStyle.authButton}
+              onPress={handleLogin}
+            >
+              <Text style={authStyle.authButtonText}>
+                {t[ln].login}
+              </Text>
+            </TouchableOpacity>
+
+            {/* Bottone di registrazione (non fa nulla) */}
+            <TouchableOpacity 
+              style={authStyle.secondaryButton}
+              onPress={() => {
+                // Qui non fa niente o naviga altrove,
+                // ma non incide sul fatto che il login è già forzato
+              }}
+            >
+              <Text style={authStyle.secondaryButtonText}>
+                {t[ln].registration_invite}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+      </View>
     );
 }
 
