@@ -94,6 +94,9 @@ function DettaglioPartner({ navigation, route }) {
               <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_posizione}</Text>
               <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='#294075' />
             </View>
+            <Text style={{ color: '#4d4d4d', fontSize: 15, fontWeight: 'bold', textAlign: 'center', alignSelf: 'center' }}>
+              {t[ln].pin_click}
+            </Text>
             <MapView provider={PROVIDER_GOOGLE} style={detailStyle.map}
               region={{ latitude: lat, longitude: lgt, latitudeDelta: 1, longitudeDelta: 1, }}>
               <Marker coordinate={{ latitude: lat, longitude: lgt }} onPress={() => { geo(lat, lgt, nome) }} />
