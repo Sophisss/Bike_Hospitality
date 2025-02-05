@@ -2,7 +2,7 @@
   "expo": {
     "name": "Bike Hospitality",
     "slug": "bikehospitality",
-    "version": "1.0.5",
+    "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/iconBH.png",
     "owner": "bike-hospitality-org",
@@ -29,14 +29,14 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "it.maitour.bikehospitality",
-      "buildNumber": "1.0.5",
+      "buildNumber": "1.0.8",
       "config": {
         "googleMapsApiKey": "AIzaSyC_XAFv0noAMAdTA-A99sx3B6S3i6vTMq4"
       }
     },
     "android": {
-      "package": "it.unicam.bikehospitality",
-      "versionCode": 22,
+      "package": "it.maitour.bikehospitality",
+      "versionCode": 24,
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyAjG9rRRDvgvXW0r93TI2RtUokYdKv4qo8"
