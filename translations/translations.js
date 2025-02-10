@@ -72,11 +72,16 @@ const translations = {
         welcome: "Welcome!",
         username: "Username",
         password: "Password",
+        repeatPassword: "Repeat Password",
         login: "Login",
         fill_fields: "Please fill all the fields.",
+        password_too_short: "Password must be at least 8 characters long.",
+        passwords_not_matching: "Passwords do not match.",
         invalid_credentials: "Invalid username or password.",
         registration_success: "User registered successfully.",
-        error: "Error"
+        error: "Error",
+        forgot_password: "Forgot your password? Click here!",
+        create_account_invite: "Create your account to explore routes, stay updated on events and access many other services!"
 
 
     },
@@ -151,11 +156,16 @@ const translations = {
         welcome: "Benvenuto!",
         username: "Nome utente",
         password: "Password",
+        repeatPassword: "Ripeti la password",
         login: "Accedi",
         fill_fields: "Per favore compila tutti i campi.",
+        password_too_short: "La password deve contenere almeno 8 caratteri.",
+        passwords_not_matching: "Le password non corrispondono.",
         invalid_credentials: "Nome utente o password non validi.",
         registration_success: "Utente registrato con successo.",
-        error: "Errore"
+        error: "Errore",
+        forgot_password: "Hai dimenticato la password? Clicca qui!",
+        create_account_invite: "Crea il tuo account per esplorare itinerari, rimanere aggiornato sugli eventi e accedere a molti altri servizi!"
 
     },
 
