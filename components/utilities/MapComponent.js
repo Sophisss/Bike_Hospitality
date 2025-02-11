@@ -20,6 +20,7 @@ const MapComponent = ({ gpxFileUri }) => {
   const [itinerary, setItinerary] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [nearestPoint, setNearestPoint] = useState(null);
+  const [routeUrl, setRouteUrl] = useState(null);
   const [mapsUrl, setMapsUrl] = useState(null);
   const [region, setRegion] = useState(null);
 
@@ -95,6 +96,60 @@ const MapComponent = ({ gpxFileUri }) => {
   }
 
   /**
+   * Reorders the itinerary so that the nearest point to the user's location is at the beginning of the route.
+   * This is necessary because the GPX file might not have the nearest point as the first point, 
+   * and we want the user to follow the path starting from the closest location.
+   * @param {*} itinerary An array of coordinate objects representing the itinerary.
+   * @param {*} nearestPoint A coordinate object representing the nearest point to the user's location.
+   * @returns A reordered array of itinerary points, starting from the nearest point.
+   */
+  function reorderItinerary(itinerary, nearestPoint) {
+    let nearestIndex = itinerary.findIndex(point =>
+      point.latitude === nearestPoint.latitude && point.longitude === nearestPoint.longitude
+    );
+
+    if (nearestIndex === -1) {
+      return itinerary;
+    }
+
+    const reordered = [...itinerary.slice(nearestIndex), ...itinerary.slice(0, nearestIndex)];
+
+    return reordered;
+  }
+
+  /**
+   * Generates a Google Maps route URL for the user to follow the entire itinerary, starting from the nearest point.
+   * This method creates a URL for Google Maps with waypoints (intermediate points) to follow the entire path.
+   * Google Maps supports a maximum of 10 waypoints, so the itinerary is split into smaller segments if necessary.
+   * @param {*} itinerary An array of coordinate objects representing the itinerary.
+   * @returns A URL that opens the route in Google Maps with the 'bicycling' mode.
+   */
+  function generateGoogleMapsRoute(itinerary) {
+    const baseUrl = "https://www.google.com/maps/dir/?api=1";
+    const origin = `${itinerary[0].latitude},${itinerary[0].longitude}`;
+    const destination = `${itinerary[itinerary.length - 1].latitude},${itinerary[itinerary.length - 1].longitude}`;
+
+    const maxWaypoints = 10;
+
+    let waypoints = [];
+    const totalPoints = itinerary.length;
+
+    if (totalPoints > maxWaypoints) {
+      const step = Math.floor((totalPoints - 2) / (maxWaypoints - 2));
+      for (let i = step; i < totalPoints - 1; i += step) {
+        waypoints.push(`${itinerary[i].latitude},${itinerary[i].longitude}`);
+      }
+    }
+
+    let mapsUrl = `${baseUrl}&origin=${origin}&destination=${destination}&travelmode=bicycling`;
+    if (waypoints.length > 0) {
+      mapsUrl += `&waypoints=${waypoints.join("|")}`;
+    }
+
+    return mapsUrl;
+  }
+
+  /**
    * Initializes the map by parsing the GPX file, getting the user's location, 
    * and calculating the nearest point.
    */
@@ -115,6 +170,12 @@ const MapComponent = ({ gpxFileUri }) => {
 
       const nearest = findNearestPoint(location, parsedItinerary);
       setNearestPoint(nearest);
+
+      const reorderedItinerary = reorderItinerary(parsedItinerary, nearest);
+      setItinerary(reorderedItinerary);
+
+      const generatedRouteUrl = generateGoogleMapsRoute(reorderedItinerary);
+      setRouteUrl(generatedRouteUrl);
 
       if (location && nearest) {
         const url = `https://www.google.com/maps/dir/?api=1` +
@@ -213,6 +274,18 @@ const MapComponent = ({ gpxFileUri }) => {
             <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center', marginTop: 8 }]} onPress={() => Linking.openURL(mapsUrl)}>
               <Ionicons name="navigate" size={25} color='#294075' />
               <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].reach_nearest_point}</Text>
+            </TouchableOpacity>
+          )}
+
+          {routeUrl && (
+            <TouchableOpacity
+              style={[detailStyle.button, { flex: 1, alignSelf: 'center', marginTop: 8 }]}
+              onPress={() => Linking.openURL(routeUrl)}
+            >
+              <Ionicons name="bicycle" size={25} color='#294075' />
+              <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>
+                {t[ln].follow_route}
+              </Text>
             </TouchableOpacity>
           )}
         </View>

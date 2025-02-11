@@ -118,13 +118,17 @@ function DettaglioStrutture({ navigation, route }) {
           <View style={detailStyle.mainContentView}>
             <View style={detailStyle.flexDirectionRow}>
               <Text style={[detailStyle.sectionTitle, { textAlign: 'left', fontSize: 22, color: '#294075' }]}>{t[ln].lb_posizione}</Text>
-              <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={30} color='#294075' />
+              <Ionicons name={IconDecisionMaker('locate')} style={detailStyle.sectionIcon} size={25} color='#294075' />
             </View>
             <MapView provider={PROVIDER_GOOGLE} style={detailStyle.map}
               region={{ latitude: lat, longitude: lgt, latitudeDelta: 1, longitudeDelta: 1, }}>
               <Marker coordinate={{ latitude: lat, longitude: lgt }}
-                onPress={() => { geo(lat, lgt, nome) }} />
+                title={nome} />
             </MapView>
+            <TouchableOpacity style={[detailStyle.button, { flex: 1, alignSelf: 'center', marginTop: 8 }]} onPress={() => { geo(lat, lgt, nome) }}>
+              <Ionicons name="location-sharp" size={25} color='#294075' />
+              <Text style={[detailStyle.buttonText, detailStyle.buttonTextFlex, { color: 'white', marginLeft: 5 }]}>{t[ln].reach_accomodation}</Text>
+            </TouchableOpacity>
           </View>
           : null}
       </ScrollView>
