@@ -66,7 +66,7 @@ const detailStyle = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 17,
-    textAlign: 'center'
+    textAlign: 'left'
   },
   buttonTextFlex: {
     flex: 1,

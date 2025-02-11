@@ -101,5 +101,9 @@
     },
     "bikeHospitalitySiteImage": {
         "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/main/contents/media/bike-hospitality-home-0000.jpg"
+    },
+    "trenitalia": {
+        "routeName": "Trenitalia",
+        "url": "https://www2.wifi-project.cloud/bikehospitality/dashboard/indexbh.php?page=trenitalia&language="
     }
 }

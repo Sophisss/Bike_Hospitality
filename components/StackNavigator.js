@@ -29,6 +29,8 @@ import Regions from '../components/Regions';
 import { LanguageContext } from './LanguageContext';
 import translations from '../translations/translations';
 
+import Trenitalia from "./pages/Trenitalia";
+
 
 const Stack = createStackNavigator();
 
@@ -101,6 +103,8 @@ const StackNavigator = () => {
       <Stack.Screen name={urls.touren.routeName} component={Tour} options={{ Title: urls.touren.routeName }} />
       <Stack.Screen name={"Scheda Itinerario"} component={DettaglioTour} options={{ Title: "Scheda Itinerario" }} />
       <Stack.Screen name={"Bike Route Info"} component={DettaglioTour} options={{ Title: "Bike Route Info" }} />
+
+      <Stack.Screen name={urls.trenitalia.routeName} component={Trenitalia} options={{ Title: "Trenitalia" }} />
 
     </Stack.Navigator>
   );

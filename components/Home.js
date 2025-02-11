@@ -1,6 +1,6 @@
 import Icon from '@expo/vector-icons/Ionicons';
 import { useState, useEffect, useRef } from 'react';
-import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking, AppState, ScrollView } from 'react-native';
+import { Alert, Image, ImageBackground, Text, TouchableOpacity, View, Linking, AppState, ScrollView, Dimensions } from 'react-native';
 import { Card } from 'react-native-paper';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
@@ -13,6 +13,8 @@ import translations from '../translations/translations';
 import urls from './utilities/Urls.json';
 import IconDecisionMaker from './utilities/IconDecisionMaker';
 import fetcher from './utilities/Fetcher';
+
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const appVersion = 3.0;
 global.msgShown = '0';
@@ -115,6 +117,14 @@ function Home({ navigation, route }) {
             subscription.remove();
         };
     }, []);
+
+    const logoStyles = {
+        alignSelf: 'center',
+        resizeMode: "contain",
+        width: Dimensions.get('window').width / 4.5,
+        height: undefined,
+        aspectRatio: 1.9,
+    }
 
     return (
 
@@ -222,6 +232,14 @@ function Home({ navigation, route }) {
                                         <TouchableOpacity style={mainStyle.touchableRowItem} onPress={() => { navigation.navigate(urlPromo, { regioneId: regioneId }) }}>
                                             <Icon name={IconDecisionMaker("star")} size={iconSize} color="white" style={mainStyle.touchableItemIcon} />
                                             <Text style={mainStyle.touchableItemText}>{t[language].attrazioni.toUpperCase()}</Text>
+                                        </TouchableOpacity>
+                                    </View>
+
+                                    <View style={mainStyle.touchableRow}>
+                                        <TouchableOpacity style={[mainStyle.touchableRowItem, { justifyContent: 'center' }]} onPress={() => { navigation.navigate(urls.trenitalia.routeName) }}>
+                                            <View style={{ backgroundColor: "white", paddingHorizontal: 10, borderRadius: 10 }}>
+                                                <Image source={require('../assets/images/trenitalia.png')} style={logoStyles} />
+                                            </View>
                                         </TouchableOpacity>
                                     </View>
                                 </ScrollView>

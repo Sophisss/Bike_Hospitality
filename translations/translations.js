@@ -72,6 +72,22 @@ const translations = {
         follow_route: "Follow the route",
         reach_accomodation: "Reach the accommodation",
         pin_click: "Press the pin to start navigation"
+        empty_address: "No address available.",
+        empty_coordinates: "No navigation coordinates available.",
+        empty_description: "No description available.",
+        empty_site: "Web site not available.",
+        empty_email: "Email not available.",
+        empty_phone_number: "Phone number not available.",
+        empty_languages: "Languages not available.",
+        loading_data: "We are retrieving the data, almost there...",
+        trenitalia_general_info_title: "Sustainable integrated mobility",
+        trenitalia_general_info_text: "In the Marche region, within the geographical boundaries of the region, the transport of bicycles is free on Trenitalia trains.",
+        trenitalia_bike_trains_title: "Transport of bicycles on regional trains",
+        trenitalia_bike_trains_text: "In the Marche region, all regional trains are equipped for the transport of bicycles on board and the transport of bicycles is free.\n\n" +
+            "An excellent opportunity to move around and get to know the Marche region in a sustainable, practical and economical way.",
+        trenitalia_useful_info_title: "Useful Information",
+        trenitalia_useful_info_link_text: "Useful Information - Marche - Trenitalia",
+
     },
     it: {
         attention: "Attenzione",
@@ -132,20 +148,14 @@ const translations = {
         select_region: "Seleziona una regione",
         disabled_region: "in fase di inserimento...",
         disabled_region_link: "Se ancora non fai parte della nostra community premi il link qui sotto per unirti a noi!",
-        empty_address: "Nessun indirizzo disponibile",
-        empty_coordinates: "Coordinate per la navigazione non disponibili",
-        empty_description: "Nessuna descrizione disponibile",
-        empty_site: "Sito web non disponibile",
-        empty_email: "Email non disponibile",
-        empty_phone_number: "Numero di telefono non disponibile",
-        empty_languages: "Lingue non disponibili",
-        loading_data: "Stiamo recuperando i dati, ci siamo quasi...",
-        your_location: "La tua posizione",
-        nearest_point: "Punto d'accesso più vicino",
-        reach_nearest_point: "Raggiungi il punto più vicino",
-        follow_route: "Segui l'itinerario",
-        reach_accomodation: "Raggiungi la struttura",
-        pin_click: "Premi sul pin per avviare la navigazione"
+        empty_address: "Nessun indirizzo disponibile.",
+        empty_coordinates: "Coordinate per la navigazione non disponibili.",
+        empty_description: "Nessuna descrizione disponibile.",
+        empty_site: "Sito web non disponibile.",
+        empty_email: "Email non disponibile.",
+        empty_phone_number: "Numero di telefono non disponibile.",
+        empty_languages: "Lingue non disponibili.",
+        loading_data: "Stiamo recuperando i dati, ci siamo quasi..."
     },
 
     // Aggiungi altre lingue qui
